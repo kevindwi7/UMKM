@@ -58,6 +58,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9CA6280128B60433008344B1 /* DetailProjectView */ = {
+			isa = PBXGroup;
+			children = (
+				9CA627FD28B5FA3B008344B1 /* DetailProjectView.swift */,
+				9CA627FF28B5FD41008344B1 /* DetailProjectCardView.swift */,
+				9CA6280228B60449008344B1 /* DetailProjectTaskCard.swift */,
+			);
+			path = DetailProjectView;
+			sourceTree = "<group>";
+		};
 		C9AE65FE28B5CEE5000C0133 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 		C9AE661D28B5D39C000C0133 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9CA6280128B60433008344B1 /* DetailProjectView */,
 				C9AE662428B5D839000C0133 /* TabBarView */,
 				C9AE661F28B5D3C4000C0133 /* LoginView */,
 			);
@@ -225,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
+				9CA6280028B5FD41008344B1 /* DetailProjectCardView.swift in Sources */,
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
 				C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */,

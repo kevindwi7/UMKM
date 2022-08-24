@@ -15,7 +15,7 @@ struct UMKMApp: App {
     @State var isListRoomView = false
     var body: some Scene {
         WindowGroup {
-            LoginView(vm: MainViewModel(container: CKContainer.default()))
+            TabBarView()
         }
     }
 }
