@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CA627F828B5E0DC008344B1 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F728B5E0DC008344B1 /* DashboardView.swift */; };
+		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
+		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
 		C9AE660B28B5CEE5000C0133 /* UMKMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE660A28B5CEE5000C0133 /* UMKMApp.swift */; };
 		C9AE660D28B5CEE5000C0133 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE660C28B5CEE5000C0133 /* ContentView.swift */; };
 		C9AE660F28B5CEE6000C0133 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9AE660E28B5CEE6000C0133 /* Assets.xcassets */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9CA627F728B5E0DC008344B1 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
+		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C9AE660728B5CEE5000C0133 /* UMKM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UMKM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9AE660A28B5CEE5000C0133 /* UMKMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMKMApp.swift; sourceTree = "<group>"; };
 		C9AE660C28B5CEE5000C0133 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +61,9 @@
 				C9AE660C28B5CEE5000C0133 /* ContentView.swift */,
 				C9AE660E28B5CEE6000C0133 /* Assets.xcassets */,
 				C9AE661028B5CEE6000C0133 /* Preview Content */,
+				9CA627F728B5E0DC008344B1 /* DashboardView.swift */,
+				9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */,
+				9CA627FB28B5E206008344B1 /* Constant.swift */,
 			);
 			path = UMKM;
 			sourceTree = "<group>";
@@ -137,7 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
 				C9AE660D28B5CEE5000C0133 /* ContentView.swift in Sources */,
+				9CA627FC28B5E206008344B1 /* Constant.swift in Sources */,
+				9CA627F828B5E0DC008344B1 /* DashboardView.swift in Sources */,
 				C9AE660B28B5CEE5000C0133 /* UMKMApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
