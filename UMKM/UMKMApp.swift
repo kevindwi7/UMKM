@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import AuthenticationServices
+
+import CloudKit
 
 @main
 struct UMKMApp: App {
+    @State var isListRoomView = false
     var body: some Scene {
         WindowGroup {
-            DashboardView()
+            LoginView(vm: MainViewModel(container: CKContainer.default()))
         }
     }
 }
