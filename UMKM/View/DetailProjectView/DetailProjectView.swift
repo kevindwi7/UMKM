@@ -2,7 +2,7 @@
 //  DetailProjectView.swift
 //  UMKM
 //
-//  Created by Trevincen Tambunan on 24/08/22.
+//  Created by Kevin  Dwi on 24/08/22.
 //
 
 import SwiftUI
@@ -10,6 +10,9 @@ import SwiftUI
 struct DetailProjectView: View {
     
     @State var isProjectJoined = false
+    @StateObject var vm: MainViewModel
+    @State var isActive = false
+    @Binding var project: ProjectViewModel
     
     var body: some View {
         ZStack{
@@ -19,7 +22,7 @@ struct DetailProjectView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                     .frame(width: 200, height: 60)
-                DetailProjectCardView()
+                DetailProjectCardView(project: $project)
                 if !isProjectJoined {
                     Button {
                         //handle join project
@@ -39,8 +42,9 @@ struct DetailProjectView: View {
     }
 }
 
-struct DetailProjectView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailProjectView()
-    }
-}
+//struct DetailProjectView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailProjectView()
+//    }
+//}
+

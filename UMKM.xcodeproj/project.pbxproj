@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
 		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
+		C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */; };
+		C958E9BE28B639D700DC7F8B /* DetailProjectTaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */; };
+		C958E9C028B639EF00DC7F8B /* DetailProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */; };
 		C978E52328B5FE540079C6AE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52228B5FE540079C6AE /* Project.swift */; };
 		C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52428B602BC0079C6AE /* ProjectViewModel.swift */; };
 		C978E52728B630450079C6AE /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52628B630450079C6AE /* CreateProjectView.swift */; };
@@ -28,6 +31,9 @@
 /* Begin PBXFileReference section */
 		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCardView.swift; sourceTree = "<group>"; };
+		C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectTaskCard.swift; sourceTree = "<group>"; };
+		C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectView.swift; sourceTree = "<group>"; };
 		C978E52228B5FE540079C6AE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		C978E52428B602BC0079C6AE /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C978E52628B630450079C6AE /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
@@ -61,9 +67,9 @@
 		9CA6280128B60433008344B1 /* DetailProjectView */ = {
 			isa = PBXGroup;
 			children = (
-				9CA627FD28B5FA3B008344B1 /* DetailProjectView.swift */,
-				9CA627FF28B5FD41008344B1 /* DetailProjectCardView.swift */,
-				9CA6280228B60449008344B1 /* DetailProjectTaskCard.swift */,
+				C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */,
+				C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */,
+				C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */,
 			);
 			path = DetailProjectView;
 			sourceTree = "<group>";
@@ -236,13 +242,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
-				9CA6280028B5FD41008344B1 /* DetailProjectCardView.swift in Sources */,
+				C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */,
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
 				C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */,
 				C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */,
 				C9820E7628B5F37E0043724D /* TugaskuView.swift in Sources */,
+				C958E9C028B639EF00DC7F8B /* DetailProjectView.swift in Sources */,
 				C9AE662328B5D82D000C0133 /* HomeView.swift in Sources */,
+				C958E9BE28B639D700DC7F8B /* DetailProjectTaskCard.swift in Sources */,
 				C9AE660D28B5CEE5000C0133 /* ContentView.swift in Sources */,
 				C978E52328B5FE540079C6AE /* Project.swift in Sources */,
 				9CA627FC28B5E206008344B1 /* Constant.swift in Sources */,

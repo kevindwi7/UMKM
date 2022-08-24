@@ -28,7 +28,7 @@ struct TabBarView: View {
                     Label("Profile", systemImage: "person")
                     
                 }
-        }.background(.blue)
+        }
      
        
 }

@@ -2,7 +2,7 @@
 //  DetailProjectTaskCard.swift
 //  UMKM
 //
-//  Created by Trevincen Tambunan on 24/08/22.
+//  Created by Kevin  Dwi on 24/08/22.
 //
 
 import SwiftUI
@@ -48,3 +48,4 @@ struct DetailProjectTaskCard_Previews: PreviewProvider {
         DetailProjectTaskCard(isProjectJoined: .constant(false))
     }
 }
+

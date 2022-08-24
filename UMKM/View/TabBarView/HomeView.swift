@@ -23,12 +23,9 @@ struct HomeView: View {
                         ProjectCardView(vm: self.vm, project: $project)
                     }.padding(.vertical, 6)
                 }
-                   
-    
-            
                 
             }
-            .frame(width: UIScreen.main.bounds.maxX)
+            .frame(width: UIScreen.main.bounds.width)
             .background(Color.primaryGray)
             .navigationTitle("Proyek")
             .navigationBarTitleDisplayMode(.inline)
@@ -52,7 +49,7 @@ struct HomeView: View {
             }
         }
     }
-}
+
 
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {
