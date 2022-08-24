@@ -8,35 +8,46 @@
 import SwiftUI
 
 struct ProjectCardView: View {
+    @StateObject var vm: MainViewModel
+    @Binding var project: ProjectViewModel
     
-    @Binding var isShowingDetailProjectView:Bool
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }
+    
+    let userID = UserDefaults.standard.object(forKey: "userID") as? String
+    
     var body: some View {
-        VStack(alignment:.leading,spacing: 8){
-            Text("Bersih bersih basecamp").font(.system(size: 15, weight: .bold, design: .default))
-            HStack{
-                Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
-                Text("Basecamp").font(.system(size: 12, weight: .medium, design: .default))
-                Spacer()
-                Image(systemName: "chevron.right")
-            }
-            HStack{
-                Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
-                Text("21 Aug 22")
-                Text("|")
-                Text("8.00 - 10.00 AM")
-            }.font(.system(size: 12, weight: .medium, design: .default))
-        }.padding()
-            .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
-        .background(.white)
-        .cornerRadius(16)
-        .onTapGesture {
-            isShowingDetailProjectView.toggle()
+        Button(action: {
+            
+        }){
+            VStack(alignment:.leading,spacing: 8){
+                Text(project.projectName).font(.system(size: 15, weight: .bold, design: .default))
+                HStack{
+                    Image("location").resizable().frame(width: 15, height: 18).scaledToFit()
+                    Text(project.location).font(.system(size: 12, weight: .medium, design: .default))
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                }
+                HStack{
+                    Image(systemName: "calendar")
+                    Text(dateFormatter.string(from: project.startTime))
+                    Text("|")
+                    Text("8.00 - 10.00 AM")
+                }.font(.system(size: 12, weight: .medium, design: .default))
+            }.padding()
+                .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
+                .background(.white)
+                .cornerRadius(15)
         }
     }
 }
 
-struct ProjectCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectCardView(isShowingDetailProjectView: .constant(false))
-    }
-}
+//struct ProjectCardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProjectCardView()
+//    }
+//}

@@ -8,35 +8,54 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject var vm: MainViewModel
+    @State var isActive = false
     
-    @State var isShowingDetailProjectView = false
+    init(vm: MainViewModel) {
+        _vm = StateObject(wrappedValue: vm)
+    }
     
     var body: some View {
         NavigationView{
-            ZStack{
-                NavigationLink(destination: DetailProjectView(), isActive: $isShowingDetailProjectView) { EmptyView() }
-                ScrollView{
-                    ForEach(0...10, id: \.self){ project in
-                        ProjectCardView(isShowingDetailProjectView: self.$isShowingDetailProjectView)
-                        
-                    }.padding()
+            ScrollView(.vertical){
+                VStack(alignment: .leading){
+                    ForEach($vm.projects, id: \.id){ $project in
+                        ProjectCardView(vm: self.vm, project: $project)
+                    }.padding(.vertical, 6)
                 }
-                .navigationTitle("Proyek")
-                .frame(width: UIScreen.main.bounds.width)
-                .background(Color.primaryGray)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    NavigationLink(destination: HomeView()) {
+                   
+    
+            
+                
+            }
+            .frame(width: UIScreen.main.bounds.maxX)
+            .background(Color.primaryGray)
+            .navigationTitle("Proyek")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                    Button {
+                        self.isActive = true
+                    } label: {
                         Image(systemName: "plus.circle.fill")
-                    }
+                    }.background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
+                        EmptyView()
+                    })
+                                 )
+                }
+                .onAppear {
+                    //                vm.fetchUserID()
+                    vm.fetchProject()
+                }
+                .onReceive(vm.objectWillChange) { _ in
+                    vm.fetchProject()
                 }
             }
         }
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}
