@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
+		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
 		C9820E7228B5F28A0043724D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9820E7128B5F28A0043724D /* ProfileView.swift */; };
 		C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9820E7328B5F2A00043724D /* TabBarView.swift */; };
 		C9820E7628B5F37E0043724D /* TugaskuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9820E7528B5F37E0043724D /* TugaskuView.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
+		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C9820E7128B5F28A0043724D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C9820E7328B5F2A00043724D /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		C9820E7528B5F37E0043724D /* TugaskuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TugaskuView.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 		C9AE661C28B5D392000C0133 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9CA627FB28B5E206008344B1 /* Constant.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 		C9AE662428B5D839000C0133 /* TabBarView */ = {
 			isa = PBXGroup;
 			children = (
+				9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */,
 				C9AE662228B5D82D000C0133 /* HomeView.swift */,
 				C9820E7128B5F28A0043724D /* ProfileView.swift */,
 				C9820E7328B5F2A00043724D /* TabBarView.swift */,
@@ -209,12 +215,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
 				C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */,
 				C9820E7628B5F37E0043724D /* TugaskuView.swift in Sources */,
 				C9AE662328B5D82D000C0133 /* HomeView.swift in Sources */,
 				C9AE660D28B5CEE5000C0133 /* ContentView.swift in Sources */,
+				9CA627FC28B5E206008344B1 /* Constant.swift in Sources */,
 				C9820E7228B5F28A0043724D /* ProfileView.swift in Sources */,
 				C9AE660B28B5CEE5000C0133 /* UMKMApp.swift in Sources */,
 			);

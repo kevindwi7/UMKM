@@ -1,13 +1,14 @@
 //
-//  HomeView.swift
+//  DashboardView.swift
 //  UMKM
 //
-//  Created by Kevin  Dwi on 24/08/22.
+//  Created by Trevincen Tambunan on 24/08/22.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct DashboardView: View {
+    
     var body: some View {
         NavigationView{
             ScrollView{
@@ -31,8 +32,8 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        DashboardView()
     }
 }
