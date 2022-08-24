@@ -18,7 +18,7 @@ struct DetailProjectView: View {
         ZStack{
             Color.primaryGray.ignoresSafeArea()
             VStack(alignment:.leading){
-                Text("Bersih bersih basecamp ").font(.system(size: 25, weight: .bold, design: .default))
+                Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                     .frame(width: 200, height: 60)
