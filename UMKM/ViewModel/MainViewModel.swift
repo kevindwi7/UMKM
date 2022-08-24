@@ -12,6 +12,7 @@ import UIKit
 import SwiftUI
 
 enum RecordType: String {
+    case project = "Project"
     case user = "UsersData"
 }
 
@@ -19,9 +20,10 @@ final class MainViewModel: ObservableObject{
     private var database: CKDatabase
     private var container: CKContainer
     
+    @Published var projects: [ProjectViewModel] = []
     @Published var isSignedInToiCloud: Bool = false
     @Published var userID: String = ""
-    
+    @Published var isLoading: Bool = false
     
     let objectWillChange = PassthroughSubject<(), Never>()
     
@@ -70,6 +72,73 @@ final class MainViewModel: ObservableObject{
                             print(error)
                         }
                     }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func createProject(projectHost: String, projectName: String, location: String, participant: Int, startTime: Date, endTime: Date, participantList: [String],  description: String, goal: String){
+        self.isLoading = true
+        let record = CKRecord(recordType: RecordType.project.rawValue)
+        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList)
+        
+        record.setValuesForKeys(project.toDictionary())
+        
+        // saving record in database
+        self.database.save(record) { returnedRecord, returnedError in
+            if let returnedError = returnedError {
+                print("Error: \(returnedError)")
+            } else {
+                if let returnedRecord = returnedRecord {
+                    if let project = Project.fromRecord(returnedRecord) {
+                        DispatchQueue.main.async {
+                            self.isLoading = false
+                            self.projects.append(ProjectViewModel(project: project))
+                            self.objectWillChange.send()
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchProject(){
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.project.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedProjects: [Project] = []
+        
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            
+                            if let project = Project.fromRecord(record) {
+                                returnedProjects.append(project)
+                            }
+//                            print(returnedRooms)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                
+                DispatchQueue.main.async {
+                    self.projects = returnedProjects.map(ProjectViewModel.init)
+//                    defer {
+//                        self.objectWillChange.send()
+//                    }
+                    self.objectWillChange.send()
+//                    print("\(self.rooms)")
+                }
+
             case .failure(let error):
                 print(error)
             }

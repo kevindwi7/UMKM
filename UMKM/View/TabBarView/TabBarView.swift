@@ -9,9 +9,13 @@ import SwiftUI
 import CloudKit
 
 struct TabBarView: View {
+    let test = Color("F2F2F7")
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(.white)
+        }
     var body: some View {
         TabView{
-            HomeView()
+            HomeView(vm: MainViewModel(container: CKContainer.default()))
                 .tabItem{
                     Label("Explore", systemImage: "person.3")
                 }
@@ -24,7 +28,9 @@ struct TabBarView: View {
                     Label("Profile", systemImage: "person")
                     
                 }
-    }
+        }.background(.blue)
+     
+       
 }
 //
 //struct TabBarView_Previews: PreviewProvider {
