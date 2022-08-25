@@ -12,7 +12,7 @@ struct DetailProjectTaskCard: View {
     @Binding var isProjectJoined:Bool
     
     var body: some View {
-        ScrollView{
+//        ScrollView{
             VStack(alignment:.leading,spacing: 10){
                 Text("Tasks").font(.system(size: 17, weight: .bold, design: .default))
                 ForEach(0...15, id: \.self){ project in
@@ -38,7 +38,7 @@ struct DetailProjectTaskCard: View {
                 .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
                 .background(.white)
                 .cornerRadius(16)
-        }
+//        }
         
     }
 }
