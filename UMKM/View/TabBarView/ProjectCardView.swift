@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectCardView: View {
-    @StateObject var vm: MainViewModel
+    @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
     
