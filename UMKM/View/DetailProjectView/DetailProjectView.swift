@@ -10,14 +10,14 @@ import SwiftUI
 struct DetailProjectView: View {
     
     @State var isProjectJoined = false
-    @StateObject var vm: MainViewModel
+    @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
     
     var body: some View {
         ZStack{
             Color.primaryGray.ignoresSafeArea()
-            VStack(alignment:.leading){
+            VStack(alignment:.leading, spacing: 28){
                 Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)

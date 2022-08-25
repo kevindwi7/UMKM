@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C281B9B28B7050800B437AC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C281B9A28B7050800B437AC /* HomeViewModel.swift */; };
 		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
 		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
 		C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C281B9A28B7050800B437AC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCardView.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				C9AE662528B5D8A6000C0133 /* MainViewModel.swift */,
 				C978E52428B602BC0079C6AE /* ProjectViewModel.swift */,
+				9C281B9A28B7050800B437AC /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C281B9B28B7050800B437AC /* HomeViewModel.swift in Sources */,
 				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
 				C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */,
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,

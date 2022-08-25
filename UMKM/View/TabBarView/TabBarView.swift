@@ -15,7 +15,7 @@ struct TabBarView: View {
         }
     var body: some View {
         TabView{
-            HomeView(vm: MainViewModel(container: CKContainer.default()))
+            HomeView(vm: HomeViewModel(container: CKContainer.default()))
                 .tabItem{
                     Label("Explore", systemImage: "person.3")
                 }

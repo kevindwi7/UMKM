@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var vm: MainViewModel
+    @StateObject var vm:HomeViewModel
     @State var isActive = false
     
-    init(vm: MainViewModel) {
+    init(vm: HomeViewModel) {
         _vm = StateObject(wrappedValue: vm)
     }
     
