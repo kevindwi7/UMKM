@@ -10,9 +10,9 @@ import CloudKit
 
 struct TabBarView: View {
     let test = Color("F2F2F7")
-    init() {
-        UITabBar.appearance().backgroundColor = UIColor(.white)
-        }
+//    init() {
+//        UITabBar.appearance().backgroundColor = UIColor(.white)
+//        }
     var body: some View {
         TabView{
             HomeView(vm: HomeViewModel(container: CKContainer.default()))
