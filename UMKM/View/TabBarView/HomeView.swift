@@ -36,10 +36,9 @@ struct HomeView: View {
                         self.isActive = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
-                    }.background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
-                        EmptyView()
-                    })
-                    )
+                    }.sheet(isPresented: $isActive) {
+                        CreateProjectView(isActive: self.$isActive)
+                    }
                 }
                 .onAppear {
                     //                vm.fetchUserID()

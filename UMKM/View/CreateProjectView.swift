@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CreateProjectView: View {
+    @Binding var isActive:Bool
     @State var namaProject:String = ""
     @State var tujuanProject:String = ""
     @State var deskripsiProject:String = ""
@@ -18,10 +19,10 @@ struct CreateProjectView: View {
     @State var lokasiProject:String = ""
     
     var dateFormatter: DateFormatter {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter
-        }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
     
     var body: some View {
         
@@ -84,16 +85,31 @@ struct CreateProjectView: View {
                     Spacer()
                 }
                 .navigationTitle("Buat Proyek").navigationBarTitleDisplayMode(.inline)
-            .textFieldStyle(.roundedBorder).frame(width: UIScreen.main.bounds.width/1.2)
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            self.isActive.toggle()
+                        } label: {
+                            HStack{
+                                Image(systemName: "chevron.left")
+                                Text("Proyek")
+                            }
+                        }
+
+                    }
+                }
+                )
             }
-                
+            .textFieldStyle(.roundedBorder).frame(width: UIScreen.main.bounds.width/1.2)
         }
         
     }
+    
 }
+
 
 struct CreateProjectView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateProjectView()
+        CreateProjectView(isActive: .constant(true))
     }
 }
