@@ -30,25 +30,28 @@ struct HomeView: View {
             .navigationTitle("Proyek")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                    Button {
-                        self.isActive = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                    }.background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
-                        EmptyView()
-                    })
-                                 )
+                Button {
+                    self.isActive = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                }.sheet(isPresented: $isActive) {
+                    CreateProjectView()
                 }
-                .onAppear {
-                    //                vm.fetchUserID()
-                    vm.fetchProject()
-                }
-                .onReceive(vm.objectWillChange) { _ in
-                    vm.fetchProject()
-                }
+//                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
+//                    EmptyView()
+//                })
+//                )
+            }
+            .onAppear {
+                //                vm.fetchUserID()
+                vm.fetchProject()
+            }
+            .onReceive(vm.objectWillChange) { _ in
+                vm.fetchProject()
             }
         }
     }
+}
 
 
 //struct HomeView_Previews: PreviewProvider {
