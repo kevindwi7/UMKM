@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
     @State var isActive = false
-    
+    @State var isListRoomView = false
     init(vm: HomeViewModel) {
         _vm = StateObject(wrappedValue: vm)
     }
@@ -50,7 +50,7 @@ struct HomeView: View {
                 }
             }
             
-        }
+        }.navigationViewStyle(.stack)
     }
 }
 

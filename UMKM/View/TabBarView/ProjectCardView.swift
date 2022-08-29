@@ -11,6 +11,7 @@ struct ProjectCardView: View {
     @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
+    @State var isListRoomView = false
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -24,6 +25,7 @@ struct ProjectCardView: View {
     var body: some View {
         Button(action: {
             self.isActive = true
+            
         }){
             VStack(alignment:.leading,spacing: 8){
                 Text(project.projectName)

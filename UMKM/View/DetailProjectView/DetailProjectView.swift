@@ -19,51 +19,59 @@ struct DetailProjectView: View {
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     
     var body: some View {
-        LoadingView(isShowing: $vm.isLoading){
-            ScrollView{
+            LoadingView(isShowing: $vm.isLoading){
                 ZStack{
                     Color.primaryGray
-                    VStack(alignment:.leading, spacing: 28){
-                        Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
-                            .multilineTextAlignment(.leading)
-                            .padding(.horizontal, 20)
-                            .frame(width: 200, height: 60)
-                        
-                        DetailProjectCardView(project: $project)
-                        
-                        if (project.participantList.contains(userID!)){
-                            DetailProjectTaskCard(test: $project)
-                        }else{
-                            Button {
-                                //handle join project
-                                self.isPresented = true
+                    ScrollView{
+                       
+                           
+                            VStack(alignment:.leading, spacing: 28){
+                                Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.horizontal, 20)
+                                    .frame(width: 200, height: 60)
                                 
-                            } label: {
-                                Text("Join Project").foregroundColor(.white)
+                                DetailProjectCardView(project: $project)
+                                
+                                DetailProjecrCard2View(project2: $project)
+                                
+                                DetailProjectCard3View(project3: $project)
+                                
+                                //                        if (project.participantList.contains(userID!)){
+                                //                            DetailProjectTaskCard(test: $project)
+                                //                        }else{
+                                //                            Button {
+                                //                                //handle join project
+                                //                                self.isPresented = true
+                                //
+                                //                            } label: {
+                                //                                Text("Join Project").foregroundColor(.white)
+                                //                            }
+                                //                            .alert(isPresented: $isPresented){
+                                //                                Alert(
+                                //                                    title: Text("Konfirmasi Project"),
+                                //                                    message: Text("Apakah anda yakin bergabung ke project \(project.projectName)?"),
+                                //                                    primaryButton: .default(Text("Gabung Projek"), action: {
+                                //                                        vm.updateProjectMember(project: project, participantID: userID!, command: "join")
+                                //                                        isLoading = true
+                                //                                        isProjectJoined.toggle()
+                                //                                    }),
+                                //                                    secondaryButton: .destructive(Text("Batal"), action: { // 1
+                                //
+                                //
+                                //                                    })
+                                //                                )
+                                //                            }
+                                //                            .frame(width: UIScreen.main.bounds.width/1.2,height: 38)
+                                //                            .background(.blue)
+                                //                            .cornerRadius(12)
+                                //
+                                //                            DetailProjectTaskCard(test: $project)
+                                //                        }
                             }
-                            .alert(isPresented: $isPresented){
-                                Alert(
-                                    title: Text("Konfirmasi Project"),
-                                    message: Text("Apakah anda yakin bergabung ke project \(project.projectName)?"),
-                                    primaryButton: .default(Text("Gabung Projek"), action: {
-                                        vm.updateProjectMember(project: project, participantID: userID!, command: "join")
-                                        isLoading = true
-                                        isProjectJoined.toggle()
-                                    }),
-                                    secondaryButton: .destructive(Text("Batal"), action: { // 1
-                                        
-                                        
-                                    })
-                                )
-                            }
-                            .frame(width: UIScreen.main.bounds.width/1.2,height: 38)
-                            .background(.blue)
-                            .cornerRadius(12)
-                            
-                            DetailProjectTaskCard(test: $project)
-                        }
+                            .padding()
+                        
                     }
-                    .padding()
                 }.toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         if(project.hostId == userID) {
@@ -76,8 +84,11 @@ struct DetailProjectView: View {
                         }
                     }
                 }
+                
+                
             }
-        }
+        
+        
         
         
         

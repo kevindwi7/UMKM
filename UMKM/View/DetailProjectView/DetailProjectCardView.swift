@@ -37,14 +37,10 @@ struct DetailProjectCardView: View {
                     Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
                 }
             }
-            Text("Tujuan :").font(.system(size: 17, weight: .bold, design: .default))
-            Text(project.goal).font(.system(size: 12, weight: .regular, design: .default))
-            Text("Deskripsi :").font(.system(size: 17, weight: .bold, design: .default))
-            Text(project.description).font(.system(size: 12, weight: .regular, design: .default)).fixedSize(horizontal: false, vertical: true)
-            HStack{
-                Image(systemName: "person.circle.fill")
-                Text("\(project.participantList.count) member telah bergabung").font(.system(size: 12, weight: .regular, design: .default))
-            }
+//            HStack{
+//                Image(systemName: "person.circle.fill")
+//                Text("\(project.participantList.count) member telah bergabung").font(.system(size: 12, weight: .regular, design: .default))
+//            }
         }.padding()
             .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
             .background(.white)
