@@ -43,7 +43,7 @@ struct DetailProjectCardView: View {
             Text(project.description).font(.system(size: 12, weight: .regular, design: .default)).fixedSize(horizontal: false, vertical: true)
             HStack{
                 Image(systemName: "person.circle.fill")
-                Text("\(project.participant) Participants").font(.system(size: 12, weight: .regular, design: .default))
+                Text("\(project.participantList.count) member telah bergabung").font(.system(size: 12, weight: .regular, design: .default))
             }
         }.padding()
             .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)

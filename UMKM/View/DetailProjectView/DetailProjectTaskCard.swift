@@ -9,7 +9,8 @@ import SwiftUI
 
 struct DetailProjectTaskCard: View {
     
-    @Binding var isProjectJoined:Bool
+    @Binding var test: ProjectViewModel
+    let userID = UserDefaults.standard.object(forKey: "userID") as? String
     
     var body: some View {
 //        ScrollView{
@@ -19,6 +20,7 @@ struct DetailProjectTaskCard: View {
                     HStack{
                         Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
                         Spacer()
+                        
                         Button {
                             //handle assign to me
                             print("Test")
@@ -27,9 +29,10 @@ struct DetailProjectTaskCard: View {
                         }
                         .frame(width: 103,height: 25)
                         .foregroundColor(.white)
-                        .background(isProjectJoined ? .blue : .gray)
+                        .background(test.participantList.contains(userID!) ? .blue : .gray)
                         .cornerRadius(8)
-                        .disabled(!isProjectJoined)
+                        .disabled(!test.participantList.contains(userID!))
+                        
                         
                         
                     }
@@ -43,9 +46,9 @@ struct DetailProjectTaskCard: View {
     }
 }
 
-struct DetailProjectTaskCard_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailProjectTaskCard(isProjectJoined: .constant(false))
-    }
-}
+//struct DetailProjectTaskCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailProjectTaskCard(isProjectJoined: .constant(false))
+//    }
+//}
 
