@@ -17,25 +17,36 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView{
-            ScrollView(.vertical){
-                VStack(alignment: .leading){
-                    ForEach($vm.projects, id: \.id){ $project in
-                        ProjectCardView(vm: self.vm, project: $project)
-                    }.padding(.vertical, 6)
+            ZStack{
+                Color.primaryGray
+                ScrollView(.vertical){
+                    VStack(alignment: .leading){
+                        ForEach($vm.projects, id: \.id){ $project in
+                            ProjectCardView(vm: self.vm, project: $project)
+                        }.padding(.vertical, 6)
+                    }.padding()
+                    
                 }
+                //            .frame(width: UIScreen.main.bounds.width)
                 
-            }
-            .frame(width: UIScreen.main.bounds.width)
-            .background(Color.primaryGray)
-            .navigationTitle("Proyek")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                Button {
-                    self.isActive = true
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                }.sheet(isPresented: $isActive) {
-                    CreateProjectView()
+                .navigationTitle("Proyek")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    Button {
+                        self.isActive = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                    }.background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
+                        EmptyView()
+                    })
+                    )
+                }
+                .onAppear {
+                    //                vm.fetchUserID()
+                    vm.fetchProject()
+                }
+                .onReceive(vm.objectWillChange) { _ in
+                    vm.fetchProject()
                 }
 //                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
 //                    EmptyView()
@@ -49,6 +60,7 @@ struct HomeView: View {
             .onReceive(vm.objectWillChange) { _ in
                 vm.fetchProject()
             }
+            
         }
     }
 }

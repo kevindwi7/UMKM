@@ -14,6 +14,7 @@
 		C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */; };
 		C958E9BE28B639D700DC7F8B /* DetailProjectTaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */; };
 		C958E9C028B639EF00DC7F8B /* DetailProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */; };
+		C967B89428B7B3BB00B59CE2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967B89328B7B3BB00B59CE2 /* ActivityIndicator.swift */; };
 		C978E52328B5FE540079C6AE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52228B5FE540079C6AE /* Project.swift */; };
 		C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52428B602BC0079C6AE /* ProjectViewModel.swift */; };
 		C978E52728B630450079C6AE /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52628B630450079C6AE /* CreateProjectView.swift */; };
@@ -38,6 +39,7 @@
 		C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCardView.swift; sourceTree = "<group>"; };
 		C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectTaskCard.swift; sourceTree = "<group>"; };
 		C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectView.swift; sourceTree = "<group>"; };
+		C967B89328B7B3BB00B59CE2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		C978E52228B5FE540079C6AE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		C978E52428B602BC0079C6AE /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C978E52628B630450079C6AE /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				9CA6280128B60433008344B1 /* DetailProjectView */,
 				C9AE662428B5D839000C0133 /* TabBarView */,
 				C9AE661F28B5D3C4000C0133 /* LoginView */,
+				C967B89328B7B3BB00B59CE2 /* ActivityIndicator.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				9CA627FC28B5E206008344B1 /* Constant.swift in Sources */,
 				C978E52728B630450079C6AE /* CreateProjectView.swift in Sources */,
 				C9820E7228B5F28A0043724D /* ProfileView.swift in Sources */,
+				C967B89428B7B3BB00B59CE2 /* ActivityIndicator.swift in Sources */,
 				C9AE660B28B5CEE5000C0133 /* UMKMApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -59,5 +59,13 @@ struct ProjectViewModel: Hashable, Identifiable {
         project.participantList
     }
     
+    var hostId: String {
+        project.hostiD
+    }
+    
+    var isFinish: Int {
+        project.isFinish
+    }
+
 }
 

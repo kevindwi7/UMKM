@@ -12,10 +12,11 @@ import CloudKit
 
 @main
 struct UMKMApp: App {
-    @State var isListRoomView = false
+    
     var body: some Scene {
         WindowGroup {
-            TabBarView()
+            LoginView(vm: MainViewModel(container: CKContainer.default()))
+//            TabBarView()
         }
     }
 }

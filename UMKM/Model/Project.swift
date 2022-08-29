@@ -19,8 +19,11 @@ struct Project{
     var startTime: Date
     var endTime: Date
     var participantList: [String]
+    var hostiD: String
+    var isFinish: Int
     
-    init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String, participant: Int, startTime: Date, endTime: Date, participantList: [String]){
+    
+    init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String, participant: Int, startTime: Date, endTime: Date, participantList: [String], hostId: String, isFinish: Int){
         self.id = id
         self.projectHost = projectHost
         self.projectName = projectName
@@ -31,10 +34,12 @@ struct Project{
         self.startTime = startTime
         self.endTime = endTime
         self.participantList = participantList
+        self.hostiD = hostId
+        self.isFinish = isFinish
     }
     
     func toDictionary() -> [String: Any]{
-        return ["projectHost": projectHost, "projectName": projectName, "location": location, "goal": goal,"description": description, "participant":participant,"startTime": startTime,"endTime": endTime, "participantList": participantList]
+        return ["projectHost": projectHost, "projectName": projectName, "location": location, "goal": goal,"description": description, "participant":participant,"startTime": startTime,"endTime": endTime, "participantList": participantList, "hostId": hostiD, "isFinish": isFinish]
     }
     
     static func fromRecord(_ record: CKRecord) -> Project? {
@@ -48,11 +53,13 @@ struct Project{
             let startTime = record.value(forKey: "startTime") as? Date,
             let endTime = record.value(forKey: "endTime") as? Date,
             let description = record.value(forKey: "description") as? String,
-                let participantList = record.value(forKey: "participantList") as? [String]
+            let participantList = record.value(forKey: "participantList") as? [String],
+            let hostId = record.value(forKey: "hostId") as? String,
+                let isFinish = record.value(forKey: "isFinish") as? Int
         else {
             return nil
         }
         
-        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList)
+        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish)
     }
 }
