@@ -78,10 +78,10 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func createProject(projectHost: String, projectName: String, location: String, participant: Int, startTime: Date, endTime: Date, participantList: [String],  description: String, goal: String, hostId: String, isFinish: Int){
+    func createProject(projectHost: String, projectName: String, location: String, participant: Int, startTime: Date, endTime: Date, participantList: [String],  description: String, goal: String, hostId: String, isFinish: Int, startDate:Date, endDate: Date){
         self.isLoading = true
         let record = CKRecord(recordType: RecordType.project.rawValue)
-        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish)
+        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate)
         
         record.setValuesForKeys(project.toDictionary())
         

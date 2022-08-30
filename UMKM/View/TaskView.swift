@@ -11,13 +11,22 @@ struct TaskView: View {
     
     @State private var totalTask:Int = 2
     @State private var tasks = ["",""]
+    @Binding private var namaProject: String
+    @Binding private var tujuanProject: String
+    @Binding private var deskripsiProject: String
+    @Binding private var startDate: Date
+    @Binding private var endDate: Date
+    @Binding private var startTime: Date
+    @Binding private var endTime: Date
+    @Binding private var lokasiProject: String
     
-    init() {
-        let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.backgroundColor = .white
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-    }
+//    init() {
+//        let navBarAppearance = UINavigationBar.appearance()
+//        navBarAppearance.backgroundColor = .white
+//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+//        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+//    }
+    
     var body: some View {
         ZStack {
             Color.primaryGray.ignoresSafeArea()
@@ -56,11 +65,11 @@ struct TaskView: View {
     }
 }
 
-struct TaskView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskView()
-    }
-}
+//struct TaskView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TaskView()
+//    }
+//}
 
 public struct CustomTextFieldStyle : TextFieldStyle {
     public func _body(configuration: TextField<Self._Label>) -> some View {

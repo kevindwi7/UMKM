@@ -66,6 +66,13 @@ struct ProjectViewModel: Hashable, Identifiable {
     var isFinish: Int {
         project.isFinish
     }
-
+    
+    var startDate: Date {
+        project.startDate
+    }
+    
+    var endDate: Date {
+        project.endDate
+    }
 }
 

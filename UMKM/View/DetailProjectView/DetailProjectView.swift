@@ -76,7 +76,7 @@ struct DetailProjectView: View {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         if(project.hostId == userID) {
                             Button(action: {
-                                vm.deleteRoom(project: project)
+                                vm.deleteProject(project: project)
                                 isLoading = true
                             }){
                                 Image(systemName: "trash")

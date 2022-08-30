@@ -76,7 +76,7 @@ struct CreateProjectView: View {
                             TextField("", text: $lokasiProject).frame(width:180)
                         }
                     }.frame(width: UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
-                    NavigationLink(destination: TaskView()) {
+                    NavigationLink(destination: TaskView(createProjects: )) {
                         Text("Lanjut Bagi Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 38)
                     }.frame(width: UIScreen.main.bounds.width/1.1,height: 38)
                         .background(.blue)

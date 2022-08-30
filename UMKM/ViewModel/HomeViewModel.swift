@@ -85,6 +85,8 @@ class HomeViewModel:ObservableObject{
         let endTime = project.endTime
         let participant = project.participant
         let isFinish = project.isFinish
+        let startDate = project.startDate
+        let endDate = project.endDate
         
         if(command == "join") {
             if( !(newParticipant.contains(participantID))){
@@ -123,7 +125,7 @@ class HomeViewModel:ObservableObject{
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish))
+                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate))
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
@@ -134,7 +136,7 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func deleteRoom(project: ProjectViewModel){
+    func deleteProject(project: ProjectViewModel){
         self.isLoading = true
         let recordId = project.id
         database.delete(withRecordID: recordId!) { deletedRecordId, error in
