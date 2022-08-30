@@ -18,6 +18,7 @@ struct DetailProjectCardView: View {
     
     var body: some View {
         VStack(alignment:.leading,spacing: 15){
+            Text("Detail").font(.system(size: 18, weight: .bold, design: .default))
             Group{
                 HStack{
                     Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
@@ -42,7 +43,7 @@ struct DetailProjectCardView: View {
 //                Text("\(project.participantList.count) member telah bergabung").font(.system(size: 12, weight: .regular, design: .default))
 //            }
         }.padding()
-            .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
+            .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
             .cornerRadius(16)
     }

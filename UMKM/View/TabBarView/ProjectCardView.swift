@@ -56,7 +56,7 @@ struct ProjectCardView: View {
                 HStack{
                     Spacer()
                     HStack{
-                        Image(systemName: "doc.text")
+                        Image(systemName: "doc.text.fill")
                         Spacer().frame(width:20)
                         Text("6/10").font(.system(size: 14, weight: .medium, design: .default))
                     }.padding(5).background(
@@ -67,7 +67,8 @@ struct ProjectCardView: View {
                 .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
                 .background(.white)
                 .cornerRadius(15)
-        }.background(
+        }
+        .background(
             NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project), isActive: $isActive, label: {
                 EmptyView()
             })

@@ -61,7 +61,7 @@ struct DetailProjectCard3View: View {
             }
   
         }.padding()
-            .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
+            .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
             .cornerRadius(16)
     }
