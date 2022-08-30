@@ -16,7 +16,7 @@ struct DetailProjecrCard2View: View {
             Text("Deskripsi :").font(.system(size: 17, weight: .bold, design: .default))
             Text(project2.description).font(.system(size: 12, weight: .regular, design: .default)).fixedSize(horizontal: false, vertical: true)
         }.padding()
-            .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
+            .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
             .cornerRadius(16)
     }

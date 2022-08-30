@@ -18,31 +18,40 @@ struct DetailProjectCardView: View {
     
     var body: some View {
         VStack(alignment:.leading,spacing: 15){
+            Text("Detail").font(.system(size: 18, weight: .bold, design: .default))
             Group{
                 HStack{
                     Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
+                        .accessibilityHidden(true)
                     Text("Lokasi : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.location).font(.system(size: 12, weight: .medium, design: .default))
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Lokasi kegiatan dilaksanakan di \(project.location)")
                 HStack{
                     Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
+                        .accessibilityHidden(true)
                     Text("Waktu : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(dateFormatter.string(from: project.startTime))
                     Text("|")
                     Text("8.00 - 10.00 AM")
                 }.font(.system(size: 12, weight: .medium, design: .default))
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("waktu kegiatan dilaksanakan pada hari \(dateFormatter.string(from: project.startTime)) di jam") //need to further update - vp
                 HStack{
                     Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
+                        .accessibilityHidden(true)
                     Text("Ideator : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
-                }
+                }.accessibilityElement(children: .combine)
+                    .accessibilityLabel("Ideator program pelaksanan adalah \(project.projectHost)") //need to further update - vp
             }
 //            HStack{
 //                Image(systemName: "person.circle.fill")
 //                Text("\(project.participantList.count) member telah bergabung").font(.system(size: 12, weight: .regular, design: .default))
 //            }
         }.padding()
-            .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
+            .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
             .cornerRadius(16)
     }

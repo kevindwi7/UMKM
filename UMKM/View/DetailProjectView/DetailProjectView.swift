@@ -23,19 +23,20 @@ struct DetailProjectView: View {
                 ZStack{
                     Color.primaryGray
                     ScrollView{
-                       
-                           
-                            VStack(alignment:.leading, spacing: 28){
+                            VStack(alignment:.leading, spacing: 10){
                                 Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
+                                    .lineLimit(2)
                                     .multilineTextAlignment(.leading)
-                                    .padding(.horizontal, 20)
-                                    .frame(width: 200, height: 60)
+                                    .frame(width: UIScreen.main.bounds.width,alignment: .leading)
+                                    .padding(.horizontal)
                                 
-                                DetailProjectCardView(project: $project)
+                                .background(.white)
                                 
-                                DetailProjecrCard2View(project2: $project)
+                                DetailProjectCardView(project: $project).padding(.leading)
                                 
-                                DetailProjectCard3View(project3: $project)
+                                DetailProjecrCard2View(project2: $project).padding(.leading)
+                                
+                                DetailProjectCard3View(project3: $project).padding(.leading)
                                 
                                 //                        if (project.participantList.contains(userID!)){
                                 //                            DetailProjectTaskCard(test: $project)
@@ -69,9 +70,10 @@ struct DetailProjectView: View {
                                 //                            DetailProjectTaskCard(test: $project)
                                 //                        }
                             }
-                            .padding()
+//                            .padding()
                         
                     }
+//                    .navigationTitle(project.projectName).navigationBarTitleDisplayMode(.large)
                 }.toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         if(project.hostId == userID) {
