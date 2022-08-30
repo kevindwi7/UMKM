@@ -35,19 +35,22 @@ struct CreateProjectView: View {
                             Text("Nama Proyek").font(.system(size: 14, weight: .medium, design: .default))
                             Spacer()
                             TextField("", text: $namaProject).frame(width:180)
-                        }
+                        }.accessibilityElement(children: .combine)
+                            .accessibilityLabel("Tuliskan ide nama proyek anda") //need to further update - vp
                         HStack {
                             Text("Tujuan").font(.system(size: 14, weight: .medium, design: .default))
                             Spacer()
                             TextField("", text: $tujuanProject).frame(width:180)
-                        }
+                        }.accessibilityElement(children: .combine)
+                            .accessibilityLabel("Tuliskan tujuan proyek anda") //need to further update - vp
                         HStack {
                             Text("Deskripsi").font(.system(size: 14, weight: .medium, design: .default))
                             Spacer()
                             TextEditor(text: $deskripsiProject)
                                 .frame(width:180 ,height:120)
                                 .overlay(RoundedRectangle(cornerRadius: 16).stroke(.gray.opacity(0.2), lineWidth: 1))
-                        }
+                        }.accessibilityElement(children: .combine)
+                            .accessibilityLabel("Tuliskan deskripsi detail dari proyek anda") //need to further update - vp
                         HStack{
                             Text("Tanggal Mulai").font(.system(size: 14, weight: .medium, design: .default))
                             Spacer()

@@ -21,21 +21,29 @@ struct DetailProjectCardView: View {
             Group{
                 HStack{
                     Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
+                        .accessibilityHidden(true)
                     Text("Lokasi : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.location).font(.system(size: 12, weight: .medium, design: .default))
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Lokasi kegiatan dilaksanakan di \(project.location)")
                 HStack{
                     Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
+                        .accessibilityHidden(true)
                     Text("Waktu : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(dateFormatter.string(from: project.startTime))
                     Text("|")
                     Text("8.00 - 10.00 AM")
                 }.font(.system(size: 12, weight: .medium, design: .default))
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("waktu kegiatan dilaksanakan pada hari \(dateFormatter.string(from: project.startTime)) di jam") //need to further update - vp
                 HStack{
                     Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
+                        .accessibilityHidden(true)
                     Text("Ideator : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
-                }
+                }.accessibilityElement(children: .combine)
+                    .accessibilityLabel("Ideator program pelaksanan adalah \(project.projectHost)") //need to further update - vp
             }
             Text("Tujuan :").font(.system(size: 17, weight: .bold, design: .default))
             Text(project.goal).font(.system(size: 12, weight: .regular, design: .default))
