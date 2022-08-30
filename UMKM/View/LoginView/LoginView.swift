@@ -27,16 +27,18 @@ struct LoginView: View {
                     .font(.system(size: 38))
                     .fontWeight(.bold)
                     .padding()
-                Text("Aplikasi ini bantu …. komunitasmu, ")
+                Text("Setiap potensi anda")
                     .font(.system(size: 15))
-                Text("dimanapun dan kapanpun")
+                Text("berarti bagi komunitas")
                     .font(.system(size: 15))
+                    .accessibilityElement(children: .combine)
                     
                 VStack{
                     Image("peeps")
                         .resizable()
                         .scaledToFit()
                         .frame(height:200)
+                        .accessibilityHidden(true)
                     
 
                 }
