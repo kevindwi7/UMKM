@@ -22,7 +22,7 @@ struct TaskView: View {
         ZStack {
             Color.primaryGray.ignoresSafeArea()
             VStack {
-                Spacer().frame(height:20)
+                Spacer().frame(height:15)
                 ScrollView {
                     VStack{
                         Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(size: 12, weight: .medium, design: .default))
