@@ -49,17 +49,16 @@ struct Project{
             let goal = record.value(forKey: "goal") as? String,
             let description = record.value(forKey: "description") as? String,
             let location = record.value(forKey: "location") as? String,
-            let participant = record.value(forKey: "participant") as? Int,
             let startTime = record.value(forKey: "startTime") as? Date,
             let endTime = record.value(forKey: "endTime") as? Date,
-            let description = record.value(forKey: "description") as? String,
             let participantList = record.value(forKey: "participantList") as? [String],
             let hostId = record.value(forKey: "hostId") as? String,
-                let isFinish = record.value(forKey: "isFinish") as? Int
+            let isFinish = record.value(forKey: "isFinish") as? Int
         else {
             return nil
         }
         
-        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish)
+        
+        return Project(id: nil, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participantList.count, startTime:startTime, endTime:endTime, participantList: participantList, hostId: hostId, isFinish:isFinish)
     }
 }

@@ -13,8 +13,12 @@ struct DetailProjecrCard2View: View {
         VStack(alignment:.leading,spacing: 15){
             Text("Tujuan :").font(.system(size: 17, weight: .bold, design: .default))
             Text(project2.goal).font(.system(size: 12, weight: .regular, design: .default))
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Tujuan dari proyek ini adalah \(project2.goal)")
             Text("Deskripsi :").font(.system(size: 17, weight: .bold, design: .default))
             Text(project2.description).font(.system(size: 12, weight: .regular, design: .default)).fixedSize(horizontal: false, vertical: true)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Tujuan dari proyek ini adalah \(project2.description)")
         }.padding()
             .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
