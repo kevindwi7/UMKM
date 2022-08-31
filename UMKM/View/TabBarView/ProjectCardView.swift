@@ -30,19 +30,22 @@ struct ProjectCardView: View {
             VStack(alignment:.leading,spacing: 8){
                 HStack {
                     Text(project.projectName)
-                        .font(.system(size: 18, weight: .bold, design: .default))
+                        .fontWeight(.bold)
                         .minimumScaleFactor(0.01)
+                        .scaledFont(name: "", size: 24)
+                        .lineLimit(1)
                     .foregroundColor(.black)
                     Spacer()
                     Image(systemName: "chevron.right").foregroundColor(.black)
                         .accessibilityHidden(true)
                 }
                 HStack{
-                    Image("location").resizable().frame(width: 15, height: 18).scaledToFit()
+                    Image(systemName: "mappin.and.ellipse").foregroundColor(.black)
                         .accessibilityHidden(true)
                     Text(project.location)
-                        .font(.system(size: 14, weight: .medium, design: .default))
+                        .scaledFont(name: "", size: 14)
                         .minimumScaleFactor(0.01)
+                        .lineLimit(1)
                         .foregroundColor(.black)
                 }
                 HStack{
@@ -51,8 +54,9 @@ struct ProjectCardView: View {
                     Text("21 Jan 2022")
                     Text("-")
                     Text("25 Jan 2022")
-                }.font(.system(size: 14, weight: .medium, design: .default))
+                }.scaledFont(name: "", size: 14)
                     .minimumScaleFactor(0.01)
+                    .lineLimit(1)
                     .foregroundColor(.black)
                 HStack{
                     Image(systemName: "clock")
@@ -60,7 +64,10 @@ struct ProjectCardView: View {
                     Text("08.50")
                     Text("-")
                     Text("16.40")
-                }.font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.black)
+                }.scaledFont(name: "", size: 14)
+                    .minimumScaleFactor(0.01)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
                 HStack{
                     Spacer()
                     HStack{
