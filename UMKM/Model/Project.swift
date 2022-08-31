@@ -23,6 +23,7 @@ struct Project{
     var startDate: Date
     var endDate: Date
     var projectID: String
+    var tasks:[TaskViewModel] = []
     
     init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String,  startTime: Date, endTime: Date, participantList: [String], hostId: String, isFinish: Bool, startDate: Date, endDate: Date, projectID: String){
         self.id = id

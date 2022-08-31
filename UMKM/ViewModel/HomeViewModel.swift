@@ -15,7 +15,7 @@ class HomeViewModel:ObservableObject{
     
     private var database: CKDatabase
     private var container: CKContainer
-    @Published var projects: [ProjectViewModel] = []
+    @Published var projects: [ProjectViewModel] = [ProjectViewModel]()
     @Published var tasks: [TaskViewModel] = []
     
     @Published var isLoading: Bool = false
@@ -55,6 +55,7 @@ class HomeViewModel:ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.projects = returnedProjects.map(ProjectViewModel.init)
+                    self.fetchTask()
 //                    defer {
 //                        self.objectWillChange.send()
 //                    }
@@ -161,6 +162,7 @@ class HomeViewModel:ObservableObject{
         
         var returnedTasks: [Task] = []
         
+//        projects[0].projectName = "asdas"
         self.database.fetch(withQuery: query) { result in
             switch result {
             case .success(let result):
@@ -171,7 +173,15 @@ class HomeViewModel:ObservableObject{
                         case .success(let record):
                             
                             if let task = Task.fromRecord(record) {
-                                returnedTasks.append(task)
+                                for i in 0 ..< self.projects.count{
+                                    if self.projects[i].projectID == task.projectId{
+//                                        returnedTasks.append(task)
+//                                        self.projects[i].projectName = "ASD"
+//                                        self.projects[i].tasks.append(TaskViewModel(task: task))
+                                    }
+                                }
+                                
+//                                returnedTasks.append(task)
                             }
 //                            print(returnedRooms)
                         case .failure(let error):
@@ -181,8 +191,13 @@ class HomeViewModel:ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.tasks = returnedTasks.map(TaskViewModel.init)
+                    
+                    
 //                    defer {
 //                        self.objectWillChange.send()
+                    
+                    // Cek Task id dari projectID
+                    
 //                    }
                     self.objectWillChange.send()
 //                    print("\(self.rooms)")
@@ -214,16 +229,6 @@ class HomeViewModel:ObservableObject{
                 }
             }
         }
-//        else if (command == "leave") {
-//            if(newParticipant.contains(participantID)){
-//                if let index = newParticipant.firstIndex(of: participantID) {
-//                    print("Leave Room : \(newParticipant[index])")
-//                    newParticipant.remove(at: index)
-//                }
-//            }
-//        }
-        
-//        newParticipant.removeAll(where: { $0 == "" })
         
         print(newParticipant)
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
@@ -245,7 +250,7 @@ class HomeViewModel:ObservableObject{
                         let id = record.recordID
                         guard let user = record["user"] as? String else { return }
                         let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user))
-                        
+                        print(123)
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false

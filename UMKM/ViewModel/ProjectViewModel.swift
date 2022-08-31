@@ -10,6 +10,10 @@ import CloudKit
 
 struct ProjectViewModel: Hashable, Identifiable {
     
+    var tasks: [TaskViewModel]{
+        project.tasks
+    }
+    
     func hash(into hasher: inout Hasher) {
             hasher.combine(id.hashValue)
     }
@@ -27,6 +31,7 @@ struct ProjectViewModel: Hashable, Identifiable {
     var projectHost: String {
         project.projectHost
     }
+    
     
     var projectName: String {
         project.projectName

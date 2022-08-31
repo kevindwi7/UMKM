@@ -14,7 +14,7 @@ struct DetailProjectView: View {
     @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
-    @Binding var task: TaskViewModel
+//    @Binding var task: TaskViewModel
     @State var isLoading = false
     @State var isPresented: Bool = false
     
@@ -39,7 +39,7 @@ struct DetailProjectView: View {
                                 
                                 DetailProjecrCard2View(project2: $project).padding(.leading)
                                 
-                                DetailProjectCard3View( project3: $project, task: $task).padding(.leading)
+                                DetailProjectCard3View( project3: $project).padding(.leading)
                                 
                                 //                        if (project.participantList.contains(userID!)){
                                 //                            DetailProjectTaskCard(test: $project)

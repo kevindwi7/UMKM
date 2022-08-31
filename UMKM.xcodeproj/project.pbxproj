@@ -21,7 +21,6 @@
 		C967B89A28BC5E5E00B59CE2 /* DetailProjectCard3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967B89928BC5E5E00B59CE2 /* DetailProjectCard3View.swift */; };
 		C967B8A028BDAD0200B59CE2 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967B89F28BDAD0200B59CE2 /* Task.swift */; };
 		C967B8A228BDB84A00B59CE2 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967B8A128BDB84A00B59CE2 /* TaskViewModel.swift */; };
-		C967B8A428BE44DF00B59CE2 /* DetailTaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967B8A328BE44DF00B59CE2 /* DetailTaskCard.swift */; };
 		C978E52328B5FE540079C6AE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52228B5FE540079C6AE /* Project.swift */; };
 		C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52428B602BC0079C6AE /* ProjectViewModel.swift */; };
 		C978E52728B630450079C6AE /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C978E52628B630450079C6AE /* CreateProjectView.swift */; };
@@ -53,7 +52,6 @@
 		C967B89928BC5E5E00B59CE2 /* DetailProjectCard3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCard3View.swift; sourceTree = "<group>"; };
 		C967B89F28BDAD0200B59CE2 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C967B8A128BDB84A00B59CE2 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		C967B8A328BE44DF00B59CE2 /* DetailTaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskCard.swift; sourceTree = "<group>"; };
 		C978E52228B5FE540079C6AE /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		C978E52428B602BC0079C6AE /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		C978E52628B630450079C6AE /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */,
-				C967B8A328BE44DF00B59CE2 /* DetailTaskCard.swift */,
 			);
 			path = DetailTask;
 			sourceTree = "<group>";
@@ -296,7 +293,6 @@
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
 				C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */,
-				C967B8A428BE44DF00B59CE2 /* DetailTaskCard.swift in Sources */,
 				C967B89628BC5C6800B59CE2 /* DetailProjecrCard2View.swift in Sources */,
 				C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */,
 				C9820E7628B5F37E0043724D /* TugaskuView.swift in Sources */,

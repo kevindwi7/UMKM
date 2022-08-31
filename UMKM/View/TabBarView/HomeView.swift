@@ -25,15 +25,13 @@ struct HomeView: View {
                 Color.primaryGray
                 ScrollView(.vertical){
                     VStack(alignment: .leading){
-                        
-                        
                         ForEach($vm.projects, id: \.id){ $project in
-                            ForEach ($vm.tasks, id: \.id) { $taskHome in
-                                if ( project.projectID == taskHome.projectId){
-                                    ProjectCardView(vm: self.vm, project: $project, task: $taskHome)
-                                }
-                                
-                            }
+                            //                            ForEach ($vm.tasks, id: \.id) { $taskHome in
+                            
+                            ProjectCardView(vm: self.vm, project: $project)
+                            
+                            
+                            //                            }
                             
                         }.padding(.vertical, 6)
                     }.padding()
@@ -50,16 +48,16 @@ struct HomeView: View {
                         Image(systemName: "plus.circle.fill")
                     }.sheet(isPresented: $isActive) {
                         CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
-                    }
+                    }.accessibilityLabel("Tambah Proyek")
                 }
                 .onAppear {
                     //                vm.fetchUserID()
                     vm.fetchProject()
-                                        vm.fetchTask()
+                    //vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
-                    vm.fetchProject()
-                                        vm.fetchTask()
+                    //vm.fetchProject()
+                    //vm.fetchTask()
                 }
                 //                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
                 //                    EmptyView()

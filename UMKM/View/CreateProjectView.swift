@@ -101,13 +101,19 @@ struct CreateProjectView: View {
                             }.accessibilityElement(children: .combine)
                             .accessibilityLabel("Tulis lokasi proyek")
                         }.frame(width: UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
-                        NavigationLink(destination: TaskView()) {
-                            Text("Lanjut Bagi Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 38)
+                        Button(action: {
+                            projectID = randomString(length: 10)
+                            self.action = 1
+                            
+                        }, label: {
+                            Text("Lanjut Bagi Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 38) .accessibilityLabel("Tombol Lanjut Bagi Tugas")
                         }).frame(width: UIScreen.main.bounds.width/1.1,height: 38)
                             .background(.blue)
                             .cornerRadius(12)
                             .padding()
-                            .accessibilityLabel("Tombol Lanjut Bagi Tugas")
+//                            Text("Lanjut Bagi Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 38)
+//
+//                            .accessibilityLabel("Tombol Lanjut Bagi Tugas")
 //                            .onTapGesture {
 //                                HapticManager.instance.notification(type: .success)
 //                            }

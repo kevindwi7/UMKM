@@ -11,7 +11,7 @@ struct ProjectCardView: View {
     @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
-    @Binding var task: TaskViewModel
+//    @State var task: TaskViewModel
     @State var isListRoomView = false
     
     var dateFormatter: DateFormatter {
@@ -84,7 +84,7 @@ struct ProjectCardView: View {
                 .accessibilityLabel("Proyek \(project.projectName), Lokasi di \(project.location), tanggal mulai dua satu januari sampai tanggal dua puluh lima januari dua ribu dua dua, jam kegiatan delapan lima puluh pagi sampai empat empat puluh sore, tugas yang terisi enam dari sepuluh tugas") // dummy data, need to further update - vp
         }
         .background(
-            NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project, task: $task), isActive: $isActive, label: {
+            NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project), isActive: $isActive, label: {
                 EmptyView()
             })
         )

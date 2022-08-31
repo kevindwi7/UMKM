@@ -10,9 +10,12 @@ import CloudKit
 
 struct DetailProjectTaskCard: View {
     @StateObject var vm:HomeViewModel
-    @Binding var test: ProjectViewModel
-    @Binding var task: TaskViewModel
+    @Binding var project: ProjectViewModel
+    //    @Binding var task: TaskViewModel
     @State var isLoading = false
+    
+    @State var task: String = ""
+    
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
@@ -24,8 +27,7 @@ struct DetailProjectTaskCard: View {
                     
                     Color.primaryGray
                     VStack(alignment:.leading,spacing: 10){
-                        
-                        ForEach ($vm.tasks, id: \.id) { $project in
+                        ForEach(0...2, id: \.self){ project in
                             HStack{
                                 Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
                                     .accessibilityLabel("Sapu Lantai") //need to further update - vp
@@ -33,28 +35,62 @@ struct DetailProjectTaskCard: View {
                                 
                                 Button {
                                     //handle assign to me
-                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
-                                    print("Test")
+                                    //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
+                                    task = "Kevin Dwi"
                                     
                                 } label: {
-                                    if task.user.isEmpty{
-                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default))
+                                    if (task.isEmpty) {
+                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
                                     }else{
-                                        Text(task.user).font(.system(size: 12, weight: .regular, design: .default))
+                                        Text(task).font(.system(size: 12, weight: .regular, design: .default))
                                     }
-                                   
+                                    
+                                    //                                    if (task.user.isEmpty) {
+                                    //                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+                                    //                                    }else{
+                                    //                                        Text(task.user).font(.system(size: 12, weight: .regular, design: .default))
+                                    //                                    }
+                                    
                                 }
                                 .frame(width: 103,height: 25)
                                 .foregroundColor(.white)
-                                .background(task.user.isEmpty ? .blue : .gray)
+                                .background(task.isEmpty ? .blue : .gray)
                                 .cornerRadius(8)
-                                .disabled(!task.user.isEmpty)
+                                .disabled(!task.isEmpty)
                                 
                                 
                             }
-                            //                                DetailTaskCard(vm: HomeViewModel(container: CKContainer.default()), test: $test, task: $task)
-                            
                         }
+                        //                        ForEach (self.project.project.tasks, id: \.id) { task in
+                        //                            HStack{
+                        //                                Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
+                        //                                    .accessibilityLabel("Sapu Lantai") //need to further update - vp
+                        //                                Spacer()
+                        //
+                        //                                Button {
+                        //                                    //handle assign to me
+                        //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
+                        //                                    print("Test")
+                        //
+                        //                                } label: {
+                        //                                    if (task.user.isEmpty) {
+                        //                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+                        //                                    }else{
+                        //                                        Text(task.user).font(.system(size: 12, weight: .regular, design: .default))
+                        //                                    }
+                        //
+                        //                                }
+                        //                                .frame(width: 103,height: 25)
+                        //                                .foregroundColor(.white)
+                        //                                .background(task.user.isEmpty ? .blue : .gray)
+                        //                                .cornerRadius(8)
+                        //                                .disabled(!task.user.isEmpty)
+                        //
+                        //
+                        //                            }
+                        //                            //                                DetailTaskCard(vm: HomeViewModel(container: CKContainer.default()), test: $test, task: $task)
+                        //
+                        //                        }
                         
                         //                        ForEach($vm.projects, id: \.id){ $testss in
                         //                            ForEach ($vm.taskse, id: \.id) { $tests in
@@ -97,11 +133,12 @@ struct DetailProjectTaskCard: View {
                     
                     
                     
-                }.onAppear{
-                    vm.fetchTask()
-                }   .onReceive(vm.objectWillChange) { _ in
-                    vm.fetchTask()
                 }
+                //                .onAppear{
+                //                    vm.fetchTask()
+                //                }   .onReceive(vm.objectWillChange) { _ in
+                //                    vm.fetchTask()
+                //                }
             }
         }
         
