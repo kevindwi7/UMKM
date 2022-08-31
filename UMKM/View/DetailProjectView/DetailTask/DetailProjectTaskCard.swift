@@ -27,7 +27,8 @@ struct DetailProjectTaskCard: View {
                         
                         ForEach ($vm.tasks, id: \.id) { $project in
                             HStack{
-                                Text(task.taskName).font(.system(size: 12, weight: .regular, design: .default))
+                                Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
+                                    .accessibilityLabel("Sapu Lantai") //need to further update - vp
                                 Spacer()
                                 
                                 Button {

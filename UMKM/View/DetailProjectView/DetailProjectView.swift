@@ -31,6 +31,7 @@ struct DetailProjectView: View {
                                     .multilineTextAlignment(.leading)
                                     .frame(width: UIScreen.main.bounds.width,alignment: .leading)
                                     .padding(.horizontal)
+                                    .accessibilityLabel("proyek \(project.projectName)")
                                 
                                 .background(.white)
                                 
@@ -90,6 +91,7 @@ struct DetailProjectView: View {
                             }){
                                 Image(systemName: "trash")
                             }
+                            .accessibilityLabel("Hapus \(project.projectName)")
                         }
                     }
                 }

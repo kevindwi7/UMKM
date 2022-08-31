@@ -26,13 +26,16 @@ struct DetailProjectParticipantView: View {
                                 .frame(width: 40.8, height: 40.8)
                                 .foregroundColor(.black)
                                 .padding()
+                                .accessibilityLabel("foto \(firstName!)")
                             Text("\(firstName!)")
                             Spacer()
                             Text("3 Tugas")
                                 .padding(.all, 8)
                                 .background(RoundedRectangle(cornerRadius: 8).stroke())
                                 .foregroundColor(.blue)
-                        }.padding()
+                                .accessibilityLabel("mengerjakan tiga tugas") //need to further update
+                        }
+                        .padding()
                     }
                     Spacer()
                 }

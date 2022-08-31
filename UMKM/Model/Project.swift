@@ -54,7 +54,6 @@ struct Project{
             let location = record.value(forKey: "location") as? String,
             let startTime = record.value(forKey: "startTime") as? Date,
             let endTime = record.value(forKey: "endTime") as? Date,
-            let description = record.value(forKey: "description") as? String,
             let participantList = record.value(forKey: "participantList") as? [String],
             let hostId = record.value(forKey: "hostId") as? String,
             let isFinish = record.value(forKey: "isFinish") as? Bool,

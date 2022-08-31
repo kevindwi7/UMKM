@@ -38,14 +38,18 @@ struct ProjectCardView: View {
                 HStack {
                     Text(project.projectName)
                         .font(.system(size: 18, weight: .bold, design: .default))
+                        .minimumScaleFactor(0.01)
                     .foregroundColor(.black)
                     Spacer()
                     Image(systemName: "chevron.right").foregroundColor(.black)
+                        .accessibilityHidden(true)
                 }
                 HStack{
                     Image("location").resizable().frame(width: 15, height: 18).scaledToFit()
+                        .accessibilityHidden(true)
                     Text(project.location)
                         .font(.system(size: 14, weight: .medium, design: .default))
+                        .minimumScaleFactor(0.01)
                         .foregroundColor(.black)
                 }
                 HStack{
@@ -64,8 +68,10 @@ struct ProjectCardView: View {
                     Spacer()
                     HStack{
                         Image(systemName: "doc.text.fill")
+                            .accessibilityHidden(true)
                         Spacer().frame(width:20)
                         Text("6/10").font(.system(size: 14, weight: .medium, design: .default))
+                            .minimumScaleFactor(0.01)
                     }.padding(5).background(
                         RoundedRectangle(cornerRadius: 12)
                             .strokeBorder(Color.blue, lineWidth: 1))
@@ -74,6 +80,8 @@ struct ProjectCardView: View {
                 .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
                 .background(.white)
                 .cornerRadius(15)
+//                .minimumScaleFactor(0.01)
+                .accessibilityLabel("Proyek \(project.projectName), Lokasi di \(project.location), tanggal mulai dua satu januari sampai tanggal dua puluh lima januari dua ribu dua dua, jam kegiatan delapan lima puluh pagi sampai empat empat puluh sore, tugas yang terisi enam dari sepuluh tugas") // dummy data, need to further update - vp
         }
         .background(
             NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project, task: $task), isActive: $isActive, label: {

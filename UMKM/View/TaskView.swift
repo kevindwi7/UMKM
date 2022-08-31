@@ -76,6 +76,27 @@ struct TaskView: View {
                             }
                             Spacer()
                         }.navigationTitle("Atur Tugas")
+        ZStack {
+            Color.primaryGray.ignoresSafeArea()
+            VStack {
+                Spacer().frame(height:15)
+                ScrollView {
+                    VStack{
+                        Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(size: 12, weight: .medium, design: .default))
+                        ForEach(0...totalTask-1, id: \.self) { task in
+                            TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(CustomTextFieldStyle())
+                                .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
+                        }
+                        Button {
+                            self.totalTask+=1
+                            tasks.append("")
+                        } label: {
+                            Text("Tambah Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 30)
+                                .background(.blue)
+                                .cornerRadius(12)
+                                .padding()
+                                .accessibilityLabel("Tombol Tambah tugas")
+                        }
                         Spacer()
                     }.frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
                     Button {
