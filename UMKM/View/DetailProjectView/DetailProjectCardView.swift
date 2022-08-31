@@ -44,7 +44,7 @@ struct DetailProjectCardView: View {
                     Text("\(timeFormatter.string(from: project.startTime)) - \(timeFormatter.string(from: project.endTime))")
                 }.font(.system(size: 12, weight: .medium, design: .default))
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("waktu kegiatan pada hari \(dateFormatter.string(from: project.startTime)) di jam delapan sampai jam 10 pagi") //need to further update - vp
+                    .accessibilityLabel("waktu kegiatan pada hari \(dateFormatter.string(from: project.startDate)) di jam \(timeFormatter.string(from: project.startTime))   sampai \(timeFormatter.string(from: project.endTime))") //need to further update - vp
                 HStack{
                     Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
                         .accessibilityHidden(true)
