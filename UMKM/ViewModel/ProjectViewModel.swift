@@ -36,9 +36,6 @@ struct ProjectViewModel: Hashable, Identifiable {
         project.goal
     }
     
-    var participant: Int   {
-        project.participant
-    }
     var location: String {
         project.location
     }
@@ -63,7 +60,7 @@ struct ProjectViewModel: Hashable, Identifiable {
         project.hostiD
     }
     
-    var isFinish: Int {
+    var isFinish: Bool {
         project.isFinish
     }
     
@@ -73,6 +70,10 @@ struct ProjectViewModel: Hashable, Identifiable {
     
     var endDate: Date {
         project.endDate
+    }
+    
+    var projectID: String {
+        project.projectID
     }
 }
 

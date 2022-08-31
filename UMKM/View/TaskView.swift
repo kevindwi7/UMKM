@@ -8,17 +8,42 @@
 import SwiftUI
 
 struct TaskView: View {
+//    @StateObject private var vm: MainViewModel
+    @State  var totalTask:Int = 1
+    @State  var tasks = [""]
+    @State private var isFinish: Bool = false
+    @State var isLoading = false
     
-    @State private var totalTask:Int = 2
-    @State private var tasks = ["",""]
-    @Binding private var namaProject: String
-    @Binding private var tujuanProject: String
-    @Binding private var deskripsiProject: String
-    @Binding private var startDate: Date
-    @Binding private var endDate: Date
-    @Binding private var startTime: Date
-    @Binding private var endTime: Date
-    @Binding private var lokasiProject: String
+    @Binding  var namaProjectTask: String
+    @Binding  var tujuanProjectTask: String
+    @Binding  var deskripsiProjectTask: String
+    @Binding  var startDateTask: Date
+    @Binding var endDateTask: Date
+    @Binding  var startTimeTask: Date
+    @Binding var endTimeTask: Date
+    @Binding var lokasiProjectTask: String
+    @Binding var projectID: String
+    
+    @StateObject private var vm: MainViewModel
+    
+    init(vm: MainViewModel, namaProjectTask: Binding<String>, tujuanProjectTask: Binding<String>, deskripsiProjectTask: Binding<String>, startDateTask: Binding<Date>, endDateTask: Binding<Date>, startTimeTask: Binding<Date>, endTimeTask: Binding<Date>, lokasiProjectTask: Binding<String>, projectID: Binding<String>) {
+        _vm = StateObject(wrappedValue: vm)
+        self._namaProjectTask = namaProjectTask
+        self._tujuanProjectTask = tujuanProjectTask
+        self._deskripsiProjectTask = deskripsiProjectTask
+        self._startDateTask = startDateTask
+        self._endDateTask = endDateTask
+        self._startTimeTask = startTimeTask
+        self._endTimeTask = endTimeTask
+        self._lokasiProjectTask = lokasiProjectTask
+        self._projectID = projectID
+    }
+    
+   
+    
+    let userID = UserDefaults.standard.object(forKey: "userID") as? String
+    let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
+    let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
     
 //    init() {
 //        let navBarAppearance = UINavigationBar.appearance()
@@ -28,40 +53,73 @@ struct TaskView: View {
 //    }
     
     var body: some View {
-        ZStack {
-            Color.primaryGray.ignoresSafeArea()
-            VStack {
-                Spacer().frame(height:15)
-                ScrollView {
-                    VStack{
-                        Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(size: 12, weight: .medium, design: .default))
-                        ForEach(0...totalTask-1, id: \.self) { task in
-                            TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(CustomTextFieldStyle())
-                                .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
-                        }
-                        Button {
-                            self.totalTask+=1
-                            tasks.append("")
-                        } label: {
-                            Text("Tambah Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 30)
-                                .background(.blue)
-                                .cornerRadius(12)
-                                .padding()
-                        }
+        LoadingView(isShowing: $vm.isLoading){
+            ZStack {
+                Color.primaryGray.ignoresSafeArea()
+                VStack {
+                    Spacer().frame(height:15)
+                    ScrollView {
+                        VStack{
+                            Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(size: 12, weight: .medium, design: .default))
+                            ForEach(0...totalTask-1, id: \.self) { task in
+                                TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(CustomTextFieldStyle())
+                                    .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
+                            }
+                            Button {
+                                self.totalTask+=1
+                                tasks.append("")
+                            } label: {
+                                Text("Tambah Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 30)
+                                    .background(.blue)
+                                    .cornerRadius(12)
+                                    .padding()
+                            }
+                            Spacer()
+                        }.navigationTitle("Atur Tugas")
                         Spacer()
-                    }.navigationTitle("Atur Tugas")
-                    Spacer()
-                }.frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
-                Button {
-                    //handle save project
-                } label: {
-                    Text("Selesai").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.1,height: 38)
-                        .background(.blue)
-                        .cornerRadius(12)
-                        .padding()
+                    }.frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
+                    Button {
+                        //handle save project
+                        vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID)
+                        
+                        for task in tasks {
+                            vm.createTask(projectId: projectID, taskName: task, user: "")
+                                
+                                
+                        }
+                            
+//                        vm.createTask(projectId: projectID, taskName: "", user: "")
+                            
+                            
+                            
+//                            for task in tasks {
+//                                print(task)
+//                                vm.createTask(projectId: "", taskName: task, user: "")
+//                            }
+                            
+//                            print(firstName)
+//                            print(namaProjectTask)
+//                            print(startTimeTask)
+                            
+    //                        for task in tasks {
+    //                            print(task)
+    //                        }
+    //                        ForEach (0..<tasks.count, id: \.self) { item in
+    //                            vm.createTask(projectId: "", taskName: self.tasks[item], user: "")
+    //                        }
+                            
+                            
+                        }
+                     label: {
+                        Text("Selesai").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.1,height: 38)
+                            .background(.blue)
+                            .cornerRadius(12)
+                            .padding()
+                    }
                 }
             }
         }
+       
     }
 }
 

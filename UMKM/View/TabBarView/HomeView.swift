@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
+    //    @State var tvm:TaskViewModel
+    
     @State var isActive = false
     @State var isListRoomView = false
+    
     init(vm: HomeViewModel) {
         _vm = StateObject(wrappedValue: vm)
     }
@@ -21,8 +25,16 @@ struct HomeView: View {
                 Color.primaryGray
                 ScrollView(.vertical){
                     VStack(alignment: .leading){
+                        
+                        
                         ForEach($vm.projects, id: \.id){ $project in
-                            ProjectCardView(vm: self.vm, project: $project)
+                            ForEach ($vm.tasks, id: \.id) { $taskHome in
+                                if ( project.projectID == taskHome.projectId){
+                                    ProjectCardView(vm: self.vm, project: $project, task: $taskHome)
+                                }
+                                
+                            }
+                            
                         }.padding(.vertical, 6)
                     }.padding()
                     
@@ -37,28 +49,24 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }.sheet(isPresented: $isActive) {
-                        CreateProjectView(isActive: self.$isActive)
+                        CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
                     }
                 }
                 .onAppear {
                     //                vm.fetchUserID()
                     vm.fetchProject()
+                                        vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
                     vm.fetchProject()
+                                        vm.fetchTask()
                 }
-//                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
-//                    EmptyView()
-//                })
-//                )
+                //                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
+                //                    EmptyView()
+                //                })
+                //                )
             }
-            .onAppear {
-                //                vm.fetchUserID()
-                vm.fetchProject()
-            }
-            .onReceive(vm.objectWillChange) { _ in
-                vm.fetchProject()
-            }
+            
             
         }.navigationViewStyle(.stack)
     }

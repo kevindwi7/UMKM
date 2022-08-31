@@ -15,23 +15,22 @@ struct Project{
     var goal: String
     var description: String
     var location: String
-    var participant: Int
     var startTime: Date
     var endTime: Date
     var participantList: [String]
     var hostiD: String
-    var isFinish: Int
+    var isFinish: Bool
     var startDate: Date
     var endDate: Date
+    var projectID: String
     
-    init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String, participant: Int, startTime: Date, endTime: Date, participantList: [String], hostId: String, isFinish: Int, startDate: Date, endDate: Date){
+    init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String,  startTime: Date, endTime: Date, participantList: [String], hostId: String, isFinish: Bool, startDate: Date, endDate: Date, projectID: String){
         self.id = id
         self.projectHost = projectHost
         self.projectName = projectName
         self.goal = goal
         self.description = description
         self.location = location
-        self.participant = participant
         self.startTime = startTime
         self.endTime = endTime
         self.participantList = participantList
@@ -39,10 +38,11 @@ struct Project{
         self.isFinish = isFinish
         self.startDate = startDate
         self.endDate = endDate
+        self.projectID = projectID
     }
     
     func toDictionary() -> [String: Any]{
-        return ["projectHost": projectHost, "projectName": projectName, "location": location, "goal": goal,"description": description, "participant":participant,"startTime": startTime,"endTime": endTime, "participantList": participantList, "hostId": hostiD, "isFinish": isFinish, "startDate": startDate, "endDate": endDate]
+        return ["projectHost": projectHost, "projectName": projectName, "location": location, "goal": goal,"description": description,"startTime": startTime,"endTime": endTime, "participantList": participantList, "hostId": hostiD, "isFinish": isFinish, "startDate": startDate, "endDate": endDate, "projectID": projectID]
     }
     
     static func fromRecord(_ record: CKRecord) -> Project? {
@@ -52,20 +52,20 @@ struct Project{
             let goal = record.value(forKey: "goal") as? String,
             let description = record.value(forKey: "description") as? String,
             let location = record.value(forKey: "location") as? String,
-            let participant = record.value(forKey: "participant") as? Int,
             let startTime = record.value(forKey: "startTime") as? Date,
             let endTime = record.value(forKey: "endTime") as? Date,
             let description = record.value(forKey: "description") as? String,
             let participantList = record.value(forKey: "participantList") as? [String],
             let hostId = record.value(forKey: "hostId") as? String,
-            let isFinish = record.value(forKey: "isFinish") as? Int,
+            let isFinish = record.value(forKey: "isFinish") as? Bool,
             let startDate = record.value(forKey: "startDate") as? Date,
-            let endDate = record.value(forKey: "endDate") as? Date
+            let endDate = record.value(forKey: "endDate") as? Date,
+            let projectID = record.value(forKey: "projectID") as? String
                 
         else {
             return nil
         }
         
-        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate)
+        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID)
     }
 }

@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct CreateProjectView: View {
+    @StateObject var vm: MainViewModel
     @Binding var isActive:Bool
     @State var namaProject:String = ""
     @State var tujuanProject:String = ""
@@ -17,11 +19,18 @@ struct CreateProjectView: View {
     @State var startTime:Date = Date()
     @State var endTime:Date = Date()
     @State var lokasiProject:String = ""
+    @State var projectID: String = ""
+    @State var action: Int? = 0
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter
+    }
+    
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     var body: some View {
@@ -32,6 +41,9 @@ struct CreateProjectView: View {
                 ScrollView {
                     VStack(spacing:10){
                         VStack{
+                            NavigationLink(destination:  TaskView(vm: MainViewModel(container: CKContainer.default()), namaProjectTask: $namaProject, tujuanProjectTask: $tujuanProject, deskripsiProjectTask: $deskripsiProject, startDateTask: $startDate, endDateTask: $endDate, startTimeTask: $startTime, endTimeTask: $endTime, lokasiProjectTask: $lokasiProject, projectID: $projectID), tag: 1, selection: $action){
+                                EmptyView()
+                            }
                             HStack{
                                 Text("Nama Proyek").font(.system(size: 14, weight: .medium, design: .default))
                                 Spacer()
@@ -75,13 +87,34 @@ struct CreateProjectView: View {
                                 Spacer()
                                 TextField("", text: $lokasiProject).frame(width:180)
                             }
-                        }.frame(width: UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
-                        NavigationLink(destination: TaskView()) {
+                        }
+                        .frame(width: UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
+                        Button(action: {
+                            projectID = randomString(length: 10)
+                            self.action = 1
+                            
+                        }, label: {
                             Text("Lanjut Bagi Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 38)
-                        }.frame(width: UIScreen.main.bounds.width/1.1,height: 38)
+                        }).frame(width: UIScreen.main.bounds.width/1.1,height: 38)
                             .background(.blue)
                             .cornerRadius(12)
                             .padding()
+                        
+//                        NavigationLink(destination: TaskView(vm: MainViewModel(container: CKContainer.default()), namaProjectTask: $namaProject, tujuanProjectTask: $tujuanProject, deskripsiProjectTask: $deskripsiProject, startDateTask: $startDate, endDateTask: $endDate, startTimeTask: $startTime, endTimeTask: $endTime, lokasiProjectTask: $lokasiProject, projectID: $projectID)
+//                        ) {
+//                            Text("Lanjut Bagi Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 38)
+//
+//                        }.frame(width: UIScreen.main.bounds.width/1.1,height: 38)
+//                            .background(.blue)
+//                            .cornerRadius(12)
+//                            .padding()
+                        
+//                        TextField(randomString(length: 10), text: $projectID)
+//                        Button(action: {
+//
+//                        }, label: {
+//                            Text("test")
+//                        })
                         Spacer()
                     }
                     .padding()
@@ -102,7 +135,7 @@ struct CreateProjectView: View {
                     }
                     )
                 }
-                )
+                
             }
             .textFieldStyle(.roundedBorder).frame(width: UIScreen.main.bounds.width/1.2)
         }
@@ -112,8 +145,8 @@ struct CreateProjectView: View {
 }
 
 
-struct CreateProjectView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateProjectView(isActive: .constant(true))
-    }
-}
+//struct CreateProjectView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CreateProjectView(isActive: .constant(true))
+//    }
+//}

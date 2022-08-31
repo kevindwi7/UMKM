@@ -11,6 +11,7 @@ struct ProjectCardView: View {
     @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
+    @Binding var task: TaskViewModel
     @State var isListRoomView = false
     
     var dateFormatter: DateFormatter {
@@ -20,6 +21,12 @@ struct ProjectCardView: View {
         return formatter
     }
     
+    var timeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        return formatter
+    }
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     
     var body: some View {
@@ -43,15 +50,15 @@ struct ProjectCardView: View {
                 }
                 HStack{
                     Image(systemName: "calendar")
-                    Text("21 Jan 2022")
+                    Text(dateFormatter.string(from: project.startDate))
                     Text("-")
-                    Text("25 Jan 2022")
+                    Text(dateFormatter.string(from: project.endDate))
                 }.font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.black)
                 HStack{
                     Image(systemName: "clock")
-                    Text("08.50")
+                    Text(timeFormatter.string(from: project.startTime))
                     Text("-")
-                    Text("16.40")
+                    Text(timeFormatter.string(from: project.endTime))
                 }.font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.black)
                 HStack{
                     Spacer()
@@ -69,7 +76,7 @@ struct ProjectCardView: View {
                 .cornerRadius(15)
         }
         .background(
-            NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project), isActive: $isActive, label: {
+            NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project, task: $task), isActive: $isActive, label: {
                 EmptyView()
             })
         )
