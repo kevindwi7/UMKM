@@ -34,7 +34,7 @@ struct DetailProjectCardView: View {
                     Text(project.location).font(.system(size: 12, weight: .medium, design: .default))
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("Lokasi kegiatan dilaksanakan di \(project.location)")
+                .accessibilityLabel("Lokasi kegiatan di \(project.location)")
                 HStack{
                     Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
                         .accessibilityHidden(true)
@@ -51,7 +51,7 @@ struct DetailProjectCardView: View {
                     Text("Ideator : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
                 }.accessibilityElement(children: .combine)
-                    .accessibilityLabel("Ideator proyek pelaksanan adalah \(project.projectHost)") //need to further update - vp
+                    .accessibilityLabel("Ideator proyek \(project.projectHost)") //need to further update - vp
             }
 //            HStack{
 //                Image(systemName: "person.circle.fill")
