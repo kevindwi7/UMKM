@@ -24,6 +24,7 @@ struct DetailProjectTaskCard: View {
                         ForEach(0...15, id: \.self){ project in
                             HStack{
                                 Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
+                                    .accessibilityLabel("Sapu Lantai") //need to further update - vp
                                 Spacer()
                                 
                                 Button {
@@ -32,6 +33,7 @@ struct DetailProjectTaskCard: View {
                                     
                                 } label: {
                                     Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default))
+                                        .accessibilityLabel("tombol ambil tugas")
                                 }
                                 .frame(width: 103,height: 25)
                                 .foregroundColor(.white)

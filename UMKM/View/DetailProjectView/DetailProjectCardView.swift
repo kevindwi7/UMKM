@@ -37,14 +37,14 @@ struct DetailProjectCardView: View {
                     Text("8.00 - 10.00 AM")
                 }.font(.system(size: 12, weight: .medium, design: .default))
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("waktu kegiatan dilaksanakan pada hari \(dateFormatter.string(from: project.startTime)) di jam") //need to further update - vp
+                    .accessibilityLabel("waktu kegiatan pada hari \(dateFormatter.string(from: project.startTime)) di jam delapan sampai jam 10 pagi") //need to further update - vp
                 HStack{
                     Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
                         .accessibilityHidden(true)
                     Text("Ideator : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
                 }.accessibilityElement(children: .combine)
-                    .accessibilityLabel("Ideator program pelaksanan adalah \(project.projectHost)") //need to further update - vp
+                    .accessibilityLabel("Ideator proyek pelaksanan adalah \(project.projectHost)") //need to further update - vp
             }
 //            HStack{
 //                Image(systemName: "person.circle.fill")

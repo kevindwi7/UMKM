@@ -38,7 +38,7 @@ struct HomeView: View {
                         Image(systemName: "plus.circle.fill")
                     }.sheet(isPresented: $isActive) {
                         CreateProjectView(isActive: self.$isActive)
-                    }
+                    }.accessibilityLabel("Tambah Proyek")
                 }
                 .onAppear {
                     //                vm.fetchUserID()

@@ -14,9 +14,9 @@ struct DetailProjectCard3View: View {
     var body: some View {
         VStack(alignment:.leading,spacing: 10){
             Text("Anggota :").font(.system(size: 17, weight: .bold, design: .default))
-            
             HStack{
                 Text("\(project3.participantList.count) orang").font(.system(size: 12, weight: .regular, design: .default))
+                    .accessibilityLabel("Jumlah anggota \(project3.participantList.count) orang")
                 Spacer()
                 NavigationLink(destination: {
                     DetailProjectParticipantView(projectParticipant: $project3)
@@ -26,6 +26,7 @@ struct DetailProjectCard3View: View {
                         .font(.system(size: 12))
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 8))
+                        .accessibilityLabel("Tombol lihat anggota terdaftar")
                
                         
                         
@@ -35,6 +36,7 @@ struct DetailProjectCard3View: View {
             Text("Tugas :").font(.system(size: 17, weight: .bold, design: .default))
             HStack{
                 Text("10 Tugas").font(.system(size: 12, weight: .regular, design: .default))
+                    .accessibilityLabel("Jumlah tugas ada sepuluh tugas") //need to further update - vp
                 Spacer()
                 NavigationLink(destination: {
                     DetailProjectTaskCard(test: $project3 )
@@ -44,6 +46,7 @@ struct DetailProjectCard3View: View {
                         .font(.system(size: 12))
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 8))
+                        .accessibilityLabel("Tombol lihat detail tugas")
                
                         
                         

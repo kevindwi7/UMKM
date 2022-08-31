@@ -38,6 +38,7 @@ struct TaskView: View {
                                 .background(.blue)
                                 .cornerRadius(12)
                                 .padding()
+                                .accessibilityLabel("Tombol Tambah tugas")
                         }
                         Spacer()
                     }.navigationTitle("Atur Tugas")
