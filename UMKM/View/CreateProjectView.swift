@@ -107,6 +107,7 @@ struct CreateProjectView: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
                                 self.isActive.toggle()
+                                HapticManager.instance.notification(type: .warning)
                             } label: {
                                 HStack{
                                     Image(systemName: "chevron.left")
