@@ -15,10 +15,9 @@ struct DetailProjectTaskCard: View {
     
     var body: some View {
         ZStack{
-            Color.primaryGray
+            Color(UIColor.systemGray6)
             ScrollView{
-              
-                    Color.primaryGray
+                Color(UIColor.systemGray6)
                     VStack(alignment:.leading,spacing: 10){
                        
                         ForEach(0...15, id: \.self){ project in

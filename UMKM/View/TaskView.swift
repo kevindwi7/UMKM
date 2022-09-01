@@ -20,7 +20,7 @@ struct TaskView: View {
     }
     var body: some View {
         ZStack {
-            Color.primaryGray.ignoresSafeArea()
+            Color(UIColor.systemGray6).ignoresSafeArea()
             VStack {
                 Spacer().frame(height:15)
                 ScrollView {
