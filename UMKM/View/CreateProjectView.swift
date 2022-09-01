@@ -29,7 +29,7 @@ struct CreateProjectView: View {
         
         NavigationView {
             ZStack {
-                Color(UIColor.systemGray6)oru.ignoresSafeArea()
+                Color(UIColor.systemGray6).ignoresSafeArea()
                 ScrollView {
                     VStack(spacing:10){
                         VStack{
