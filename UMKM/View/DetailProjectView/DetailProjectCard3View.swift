@@ -6,10 +6,20 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct DetailProjectCard3View: View {
+//    @StateObject var hm:HomeViewModel
+    
     @Binding var project3: ProjectViewModel
+//    @Binding var task: TaskViewModel
     @State var action: Int? = 0
+    
+//    init(vm: HomeViewModel, project3: Binding<ProjectViewModel>, task: Binding<TaskViewModel>) {
+//        _vm = StateObject(wrappedValue: vm)
+//        self._project3 = project3
+//        self._task = task
+//    }
     
     var body: some View {
         VStack(alignment:.leading,spacing: 10){
@@ -35,11 +45,12 @@ struct DetailProjectCard3View: View {
            
             Text("Tugas :").font(.system(size: 17, weight: .bold, design: .default))
             HStack{
-                Text("10 Tugas").font(.system(size: 12, weight: .regular, design: .default))
+                Text("3 Tugas").font(.system(size: 12, weight: .regular, design: .default))
                     .accessibilityLabel("Jumlah tugas ada sepuluh tugas") //need to further update - vp
                 Spacer()
                 NavigationLink(destination: {
-                    DetailProjectTaskCard(test: $project3 )
+                    DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), project: $project3)
+//                    TabBarView()
                 }, label: {
                     Text("Detail Tugas")
                         .padding(.all,4)

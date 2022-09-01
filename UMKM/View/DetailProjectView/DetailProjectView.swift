@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct DetailProjectView: View {
     
@@ -13,6 +14,7 @@ struct DetailProjectView: View {
     @StateObject var vm: HomeViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
+//    @Binding var task: TaskViewModel
     @State var isLoading = false
     @State var isPresented: Bool = false
     
@@ -37,7 +39,7 @@ struct DetailProjectView: View {
                                 
                                 DetailProjecrCard2View(project2: $project).padding(.leading)
                                 
-                                DetailProjectCard3View(project3: $project).padding(.leading)
+                                DetailProjectCard3View( project3: $project).padding(.leading)
                                 
                                 //                        if (project.participantList.contains(userID!)){
                                 //                            DetailProjectTaskCard(test: $project)
@@ -75,11 +77,16 @@ struct DetailProjectView: View {
                         
                     }
 //                    .navigationTitle(project.projectName).navigationBarTitleDisplayMode(.large)
-                }.toolbar {
+                }
+                .onReceive(vm.objectWillChange) {_ in
+                    vm.fetchTask()
+                    vm.fetchProject()
+                }
+                .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         if(project.hostId == userID) {
                             Button(action: {
-                                vm.deleteRoom(project: project)
+                                vm.deleteProject(project: project)
                                 isLoading = true
                             }){
                                 Image(systemName: "trash")

@@ -15,7 +15,8 @@ class HomeViewModel:ObservableObject{
     
     private var database: CKDatabase
     private var container: CKContainer
-    @Published var projects: [ProjectViewModel] = []
+    @Published var projects: [ProjectViewModel] = [ProjectViewModel]()
+    @Published var tasks: [TaskViewModel] = []
     
     @Published var isLoading: Bool = false
     @Published var hasUpdated: Bool = false
@@ -54,6 +55,7 @@ class HomeViewModel:ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.projects = returnedProjects.map(ProjectViewModel.init)
+                    self.fetchTask()
 //                    defer {
 //                        self.objectWillChange.send()
 //                    }
@@ -83,8 +85,10 @@ class HomeViewModel:ObservableObject{
         let location = project.location
         let startTime = project.startTime
         let endTime = project.endTime
-        let participant = project.participant
         let isFinish = project.isFinish
+        let startDate = project.startDate
+        let endDate = project.endDate
+        let projectID = project.projectID
         
         if(command == "join") {
             if( !(newParticipant.contains(participantID))){
@@ -123,7 +127,7 @@ class HomeViewModel:ObservableObject{
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, participant: participant, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish))
+                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID))
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
@@ -134,7 +138,7 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func deleteRoom(project: ProjectViewModel){
+    func deleteProject(project: ProjectViewModel){
         self.isLoading = true
         let recordId = project.id
         database.delete(withRecordID: recordId!) { deletedRecordId, error in
@@ -146,6 +150,113 @@ class HomeViewModel:ObservableObject{
                     
                 }
                 print("here")
+            }
+        }
+    }
+    
+    func fetchTask(){
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedTasks: [Task] = []
+        
+//        projects[0].projectName = "asdas"
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            
+                            if let task = Task.fromRecord(record) {
+                                for i in 0 ..< self.projects.count{
+                                    if self.projects[i].projectID == task.projectId{
+//                                        returnedTasks.append(task)
+//                                        self.projects[i].projectName = "ASD"
+//                                        self.projects[i].tasks.append(TaskViewModel(task: task))
+                                    }
+                                }
+                                
+//                                returnedTasks.append(task)
+                            }
+//                            print(returnedRooms)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                
+                DispatchQueue.main.async {
+                    self.tasks = returnedTasks.map(TaskViewModel.init)
+                    
+                    
+//                    defer {
+//                        self.objectWillChange.send()
+                    
+                    // Cek Task id dari projectID
+                    
+//                    }
+                    self.objectWillChange.send()
+//                    print("\(self.rooms)")
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateTaskParticipant(task: TaskViewModel, user: String, command: String){
+        
+        self.isLoading = true
+        
+        var newParticipant =  String()
+
+        newParticipant.insert(contentsOf: task.user, at: newParticipant.startIndex )
+        
+        let recordId = task.id
+        let projectId = task.projectId
+        let taskName = task.taskName
+    
+        if(command == "join") {
+            if( !(newParticipant.contains(user))){
+                if(user != "" || !(user.isEmpty) ){
+                    newParticipant.append(user)
+                    print("masukk")
+                }
+            }
+        }
+        
+        print(newParticipant)
+        database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let error = error {
+                    print(error)
+                }
+                guard let record = returnedRecord else { return }
+                
+                record["user"] = newParticipant as CKRecordValue
+                
+                self.database.save(record) { record, error in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                            
+                        }
+                        guard let record = returnedRecord else { return }
+                        let id = record.recordID
+                        guard let user = record["user"] as? String else { return }
+                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user))
+                        print(123)
+//                        print(element)
+                        self.hasUpdated = true
+                        self.isLoading =  false
+                        
+                    }
+                }
             }
         }
     }

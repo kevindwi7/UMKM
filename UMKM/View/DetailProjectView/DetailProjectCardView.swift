@@ -16,6 +16,13 @@ struct DetailProjectCardView: View {
         return formatter
     }
     
+    var timeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        return formatter
+    }
+    
     var body: some View {
         VStack(alignment:.leading,spacing: 15){
             Text("Detail").font(.system(size: 18, weight: .bold, design: .default))
@@ -27,24 +34,24 @@ struct DetailProjectCardView: View {
                     Text(project.location).font(.system(size: 12, weight: .medium, design: .default))
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("Lokasi kegiatan dilaksanakan di \(project.location)")
+                .accessibilityLabel("Lokasi kegiatan di \(project.location)")
                 HStack{
                     Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
                         .accessibilityHidden(true)
                     Text("Waktu : ").font(.system(size: 12, weight: .medium, design: .default))
-                    Text(dateFormatter.string(from: project.startTime))
+                    Text(dateFormatter.string(from: project.startDate))
                     Text("|")
-                    Text("8.00 - 10.00 AM")
+                    Text("\(timeFormatter.string(from: project.startTime)) - \(timeFormatter.string(from: project.endTime))")
                 }.font(.system(size: 12, weight: .medium, design: .default))
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("waktu kegiatan pada hari \(dateFormatter.string(from: project.startTime)) di jam delapan sampai jam 10 pagi") //need to further update - vp
+                    .accessibilityLabel("waktu kegiatan pada hari \(dateFormatter.string(from: project.startDate)) di jam \(timeFormatter.string(from: project.startTime))   sampai \(timeFormatter.string(from: project.endTime))") //need to further update - vp
                 HStack{
                     Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
                         .accessibilityHidden(true)
                     Text("Ideator : ").font(.system(size: 12, weight: .medium, design: .default))
                     Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
                 }.accessibilityElement(children: .combine)
-                    .accessibilityLabel("Ideator proyek pelaksanan adalah \(project.projectHost)") //need to further update - vp
+                    .accessibilityLabel("Ideator proyek \(project.projectHost)") //need to further update - vp
             }
 //            HStack{
 //                Image(systemName: "person.circle.fill")
