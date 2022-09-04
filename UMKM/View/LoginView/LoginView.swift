@@ -23,15 +23,19 @@ struct LoginView: View {
             let userID = UserDefaults.standard.object(forKey: "userID") as? String
             
             if (!login && (userID == nil)) {
-                Text("Selamat Datang")
-                    .font(.system(size: 38))
-                    .fontWeight(.bold)
-                    .padding()
-                Text("Setiap potensi anda")
-                    .font(.system(size: 15))
-                Text("berarti bagi komunitas")
-                    .font(.system(size: 15))
-                    .accessibilityElement(children: .combine)
+                VStack{
+                    Text("Selamat Datang")
+                        .font(.system(size: 38))
+                        .fontWeight(.bold)
+                        .padding()
+                    Text("Setiap potensi anda")
+                        .font(.system(size: 15))
+                    Text("berarti bagi komunitas")
+                        .font(.system(size: 15))
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Selamat Datang. Setiap potensi anda berarti bagi komunitas")
+
                     
                 VStack{
                     Image("peeps")
