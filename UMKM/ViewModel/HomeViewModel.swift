@@ -17,6 +17,7 @@ class HomeViewModel:ObservableObject{
     private var container: CKContainer
     @Published var projects: [ProjectViewModel] = [ProjectViewModel]()
     @Published var tasks: [TaskViewModel] = []
+    @Published var users: [UserViewModel] = []
     
     @Published var isLoading: Bool = false
     @Published var hasUpdated: Bool = false
@@ -257,6 +258,46 @@ class HomeViewModel:ObservableObject{
                         
                     }
                 }
+            }
+        }
+    }
+    
+    func fetchAllUser(){
+//        print(222)
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.user.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedUsers: [UsersData] = []
+        
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            if let user = UsersData.fromRecord(record) {
+                                returnedUsers.append(user)
+                                print(123)
+                            }
+//                            print(returnedRooms)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                
+                DispatchQueue.main.async {
+                    self.users = returnedUsers.map(UserViewModel.init)
+//                    defer {
+//                        self.objectWillChange.send()
+//                    }
+                    self.objectWillChange.send()
+//                    print("\(self.rooms)")
+                }
+
+            case .failure(let error):
+                print(error)
             }
         }
     }
