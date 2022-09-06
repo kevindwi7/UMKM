@@ -24,16 +24,18 @@ struct DetailProjectParticipantView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40.8, height: 40.8)
-                                .foregroundColor(.black)
+                                .foregroundColor(.yellow)
                                 .padding()
                                 .accessibilityLabel("foto \(firstName!)")
-                            Text("\(firstName!)")
-                            Spacer()
-                            Text("3 Tugas")
-                                .padding(.all, 8)
-                                .background(RoundedRectangle(cornerRadius: 8).stroke())
-                                .foregroundColor(.blue)
-                                .accessibilityLabel("mengerjakan tiga tugas") //need to further update
+                            VStack{
+                                Text("\(firstName!)")
+                                Text("Sapu Halaman Depan")
+                            }
+//                            Text("3 Tugas")
+//                                .padding(.all, 8)
+//                                .background(RoundedRectangle(cornerRadius: 8).stroke())
+//                                .foregroundColor(.blue)
+//                                .accessibilityLabel("mengerjakan tiga tugas") //need to further update
                         }
                         .padding()
                     }

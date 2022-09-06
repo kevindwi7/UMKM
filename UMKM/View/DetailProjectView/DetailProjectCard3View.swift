@@ -22,18 +22,19 @@ struct DetailProjectCard3View: View {
 //    }
     
     var body: some View {
-        VStack(alignment:.leading,spacing: 10){
-            Text("Anggota :").font(.system(size: 17, weight: .bold, design: .default))
+        VStack(alignment:.leading){
+            Text("Anggota :").font(.system(size: 14, weight: .bold, design: .rounded))
             HStack{
-                Text("\(project3.participantList.count) orang").font(.system(size: 12, weight: .regular, design: .default))
+                Text("\(project3.participantList.count) orang").font(.system(size: 14, weight: .regular, design: .rounded))
                     .accessibilityLabel("Jumlah anggota \(project3.participantList.count) orang")
                 Spacer()
                 NavigationLink(destination: {
                     DetailProjectParticipantView(projectParticipant: $project3)
                 }, label: {
                     Text("Detail Anggota")
+                        .frame(width: 110, height: 26)
                         .padding(.all,4)
-                        .font(.system(size: 12))
+                        .font(.system(size: 14,weight: .regular, design: .rounded))
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 8))
                         .accessibilityLabel("Tombol lihat anggota terdaftar")
@@ -43,9 +44,9 @@ struct DetailProjectCard3View: View {
                 })
             }
            
-            Text("Tugas :").font(.system(size: 17, weight: .bold, design: .default))
+            Text("Tugas :").font(.system(size: 14, weight: .bold, design: .rounded))
             HStack{
-                Text("1 Tugas").font(.system(size: 12, weight: .regular, design: .default))
+                Text("1 Tugas").font(.system(size: 14, weight: .regular, design: .rounded))
                     .accessibilityLabel("Jumlah tugas ada satu tugas") //need to further update - vp
                 Spacer()
                 NavigationLink(destination: {
@@ -53,8 +54,9 @@ struct DetailProjectCard3View: View {
 //                    TabBarView()
                 }, label: {
                     Text("Detail Tugas")
+                        .frame(width: 110, height: 26)
                         .padding(.all,4)
-                        .font(.system(size: 12))
+                        .font(.system(size: 14,weight: .regular, design: .rounded))
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 8))
                         .accessibilityLabel("Tombol lihat detail tugas")
