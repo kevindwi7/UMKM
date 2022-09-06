@@ -15,7 +15,7 @@ struct DetailProjectParticipantView: View {
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     var body: some View {
         ZStack{
-            Color.primaryGray
+            Color(UIColor.systemGray6)
             ScrollView{
                 VStack(alignment:.leading){
                     ForEach (projectParticipant.participantList, id: \.self){ item in

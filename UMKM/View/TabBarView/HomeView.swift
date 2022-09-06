@@ -22,7 +22,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView{
             ZStack{
-                Color.primaryGray
+                Color(UIColor.systemGray6)
                 ScrollView(.vertical){
                     VStack(alignment: .leading){
                         ForEach($vm.projects, id: \.id){ $project in

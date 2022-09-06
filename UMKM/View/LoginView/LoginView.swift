@@ -17,32 +17,41 @@ struct LoginView: View {
     @State var selectedBookId: Int64 = 0
     @State var action: Int? = 0
     
+   
+//    let customFont = UIFont(name: "SF Compact Rounded", size: UIFont.labelFontSize)!
+    
     var body: some View {
+
         VStack{
             Spacer()
             let userID = UserDefaults.standard.object(forKey: "userID") as? String
             
             if (!login && (userID == nil)) {
-                Text("Selamat Datang")
-                    .font(.system(size: 38))
-                    .fontWeight(.bold)
-                    .padding()
-                Text("Setiap potensi anda")
-                    .font(.system(size: 15))
-                Text("berarti bagi komunitas")
-                    .font(.system(size: 15))
-                    .accessibilityElement(children: .combine)
+                VStack(spacing:80){
                     
-                VStack{
+                    Text("Atur proyek dan aktivitas\nanggota komunitas kamu dengan \(Text("Inty").foregroundColor(Color.blue))")
+                            .font(.system(.title3, design: .rounded).bold())
+                            .minimumScaleFactor(0.01)
+                            .multilineTextAlignment(.leading)
+                            .scaledFont(name: "", size: 24)
+                            .lineLimit(4)
+                    
                     Image("peeps")
                         .resizable()
                         .scaledToFit()
-                        .frame(height:200)
+                        .frame(height:150)
                         .accessibilityHidden(true)
-                    
-
+                
+                    Text("Aplikasi ini bantu atur jadwal project komunitasmu, dimanapun dan kapanpun")
+                            .font(.system(.footnote, design: .rounded))
+                            .minimumScaleFactor(0.01)
+                            .multilineTextAlignment(.leading)
+                            .scaledFont(name: "", size: 14)
+                            .lineLimit(3)
                 }
-                .padding(.vertical,64)
+                .padding(EdgeInsets(top: 40, leading: 40, bottom: 40, trailing: 40))
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Atur proyek dan aktivitas anggota komunitas kamu dengan Inty. Aplikasi ini bantu atur jadwal project komunitasmu,imanapun dan kapanpun")
                 
                 // If login = false and userID is not exist,
                 // Show Sign in with Apple Button.
@@ -125,6 +134,7 @@ struct LoginView: View {
         }
     }
 }
+
 //
 //struct LoginView_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -23,7 +23,7 @@ struct DetailProjectView: View {
     var body: some View {
             LoadingView(isShowing: $vm.isLoading){
                 ZStack{
-                    Color.primaryGray
+                    Color(UIColor.systemGray6)
                     ScrollView{
                             VStack(alignment:.leading, spacing: 10){
                                 Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
