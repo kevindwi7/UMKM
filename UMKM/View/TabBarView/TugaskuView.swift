@@ -8,13 +8,26 @@
 import SwiftUI
 
 struct TugaskuView: View {
+    
+    @StateObject var vm:HomeViewModel
+    
+    init(vm: HomeViewModel) {
+        _vm = StateObject(wrappedValue: vm)
+    }
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Test")
+            ForEach($vm.users, id: \.id) { $test in
+                Text(test.email)
+            }
+        }.onAppear{
+            vm.fetchAllUser()
+        }
     }
 }
 
-struct TugaskuView_Previews: PreviewProvider {
-    static var previews: some View {
-        TugaskuView()
-    }
-}
+//struct TugaskuView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TugaskuView()
+//    }
+//}

@@ -19,7 +19,7 @@ struct TabBarView: View {
                 .tabItem{
                     Label("Explore", systemImage: "person.3")
                 }
-            TugaskuView()
+            TugaskuView(vm: HomeViewModel(container: CKContainer.default()))
                 .tabItem{
                     Label("Tugasku", systemImage: "person.3")
                 }
