@@ -22,6 +22,7 @@ struct TugaskuView: View {
             }
         }.onAppear{
             vm.fetchAllUser()
+//            print(123)
         }
     }
 }

@@ -263,6 +263,7 @@ class HomeViewModel:ObservableObject{
     }
     
     func fetchAllUser(){
+//        print(222)
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: RecordType.user.rawValue, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
@@ -272,12 +273,10 @@ class HomeViewModel:ObservableObject{
         self.database.fetch(withQuery: query) { result in
             switch result {
             case .success(let result):
-
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
                         case .success(let record):
-                            
                             if let user = UsersData.fromRecord(record) {
                                 returnedUsers.append(user)
                                 print(123)

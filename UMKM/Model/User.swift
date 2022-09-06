@@ -32,7 +32,7 @@ struct UsersData{
     static func fromRecord(_ record: CKRecord) -> UsersData? {
         guard
             
-            let firstName = record.value(forKey: "projectId") as? String,
+            let firstName = record.value(forKey: "firstName") as? String,
             let email = record.value(forKey: "email") as? String,
             let lastName = record.value(forKey: "lastName") as? String,
             let iCloudID = record.value(forKey: "iCloudID") as? String
