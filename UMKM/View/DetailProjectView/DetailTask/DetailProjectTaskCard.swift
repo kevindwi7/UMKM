@@ -27,10 +27,10 @@ struct DetailProjectTaskCard: View {
                     
                     Color.primaryGray
                     VStack(alignment:.leading,spacing: 10){
-                        ForEach(0...2, id: \.self){ project in
+                        ForEach(0...0, id: \.self){ project in
                             HStack{
-                                Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
-                                    .accessibilityLabel("Sapu Lantai") //need to further update - vp
+                                Text("Handle acara pentas seni").font(.system(size: 12, weight: .regular, design: .default))
+                                    .accessibilityLabel("Handle acara pentas seni") //need to further update - vp
                                 Spacer()
                                 
                                 Button {

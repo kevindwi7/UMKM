@@ -56,7 +56,7 @@ struct HomeView: View {
                     //vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
-                    //vm.fetchProject()
+                    vm.fetchProject()
                     //vm.fetchTask()
                 }
                 //                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {

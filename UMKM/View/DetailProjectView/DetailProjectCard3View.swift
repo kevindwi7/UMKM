@@ -45,8 +45,8 @@ struct DetailProjectCard3View: View {
            
             Text("Tugas :").font(.system(size: 17, weight: .bold, design: .default))
             HStack{
-                Text("3 Tugas").font(.system(size: 12, weight: .regular, design: .default))
-                    .accessibilityLabel("Jumlah tugas ada sepuluh tugas") //need to further update - vp
+                Text("1 Tugas").font(.system(size: 12, weight: .regular, design: .default))
+                    .accessibilityLabel("Jumlah tugas ada satu tugas") //need to further update - vp
                 Spacer()
                 NavigationLink(destination: {
                     DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), project: $project3)

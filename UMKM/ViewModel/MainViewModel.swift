@@ -83,7 +83,7 @@ final class MainViewModel: ObservableObject{
     }
     
     func createProject(projectHost: String, projectName: String, location: String,  startTime: Date, endTime: Date, participantList: [String],  description: String, goal: String, hostId: String, isFinish: Bool, startDate:Date, endDate: Date , projectID: String
-//                       completionHandler:  @escaping (_ recentProjectiD: String) -> Void
+                       ,completionHandler:  @escaping () -> Void
     ){
         self.isLoading = true
         let record = CKRecord(recordType: RecordType.project.rawValue)
@@ -106,7 +106,7 @@ final class MainViewModel: ObservableObject{
                         }
 //                        self.recentlyCreatedProjectId = project.projectID
 //                        print("---- ROOM ID NYA INI : \(self.recentlyCreatedProjectId) -----")
-//                        completionHandler(self.recentlyCreatedProjectId)
+                        completionHandler()
 //                        self.recentlyCreatedProjectId = project.id?.recordName ?? ""
 //                        completionHandler(self.recentlyCreatedProjectId)
                         
