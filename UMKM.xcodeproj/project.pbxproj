@@ -13,6 +13,7 @@
 		9C52AE8E28C6DCBD0057AC72 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE8D28C6DCBD0057AC72 /* User.swift */; };
 		9C52AE9028C6E4020057AC72 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */; };
 		9C52AE9228C77AB10057AC72 /* AnggotaSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */; };
+		9C52AE9728C8328D0057AC72 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE9628C8328D0057AC72 /* OnboardingView.swift */; };
 		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
 		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
 		9CB9DA7428B86F1B00A57A10 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9DA7328B86F1B00A57A10 /* TaskView.swift */; };
@@ -49,6 +50,7 @@
 		9C52AE8D28C6DCBD0057AC72 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnggotaSheetView.swift; sourceTree = "<group>"; };
+		9C52AE9628C8328D0057AC72 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		9CB9DA7328B86F1B00A57A10 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,14 @@
 				9CB9DA7328B86F1B00A57A10 /* TaskView.swift */,
 			);
 			path = "Create Project";
+			sourceTree = "<group>";
+		};
+		9C52AE9528C832800057AC72 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9C52AE9628C8328D0057AC72 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		9CA6280128B60433008344B1 /* DetailProjectView */ = {
@@ -197,6 +207,7 @@
 		C9AE661D28B5D39C000C0133 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9C52AE9528C832800057AC72 /* Onboarding */,
 				9C52AE9428C830270057AC72 /* Create Project */,
 				9CA6280128B60433008344B1 /* DetailProjectView */,
 				C9AE662428B5D839000C0133 /* TabBarView */,
@@ -311,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C52AE9728C8328D0057AC72 /* OnboardingView.swift in Sources */,
 				9C52AE8E28C6DCBD0057AC72 /* User.swift in Sources */,
 				9C281B9B28B7050800B437AC /* HomeViewModel.swift in Sources */,
 				9C52AE9228C77AB10057AC72 /* AnggotaSheetView.swift in Sources */,
