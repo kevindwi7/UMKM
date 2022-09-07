@@ -16,7 +16,7 @@ struct DetailProjectTaskCard: View {
     @State var showingSheet = false
     
     @State var task: String = ""
-    @State var isPM = false
+    @State var isPM = true
     
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String

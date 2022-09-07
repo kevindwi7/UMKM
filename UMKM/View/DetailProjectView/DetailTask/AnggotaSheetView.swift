@@ -31,8 +31,9 @@ struct AnggotaSheetView: View {
                         }
                     }
                 }
-                .padding(.vertical)
-                .listStyle(.insetGrouped)
+                .cornerRadius(10)
+                .padding()
+                .listStyle(.plain)
             }
             .frame(width: UIScreen.main.bounds.width)
             .background(SwiftUI.Color.primaryGray)
