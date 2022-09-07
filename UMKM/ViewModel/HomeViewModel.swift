@@ -302,4 +302,39 @@ class HomeViewModel:ObservableObject{
         }
     }
     
+    func updateUserOnboarding(users: UserViewModel, user: String, komunitas: String, divisi: String, pengalaman: String){
+        
+        let recordId = users.id
+        
+        
+        database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let error = error {
+                    print(error)
+                }
+                guard let record = returnedRecord else { return }
+                
+                record.setValue(divisi, forKey: "divisi")
+                record.setValue(pengalaman, forKey: "pengalaman")
+                record.setValue(false, forKey: "isFirstTime")
+                record.setValue(komunitas, forKey: "komunitas")
+                
+//                record["participantList"] = newParticipant as CKRecordValue
+                
+                self.database.save(record) { record, error in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                            
+                        }
+                        guard let record = returnedRecord else { return }
+                       
+                        self.hasUpdated = true
+                        self.isLoading =  false
+                        
+                    }
+                }
+            }
+        }
+    }
 }
