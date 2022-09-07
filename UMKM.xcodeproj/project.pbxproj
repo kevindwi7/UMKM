@@ -38,6 +38,7 @@
 		C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE662028B5D3D3000C0133 /* LoginView.swift */; };
 		C9AE662328B5D82D000C0133 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE662228B5D82D000C0133 /* HomeView.swift */; };
 		C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE662528B5D8A6000C0133 /* MainViewModel.swift */; };
+		C9FCAD7A28C8303F004A0FD9 /* Divisi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FCAD7928C8303F004A0FD9 /* Divisi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,8 @@
 		C9AE662028B5D3D3000C0133 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C9AE662228B5D82D000C0133 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C9AE662528B5D8A6000C0133 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		C9FCAD7828C6FC00004A0FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C9FCAD7928C8303F004A0FD9 /* Divisi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,7 @@
 		C9AE660928B5CEE5000C0133 /* UMKM */ = {
 			isa = PBXGroup;
 			children = (
+				C9FCAD7828C6FC00004A0FD9 /* Info.plist */,
 				C9AE661E28B5D3A6000C0133 /* ViewModel */,
 				C9AE661D28B5D39C000C0133 /* View */,
 				C9AE661C28B5D392000C0133 /* Model */,
@@ -173,6 +177,7 @@
 				C978E52228B5FE540079C6AE /* Project.swift */,
 				C967B89F28BDAD0200B59CE2 /* Task.swift */,
 				9C52AE8D28C6DCBD0057AC72 /* User.swift */,
+				C9FCAD7928C8303F004A0FD9 /* Divisi.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				C978E52328B5FE540079C6AE /* Project.swift in Sources */,
 				9CA627FC28B5E206008344B1 /* Constant.swift in Sources */,
 				C978E52728B630450079C6AE /* CreateProjectView.swift in Sources */,
+				C9FCAD7A28C8303F004A0FD9 /* Divisi.swift in Sources */,
 				C9820E7228B5F28A0043724D /* ProfileView.swift in Sources */,
 				C967B89428B7B3BB00B59CE2 /* ActivityIndicator.swift in Sources */,
 				9C52AE9028C6E4020057AC72 /* UserViewModel.swift in Sources */,
@@ -461,11 +467,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = UMKM/UMKM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"UMKM/Preview Content\"";
 				DEVELOPMENT_TEAM = P66CL8827J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = UMKM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -476,7 +483,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = MiniChallenge.UMKM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -493,11 +500,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = UMKM/UMKM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"UMKM/Preview Content\"";
 				DEVELOPMENT_TEAM = P66CL8827J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = UMKM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -508,7 +516,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = MiniChallenge.UMKM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
