@@ -40,7 +40,7 @@ struct DetailProjectTaskCard: View {
                                     
                                 } label: {
                                     if (task.isEmpty) {
-                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+                                        Text("Ambil Tugas").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
                                     }else{
                                         Text(task).font(.system(size: 12, weight: .regular, design: .default))
                                     }

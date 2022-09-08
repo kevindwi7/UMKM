@@ -24,39 +24,112 @@ struct DetailProjectCardView: View {
     }
     
     var body: some View {
-        VStack(alignment:.leading,spacing: 15){
-            Text("Detail").font(.system(size: 18, weight: .bold, design: .default))
-            Group{
-                HStack{
-                    Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
-                        .accessibilityHidden(true)
-                    Text("Lokasi : ").font(.system(size: 12, weight: .medium, design: .default))
-                    Text(project.location).font(.system(size: 12, weight: .medium, design: .default))
+        VStack(alignment:.leading,spacing: 14){
+            //            Text("Detail").font(.system(size: 18, weight: .bold, design: .default))
+                VStack(alignment:.leading, spacing: 6){
+                    //                    Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
+                    //                        .accessibilityHidden(true)
+                    Text("Lokasi")
+                        .font(.system(.footnote, design: .rounded)).bold()
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                    Text(project.location)
+                        .font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("Lokasi kegiatan di \(project.location)")
-                HStack{
-                    Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
-                        .accessibilityHidden(true)
-                    Text("Waktu : ").font(.system(size: 12, weight: .medium, design: .default))
-                    Text(dateFormatter.string(from: project.startDate))
-                    Text("|")
-                    Text("\(timeFormatter.string(from: project.startTime)) - \(timeFormatter.string(from: project.endTime))")
-                }.font(.system(size: 12, weight: .medium, design: .default))
+            
+                VStack(alignment:.leading, spacing: 6){
+                    //                    Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
+                    //                        .accessibilityHidden(true)
+                    Text("Tanggal")
+                        .font(.system(.footnote, design: .rounded)).bold()
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                    HStack{
+                        Text(dateFormatter.string(from: project.startDate))
+                        Text("-")
+                        Text(dateFormatter.string(from: project.endDate))
+                        //                        Text("\(timeFormatter.string(from: project.startTime)) - \(timeFormatter.string(from: project.endTime))")
+                    }.font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                }   .accessibilityElement(children: .combine)
+                    .accessibilityLabel("Tanggal kegiatan pada hari \(dateFormatter.string(from: project.startDate))")
+            
+                VStack(alignment:.leading, spacing: 6){
+                    //                    Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
+                    //                        .accessibilityHidden(true)
+                    Text("Waktu")
+                        .font(.system(.footnote, design: .rounded)).bold()
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                    HStack{
+                        Text(timeFormatter.string(from: project.startTime))
+                        Text("-")
+                        Text(timeFormatter.string(from: project.endTime))
+                        //                        Text("\(timeFormatter.string(from: project.startTime)) - \(timeFormatter.string(from: project.endTime))")
+                    }.font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                }
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("waktu kegiatan pada hari \(dateFormatter.string(from: project.startDate)) di jam \(timeFormatter.string(from: project.startTime))   sampai \(timeFormatter.string(from: project.endTime))") //need to further update - vp
-                HStack{
-                    Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
-                        .accessibilityHidden(true)
-                    Text("Ideator : ").font(.system(size: 12, weight: .medium, design: .default))
-                    Text(project.projectHost).font(.system(size: 12, weight: .medium, design: .default))
+                    .accessibilityLabel("di jam \(timeFormatter.string(from: project.startTime)) sampai \(timeFormatter.string(from: project.endTime))")
+                VStack (alignment:.leading, spacing: 6){
+                    //                    Image(systemName: "person").resizable().scaledToFit().frame(width: 20, height: 20)
+                    //                        .accessibilityHidden(true)
+                    Text("Ideator")
+                        .font(.system(.footnote, design: .rounded)).bold()
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                    Text(project.projectHost)
+                        .font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 14)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
                 }.accessibilityElement(children: .combine)
-                    .accessibilityLabel("Ideator proyek \(project.projectHost)") //need to further update - vp
+                    .accessibilityLabel("Ideator proyek \(project.projectHost)")
+            
+            VStack(alignment:.leading, spacing: 6){
+                //                    Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
+                //                        .accessibilityHidden(true)
+                Text("Divisi")
+                    .font(.system(.footnote, design: .rounded)).bold()
+                    .scaledFont(name: "", size: 14)
+                    .minimumScaleFactor(0.01)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                Text("Humas") //need to update - backend for labeling - data dummy divisi 
+                    .font(.system(.caption, design: .rounded).bold())
+                    .foregroundColor(.black.opacity(0.85))
+                    .minimumScaleFactor(0.01)
+                    .frame(width: 116, height: 30)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(Color.yellow,lineWidth: 1)
+                            .background(RoundedRectangle(cornerRadius:20)
+                                .foregroundColor(Color.yellow.opacity(0.2)))    )
             }
-//            HStack{
-//                Image(systemName: "person.circle.fill")
-//                Text("\(project.participantList.count) member telah bergabung").font(.system(size: 12, weight: .regular, design: .default))
-//            }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Divisi humas") //need to further update, data dummy divisi - vp
+         
         }.padding()
             .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
