@@ -81,10 +81,6 @@ struct LoginView: View {
                                     record["firstName"] = firstName
                                     record["lastName"] = lastName
                                     record["iCloudID"] = vm.userID
-//                                    record["divisi"] = "tes"
-//                                    record["pengalaman"] = ""
-//                                    record["komunitas"] = ""
-//                                    record["isFirstTime"] = false
                                     // Save to local
                                     UserDefaults.standard.set(email, forKey: "email")
                                     UserDefaults.standard.set(firstName, forKey: "firstName")
