@@ -95,8 +95,8 @@
 			children = (
 				C967B89C28BC631D00B59CE2 /* DetailParticipant */,
 				C967B89B28BC630900B59CE2 /* DetailTask */,
-				C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */,
 				C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */,
+				C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */,
 				C967B89528BC5C6800B59CE2 /* DetailProjecrCard2View.swift */,
 				C967B89928BC5E5E00B59CE2 /* DetailProjectCard3View.swift */,
 				148914CB28C8CF4700F91749 /* DetailProjectCard4View.swift */,
