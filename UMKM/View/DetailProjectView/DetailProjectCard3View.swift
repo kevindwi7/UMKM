@@ -22,58 +22,48 @@ struct DetailProjectCard3View: View {
 //    }
     
     var body: some View {
-        VStack(alignment:.leading,spacing: 10){
-            Text("Anggota :").font(.system(size: 17, weight: .bold, design: .default))
+        VStack(alignment:.leading,spacing: 15){
             HStack{
-                Text("\(project3.participantList.count) orang").font(.system(size: 12, weight: .regular, design: .default))
-                    .accessibilityLabel("Jumlah anggota \(project3.participantList.count) orang")
-                Spacer()
-                NavigationLink(destination: {
-                    DetailProjectParticipantView(projectParticipant: $project3)
-                }, label: {
-                    Text("Detail Anggota")
-                        .padding(.all,4)
-                        .font(.system(size: 12))
-                        .foregroundColor(.white)
-                        .background(RoundedRectangle(cornerRadius: 8))
-                        .accessibilityLabel("Tombol lihat anggota terdaftar")
-               
-                        
-                        
-                })
+            VStack(alignment:.leading,spacing: 6){
+                Text("Tugas").font(.system(.footnote, design: .rounded)).bold()
+                    .scaledFont(name: "", size: 14)
+                    .minimumScaleFactor(0.01)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                    Text("1 Tugas")
+                        .font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 12)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                        .accessibilityLabel("Jumlah tugas ada satu tugas") //need to further update - vp
             }
-           
-            Text("Tugas :").font(.system(size: 17, weight: .bold, design: .default))
-            HStack{
-                Text("1 Tugas").font(.system(size: 12, weight: .regular, design: .default))
-                    .accessibilityLabel("Jumlah tugas ada satu tugas") //need to further update - vp
                 Spacer()
-                NavigationLink(destination: {
-                    DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), project: $project3)
-//                    TabBarView()
-                }, label: {
-                    Text("Detail Tugas")
-                        .padding(.all,4)
-                        .font(.system(size: 12))
-                        .foregroundColor(.white)
-                        .background(RoundedRectangle(cornerRadius: 8))
-                        .accessibilityLabel("Tombol lihat detail tugas")
-               
-                        
-                        
-                })
-//                Button {
-//                    //handle assign to me
-//                    print("Test")
-//                } label: {
-//                    Text("Detail Tugas").font(.system(size: 12, weight: .regular, design: .default))
-//                }
-//                .background(.blue)
-//                .frame(width: 150,height: 25)
-//                .cornerRadius(8)
-//                .foregroundColor(.white)
-            }
-  
+                    NavigationLink(destination: {
+                        DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), project: $project3)
+    //                    TabBarView()
+                    }, label: {
+                        Text("Detail Tugas")
+                            .font(.system(.caption, design: .rounded).bold())
+                            .foregroundColor(.white)
+                            .frame(width: 130, height: 30)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(.cyan))
+                            .accessibilityLabel("Tombol lihat detail tugas")
+                
+                    })
+    //                Button {
+    //                    //handle assign to me
+    //                    print("Test")
+    //                } label: {
+    //                    Text("Detail Tugas").font(.system(size: 12, weight: .regular, design: .default))
+    //                }
+    //                .background(.blue)
+    //                .frame(width: 150,height: 25)
+    //                .cornerRadius(8)
+    //                .foregroundColor(.white)
+                }
+      
+            
         }.padding()
             .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)

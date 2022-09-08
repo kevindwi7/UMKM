@@ -20,26 +20,64 @@ struct DetailProjectView: View {
     
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     
+//    let coloredAppearance = UINavigationBarAppearance()
+    
+    
+  
+//    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+//
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithDefaultBackground()
+//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//
+//        let standard = UINavigationBarAppearance()
+//
+//        standard.configureWithOpaqueBackground()
+//
+//        standard.backgroundColor = .systemPink
+//        standard.titlePositionAdjustment = UIOffset(horizontal: -30, vertical: 0)
+//        standard.titleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//        let button = UIBarButtonItemAppearance(style: .plain)
+//        button.normal.titleTextAttributes = [.foregroundColor: UIColor.systemYellow]
+//        standard.buttonAppearance = button
+//
+//        let done = UIBarButtonItemAppearance(style: .done)
+//        done.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGreen]
+//        standard.doneButtonAppearance = done
+//
+//        UINavigationBar.appearance().standardAppearance = standard
+//
+//        return false
+//    }
+    
     var body: some View {
             LoadingView(isShowing: $vm.isLoading){
                 ZStack{
                     Color(UIColor.systemGray6)
                     ScrollView{
-                            VStack(alignment:.leading, spacing: 10){
-                                Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
-                                    .lineLimit(2)
-                                    .multilineTextAlignment(.leading)
-                                    .frame(width: UIScreen.main.bounds.width,alignment: .leading)
-                                    .padding(.horizontal)
-                                    .accessibilityLabel("proyek \(project.projectName)")
+//                            VStack(alignment:.leading, spacing: 10){
+//                                Text(project.projectName).font(.system(size: 25, weight: .bold, design: .default))
+//                                    .lineLimit(2)
+//                                    .multilineTextAlignment(.leading)
+//                                    .frame(width: UIScreen.main.bounds.width,alignment: .leading)
+//                                    .padding(.horizontal)
+//                                    .accessibilityLabel("proyek \(project.projectName)")
+//
+//                                .background(.white)
                                 
-                                .background(.white)
+                        DetailProjectCardView(project: $project).padding(.top)
                                 
-                                DetailProjectCardView(project: $project).padding(.leading)
+                                DetailProjecrCard2View(project2: $project)
                                 
-                                DetailProjecrCard2View(project2: $project).padding(.leading)
-                                
-                                DetailProjectCard3View( project3: $project).padding(.leading)
+                                DetailProjectCard3View( project3: $project)
+                        
+                                DetailProjectCard4Views( project3: $project)
+                        
+                        
+
+                        
+//                                DetailProjectCard4View(project3: $projectParticipant).padding(.leading)
                                 
                                 //                        if (project.participantList.contains(userID!)){
                                 //                            DetailProjectTaskCard(test: $project)
@@ -76,8 +114,9 @@ struct DetailProjectView: View {
 //                            .padding()
                         
                     }
-//                    .navigationTitle(project.projectName).navigationBarTitleDisplayMode(.large)
+                    .navigationTitle(project.projectName).navigationBarTitleDisplayMode(.inline)
                 }
+        
                 .onReceive(vm.objectWillChange) {_ in
                     vm.fetchTask()
                     vm.fetchProject()
@@ -105,11 +144,12 @@ struct DetailProjectView: View {
         
         
     }
-}
+
 
 //struct DetailProjectView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        DetailProjectView()
+//        DetailProjectView(vm: self.vm)
+//
 //    }
 //}
 

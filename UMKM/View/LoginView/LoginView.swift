@@ -43,11 +43,11 @@ struct LoginView: View {
                         .accessibilityHidden(true)
                     
                     Text("Aplikasi ini bantu atur jadwal project komunitasmu, dimanapun dan kapanpun")
-                        .font(.system(.footnote, design: .rounded))
-                        .minimumScaleFactor(0.01)
-                        .multilineTextAlignment(.leading)
-                        .scaledFont(name: "", size: 14)
-                        .lineLimit(3)
+                            .font(.system(.caption2, design: .rounded))
+                            .minimumScaleFactor(0.01)
+                            .multilineTextAlignment(.leading)
+                            .scaledFont(name: "", size: 14)
+                            .lineLimit(3)
                 }
                 .padding(EdgeInsets(top: 40, leading: 40, bottom: 40, trailing: 40))
                 .accessibilityElement(children: .combine)

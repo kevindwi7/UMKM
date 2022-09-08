@@ -13,6 +13,8 @@ import CloudKit
 @main
 struct UMKMApp: App {
     
+
+    
     var body: some Scene {
         WindowGroup {
             LoginView(vm: MainViewModel(container: CKContainer.default()))
