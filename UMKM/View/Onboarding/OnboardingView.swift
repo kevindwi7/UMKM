@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    
     @State var komunitas = ""
     @State var divisi = ""
     @State var pengalaman = ""
     var placeholder = "Divisi"
-    var dropDownList = ["PSO", "PFA", "AIR", "HOT"]
+    @State var dropDownList = ["Humas", "Sekertariat"]
+    
+    let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
+    let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
     
     var body: some View {
         VStack(spacing:10) {
             HStack {
                 Text("Halo")
-                Text("Nama,").foregroundColor(.yellow)
+                Text("\(firstName!) \(lastName!)").foregroundColor(.yellow)
             }.font(.system(size: 34, weight: .bold, design: .default))
             Text("Cerita dikit yuk!").font(.system(size: 34, weight: .regular, design: .default))
             //            Spacer()
@@ -65,11 +67,13 @@ struct OnboardingView: View {
             Divider()
             Spacer()
         }.padding()
+            .interactiveDismissDisabled(true)
+            
     }
 }
 
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView()
-    }
-}
+//struct OnboardingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OnboardingView()
+//    }
+//}

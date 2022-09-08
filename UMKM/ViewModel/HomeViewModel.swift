@@ -279,7 +279,6 @@ class HomeViewModel:ObservableObject{
                         case .success(let record):
                             if let user = UsersData.fromRecord(record) {
                                 returnedUsers.append(user)
-                                print(123)
                             }
 //                            print(returnedRooms)
                         case .failure(let error):

@@ -10,13 +10,18 @@ import CloudKit
 
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
+    @StateObject var mvm:MainViewModel
     //    @State var tvm:TaskViewModel
     
     @State var isActive = false
+    @State var isFirstTimeActive = false
     @State var isListRoomView = false
     
-    init(vm: HomeViewModel) {
+    @State var usersID = UserDefaults.standard.object(forKey: "userID") as? String
+    
+    init(vm: HomeViewModel, mvm: MainViewModel) {
         _vm = StateObject(wrappedValue: vm)
+        _mvm = StateObject(wrappedValue: mvm)
     }
     
     var body: some View {
@@ -53,6 +58,8 @@ struct HomeView: View {
                 .onAppear {
                     //                vm.fetchUserID()
                     vm.fetchProject()
+                    mvm.fetchUserProfile()
+//                    mvm.fetchUserID()
                     //vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
@@ -65,6 +72,11 @@ struct HomeView: View {
                 //                )
             }
             
+            .sheet(isPresented: $isFirstTimeActive){
+                OnboardingView()
+   
+            }
+          
             
         }.navigationViewStyle(.stack)
     }
