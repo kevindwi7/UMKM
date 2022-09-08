@@ -72,7 +72,10 @@ struct DetailProjectView: View {
                                 
                                 DetailProjectCard3View( project3: $project)
                         
-                                DetailProjectCard4View(project3: $project)
+                                DetailProjectCard4Views( project3: $project)
+                        
+                        
+
                         
 //                                DetailProjectCard4View(project3: $projectParticipant).padding(.leading)
                                 

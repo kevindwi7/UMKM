@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1422876728BF772500ED3BF4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1422876928BF772500ED3BF4 /* Localizable.strings */; };
+		1439BAF228C985FB008A5109 /* DetailProjectCard4Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439BAF128C985FB008A5109 /* DetailProjectCard4Views.swift */; };
 		146F744728BDC73600740D8C /* HapticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146F744628BDC73600740D8C /* HapticModel.swift */; };
-		148914CC28C8CF4700F91749 /* DetailProjectCard4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148914CB28C8CF4700F91749 /* DetailProjectCard4View.swift */; };
 		9C281B9B28B7050800B437AC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C281B9A28B7050800B437AC /* HomeViewModel.swift */; };
 		9C52AE8E28C6DCBD0057AC72 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE8D28C6DCBD0057AC72 /* User.swift */; };
 		9C52AE9028C6E4020057AC72 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */; };
@@ -44,8 +44,8 @@
 
 /* Begin PBXFileReference section */
 		1422876828BF772500ED3BF4 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1439BAF128C985FB008A5109 /* DetailProjectCard4Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCard4Views.swift; sourceTree = "<group>"; };
 		146F744628BDC73600740D8C /* HapticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticModel.swift; sourceTree = "<group>"; };
-		148914CB28C8CF4700F91749 /* DetailProjectCard4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCard4View.swift; sourceTree = "<group>"; };
 		9C281B9A28B7050800B437AC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9C52AE8D28C6DCBD0057AC72 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */,
 				C967B89528BC5C6800B59CE2 /* DetailProjecrCard2View.swift */,
 				C967B89928BC5E5E00B59CE2 /* DetailProjectCard3View.swift */,
-				148914CB28C8CF4700F91749 /* DetailProjectCard4View.swift */,
+				1439BAF128C985FB008A5109 /* DetailProjectCard4Views.swift */,
 			);
 			path = DetailProjectView;
 			sourceTree = "<group>";
@@ -319,6 +319,7 @@
 				C967B8A028BDAD0200B59CE2 /* Task.swift in Sources */,
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
+				1439BAF228C985FB008A5109 /* DetailProjectCard4Views.swift in Sources */,
 				C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */,
 				C967B89628BC5C6800B59CE2 /* DetailProjecrCard2View.swift in Sources */,
 				C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */,

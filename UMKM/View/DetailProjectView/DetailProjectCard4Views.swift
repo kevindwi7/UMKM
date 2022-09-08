@@ -1,14 +1,14 @@
 //
-//  DetailProjectCard4View.swift
+//  DetailProjectCard4Views.swift
 //  UMKM
 //
-//  Created by Vidya on 07/09/22.
+//  Created by Vidya on 08/09/22.
 //
 
 import SwiftUI
 import CloudKit
 
-struct DetailProjectCard4View: View {
+struct DetailProjectCard4Views: View {
     
     @State var isActive = false
     
@@ -117,10 +117,3 @@ struct DetailProjectCard4View: View {
 //                        .transition(.slide)
         }
     }
-//}
-//}
-//struct DetailProjectCard4View_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailProjectCard4View()
-//    }
-//}
