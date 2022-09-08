@@ -15,6 +15,7 @@ enum RecordType: String {
     case project = "Project"
     case task = "Task"
     case user = "UsersData"
+    case userProfile = "userProfile"
 }
 
 final class MainViewModel: ObservableObject{
@@ -23,11 +24,13 @@ final class MainViewModel: ObservableObject{
     
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
+    @Published var usersProfile: [UserProfileViewModel] = []
     
     @Published var isSignedInToiCloud: Bool = false
     @Published var recentlyCreatedProjectId: String = ""
     @Published var userID: String = ""
     @Published var isLoading: Bool = false
+    @Published var currentUser:UsersData?
     
     let objectWillChange = PassthroughSubject<(), Never>()
     
@@ -70,7 +73,15 @@ final class MainViewModel: ObservableObject{
                     .forEach {
                         switch $0 {
                         case .success(let record):
+//                            self.currentUser?.firstName = record.recordID
                             self.userID = record.recordID.recordName
+//                            if let project = Project.fromRecord(record) {
+//                                returnedProjects.append(project)
+//                            }
+                            if let currentUser = self.currentUser {
+                                self.currentUser = currentUser
+                            }
+                            print(self.currentUser?.firstName ?? "Kosong")
                             print("UID DISINI : \(self.userID)")
                         case .failure(let error):
                             print(error)
@@ -169,6 +180,72 @@ final class MainViewModel: ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.tasks = returnedTasks.map(TaskViewModel.init)
+//                    defer {
+//                        self.objectWillChange.send()
+//                    }
+                    self.objectWillChange.send()
+//                    print("\(self.rooms)")
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func createUserProfile(userID: String,userName: String, komunitas: String,pengalaman: String,divisi: String, isFirstTime: Bool)   {
+        
+        let record = CKRecord(recordType: RecordType.userProfile.rawValue)
+        let user = UserProfile(userID: userID, userName: userName, komunitas: komunitas, pengalaman: pengalaman, divisi: divisi, isFirstTime: isFirstTime)
+        
+        record.setValuesForKeys(user.toDictionary())
+        
+        // saving record in database
+        self.database.save(record) { returnedRecord, returnedError in
+            if let returnedError = returnedError {
+                print("Error: \(returnedError)")
+            } else {
+                if let returnedRecord = returnedRecord {
+                    if let user = UserProfile.fromRecord(returnedRecord) {
+                        DispatchQueue.main.async {
+                            self.usersProfile.append(UserProfileViewModel(user: user))
+                            self.objectWillChange.send()
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchUserProfile(){
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.userProfile.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedUsersProfile: [UserProfile] = []
+        
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            
+                            if let user = UserProfile.fromRecord(record) {
+                                returnedUsersProfile.append(user)
+                            }
+//                            print(returnedRooms)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                
+                DispatchQueue.main.async {
+                    self.usersProfile = returnedUsersProfile.map(UserProfileViewModel.init)
 //                    defer {
 //                        self.objectWillChange.send()
 //                    }

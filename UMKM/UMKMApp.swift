@@ -17,8 +17,9 @@ struct UMKMApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            LoginView(vm: MainViewModel(container: CKContainer.default()))
-            TabBarView()
+            LoginView(vm: MainViewModel(container: CKContainer.default()))
+//            TabBarView()
+//            OnboardingView()
         }
     }
 }
