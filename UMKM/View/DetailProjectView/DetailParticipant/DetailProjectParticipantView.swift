@@ -33,16 +33,16 @@ struct DetailProjectParticipantView: View {
                                 .padding(.all, 8)
                                 .background(RoundedRectangle(cornerRadius: 8).stroke())
                                 .foregroundColor(.blue)
-                                .accessibilityLabel("mengerjakan tiga tugas") //need to further update
+                                .accessibilityLabel("mengerjakan tiga tugas") //need to further update - vp
                         }
                         .padding()
                     }
                     Spacer()
                 }
                 .navigationTitle("Detail Anggota")
-                .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
-                .background(.white)
-                .cornerRadius(16)
+//                .frame(width: UIScreen.main.bounds.width/1.2, alignment:.leading)
+//                .background(.white)
+//                .cornerRadius(16)
             }.padding()
         }
     }

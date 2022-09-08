@@ -45,61 +45,115 @@ struct CreateProjectView: View {
                             NavigationLink(destination:  TaskView(vm: MainViewModel(container: CKContainer.default()), namaProjectTask: $namaProject, tujuanProjectTask: $tujuanProject, deskripsiProjectTask: $deskripsiProject, startDateTask: $startDate, endDateTask: $endDate, startTimeTask: $startTime, endTimeTask: $endTime, lokasiProjectTask: $lokasiProject, projectID: $projectID, isActive: $isActive), tag: 1, selection: $action){
                                 EmptyView()
                             }
+//                            Form{
+//
+//                                    VStack{
+//                                        Image(systemName: "circle.inset.filled")
+//                                            .font(.system(.footnote, design: .rounded))
+//                                            .scaledFont(name: "", size: 14)
+//                                            .minimumScaleFactor(0.01)
+//                                            .lineLimit(1)
+//                                            .foregroundColor(.black)
+//                                        Spacer()
+//                                        TextField("", text: $namaProject)
+//                                            .frame(width:180)
+//                                    }.accessibilityElement(children: .combine)
+//                                        .accessibilityLabel("tulis nama proyek")
+//
+//                            }
+                            
+                            //Nama Proyek
                             HStack{
-                                Text("Nama Proyek").font(.system(size: 14, weight: .medium, design: .default))
+                                Image(systemName: "circle.inset.filled").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
                                 Spacer()
-                                TextField("", text: $namaProject).frame(width:180)
+                                TextField("Nama proyek", text: $namaProject).foregroundColor(.black)
                             }.accessibilityElement(children: .combine)
                                 .accessibilityLabel("tulis nama proyek")
+                            
+                            //Tujuan Proyek
                             HStack {
-                                Text("Tujuan").font(.system(size: 14, weight: .medium, design: .default))
+                                Image(systemName: "target").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
                                 Spacer()
-                                TextField("", text: $tujuanProject).frame(width:180)
-                            }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("tulis tujuan proyek")
-                            HStack {
-                                Text("Deskripsi").font(.system(size: 14, weight: .medium, design: .default))
-                                Spacer()
-                                TextEditor(text: $deskripsiProject)
-                                    .frame(width:180 ,height:120)
+//                                TextField("Tujuan", text: $tujuanProject).foregroundColor(.black)
+                                TextEditor(text: $tujuanProject)
+                                    .frame(height:100)
                                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(.gray.opacity(0.2), lineWidth: 1))
                             }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("tulis deskripsi proyek")
-                            HStack{
-                                Text("Tanggal Mulai").font(.system(size: 14, weight: .medium, design: .default))
-                                    .accessibilityHidden(true)
+                                .accessibilityLabel("tulis tujuan proyek")
+                            
+                            //Lokasi
+                            HStack {
+                                Image(systemName: "mappin.and.ellipse").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
                                 Spacer()
-                                DatePicker("", selection: $startDate, displayedComponents: .date).labelsHidden()
-                                    .frame(width: 130, height: 40, alignment: .center)
+                                TextField("Lokasi", text: $lokasiProject)
+//                                    .frame(width:180 ,height:120)
+//                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(.gray.opacity(0.2), lineWidth: 1))
+                            }.accessibilityElement(children: .combine)
+                                .accessibilityLabel("tulis lokasi proyek")
+                            
+                            //Divisi
+                            HStack {
+                                Image(systemName: "person.2.fill").font(.system(size: 10, weight: .medium, design: .default)).foregroundColor(.cyan)
+                                Spacer()
+                                TextField("Divisi", text: $tujuanProject).foregroundColor(.black) //need to chage to ...
+//                                TextEditor(text: $tujuanProject)
+//                                    .frame(width:180 ,height:120)
+//                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(.gray.opacity(0.2), lineWidth: 1))
+                            }.accessibilityElement(children: .combine)
+                                .accessibilityLabel("input divisi")
+                            
+                            //Deskripsi Proyek
+                            HStack {
+                                Image(systemName: "text.justify.left").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
+                                Spacer()
+                                TextEditor(text: $deskripsiProject)
+                                    .frame(height:100)
+                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(.gray.opacity(0.2), lineWidth: 1))
+                            }.accessibilityElement(children: .combine)
+                                .accessibilityLabel("Tulis deskrisi proyek")
+                            
+                            //tanggal mulai
+                            HStack{
+                                Image(systemName: "calendar").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
+                                Spacer()
+                                DatePicker("Tanggal Mulai", selection: $startDate, displayedComponents: .date).foregroundColor(.gray)
+//                                    .frame(width: 130, height: 40, alignment: .center)
                             }.accessibilityElement(children: .combine)
                                 .accessibilityLabel("Input tanggal mulai proyek")
+                            
+                            //tanggal selesai
                             HStack{
-                                Text("Tanggal Selesai").font(.system(size: 14, weight: .medium, design: .default))
+                                Image(systemName: "calendar").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
                                     .accessibilityHidden(true)
                                 Spacer()
-                                DatePicker("", selection: $endDate, displayedComponents: .date).labelsHidden()
-                                    .frame(width: 130, height: 40, alignment: .center)
+                                DatePicker("Tanggal Selesai", selection: $endDate, displayedComponents: .date)
+//                                    .frame(width: 130, height: 40, alignment: .center)
+                                    .foregroundColor(.gray)
                             }.accessibilityElement(children: .combine)
                                 .accessibilityLabel("Input tanggal selesai proyek")
+                            
+                            //waktu mulai
                             HStack{
-                                Text("Waktu").font(.system(size: 14, weight: .medium, design: .default))
+                                Image(systemName: "clock").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
                                     .accessibilityHidden(true)
                                 Spacer()
-                                DatePicker("", selection: $startTime, displayedComponents: .hourAndMinute).labelsHidden()
-                                    .frame(width: UIScreen.main.bounds.width/3.7, height: 40, alignment: .center)
-                                    .accessibilityLabel("Input waktu mulai proyek")
-                                Text("-")
-                                DatePicker("", selection: $endTime, displayedComponents: .hourAndMinute).labelsHidden()
-                                    .frame(width: UIScreen.main.bounds.width/3.7, height: 40, alignment: .center)
-                            }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("Waktu kegiatan")
+                                DatePicker("Waktu mulai", selection: $startTime, displayedComponents: .hourAndMinute).foregroundColor(.gray)
+//                                    .frame(width: UIScreen.main.bounds.width/3.7, height: 40, alignment: .center)
+                                .accessibilityLabel("Input waktu mulai proyek")
+                                
+                            }
+                                
+                            // waktu selesai
                             HStack{
-                                Text("Lokasi").font(.system(size: 14, weight: .medium, design: .default))
+                                Image(systemName: "clock").font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
                                     .accessibilityHidden(true)
-                                Spacer()
-                                TextField("", text: $lokasiProject).frame(width:180)
+                                DatePicker("Waktu selesai", selection: $endTime, displayedComponents: .hourAndMinute)
+                                    .foregroundColor(.gray)
+//                                    .frame(width: UIScreen.main.bounds.width/3.7, height: 40, alignment: .center)
                             }.accessibilityElement(children: .combine)
-                            .accessibilityLabel("Tulis lokasi proyek")
+                                .accessibilityLabel("Input waktu selesai proyek")
+                            
+                    
                         }.frame(width: UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
                         Button(action: {
                             projectID = randomString(length: 10)

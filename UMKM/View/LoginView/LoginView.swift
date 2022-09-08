@@ -43,7 +43,7 @@ struct LoginView: View {
                         .accessibilityHidden(true)
                 
                     Text("Aplikasi ini bantu atur jadwal project komunitasmu, dimanapun dan kapanpun")
-                            .font(.system(.footnote, design: .rounded))
+                            .font(.system(.caption2, design: .rounded))
                             .minimumScaleFactor(0.01)
                             .multilineTextAlignment(.leading)
                             .scaledFont(name: "", size: 14)
