@@ -13,8 +13,10 @@ struct DetailProjectTaskCard: View {
     @Binding var project: ProjectViewModel
     //    @Binding var task: TaskViewModel
     @State var isLoading = false
+    @State var showingSheet = false
     
     @State var task: String = ""
+    @State var isPM = true
     
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
@@ -29,20 +31,30 @@ struct DetailProjectTaskCard: View {
                     VStack(alignment:.leading,spacing: 10){
                         ForEach(0...0, id: \.self){ project in
                             HStack{
-                                Text("Handle acara pentas seni").font(.system(size: 12, weight: .regular, design: .default))
+                                Text("Handle acara pentas seni").font(.system(size: 14, weight: .regular, design: .default))
                                     .accessibilityLabel("Handle acara pentas seni") //need to further update - vp
                                 Spacer()
                                 
                                 Button {
                                     //handle assign to me
                                     //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
-                                    task = "Kevin Dwi"
+                                    //                                    task = "Kevin Dwi"
+                                    if(self.isPM == true){
+                                        self.showingSheet.toggle()
+                                    }else{
+                                        //handle daftar
+                                        task = "Kevin Dwi"
+                                    }
                                     
                                 } label: {
                                     if (task.isEmpty) {
-                                        Text("Ambil Tugas").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+                                        if(self.isPM == true){
+                                            Text("Pilih Anggota").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+                                        }else{
+                                            Text("Daftar").font(.system(size: 14, weight: .regular, design: .default))
+                                        }
                                     }else{
-                                        Text(task).font(.system(size: 12, weight: .regular, design: .default))
+                                        Text(task).font(.system(size: 14, weight: .regular, design: .default))
                                     }
                                     
                                     //                                    if (task.user.isEmpty) {
@@ -57,6 +69,9 @@ struct DetailProjectTaskCard: View {
                                 .background(task.isEmpty ? .blue : .gray)
                                 .cornerRadius(8)
                                 .disabled(!task.isEmpty)
+                                .sheet(isPresented: $showingSheet) {
+                                    AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()))
+                                }
                                 
                                 
                             }
