@@ -10,14 +10,21 @@ import CloudKit
 
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
+    @StateObject var mvm:MainViewModel
     //    @State var tvm:TaskViewModel
     
     @State var isActive = false
+    @State var isFirstTimeActive = false
     @State var isListRoomView = false
     
-    init(vm: HomeViewModel) {
+    @State var usersID = UserDefaults.standard.object(forKey: "userID") as? String
+    
+    init(vm: HomeViewModel, mvm: MainViewModel) {
         _vm = StateObject(wrappedValue: vm)
+        _mvm = StateObject(wrappedValue: mvm)
     }
+    
+    
     
     var body: some View {
         NavigationView{
@@ -39,8 +46,13 @@ struct HomeView: View {
                 }
                 //            .frame(width: UIScreen.main.bounds.width)
                 
-                .navigationTitle("Proyek")
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitle(Text("Proyek").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
+//                .uiFontMenuTitle(.title)
+
+//                .background(NavigationConfigurator { nc in
+//                                nc.navigationBar.barTintColor = .systemCyan
+//                                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+//                            })
                 .toolbar {
                     Button {
                         self.isActive = true
@@ -48,11 +60,14 @@ struct HomeView: View {
                         Image(systemName: "plus.circle.fill")
                     }.sheet(isPresented: $isActive) {
                         CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
-                    }.accessibilityLabel("Tambah Proyek")
+                    }.foregroundColor(.white)
+                    .accessibilityLabel("Tambah Proyek")
                 }
                 .onAppear {
                     //                vm.fetchUserID()
                     vm.fetchProject()
+                    mvm.fetchUserProfile()
+//                    mvm.fetchUserID()
                     //vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
@@ -65,14 +80,49 @@ struct HomeView: View {
                 //                )
             }
             
+            .sheet(isPresented: $isFirstTimeActive){
+                OnboardingView()
+   
+            }
+          
             
         }.navigationViewStyle(.stack)
+            .onAppear {
+                        let appearance = UINavigationBarAppearance()
+                        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+                        appearance.backgroundColor = UIColor(Color.cyan
+//                            .opacity(0.2)
+                        )
+                        appearance.titleTextAttributes = [NSAttributedString.Key
+                                        .foregroundColor : UIColor.white]
+
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
+            }
+//                UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia", size: 20)!]
+                
+                
+//            }
     }
 }
 
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
+}
 
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        HomeView()
+//        HomeView(vm: HomeViewModel(container: CKContainer.default()))
+//        
 //    }
 //}
