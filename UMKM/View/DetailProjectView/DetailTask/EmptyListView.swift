@@ -32,7 +32,7 @@ struct EmptyListView: View {
                 .frame(height:250)
                 .accessibilityHidden(true)
             }.padding()
-                .frame(width: UIScreen.main.bounds.width/1.1, alignment:.center)
+            .frame(width: UIScreen.main.bounds.width/1.1,height: UIScreen.main.bounds.height/1.3, alignment:.center)
                 .background(.white)
                 .cornerRadius(16)
     }
