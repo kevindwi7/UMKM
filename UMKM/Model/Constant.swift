@@ -32,3 +32,62 @@ extension View {
         return self.modifier(ScaledFont(name: name, size: size))
     }
 }
+
+struct AutoSizingTF: UIViewRepresentable {
+    
+    var hint:String
+    @Binding var text:String
+    @Binding var containerHeight: CGFloat
+    
+    func makeCoordinator() -> Coordinator {
+        return AutoSizingTF.Coordinator(parent: self)
+    }
+    
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.text = hint
+        textView.textColor = .gray
+        
+        textView.font = .systemFont(ofSize: 14)
+        textView.delegate = context.coordinator
+        textView.backgroundColor = .clear
+        return textView
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        DispatchQueue.main.async {
+            if containerHeight == 0 {
+                containerHeight = uiView.contentSize.height
+            }
+        }
+    }
+    
+    class Coordinator : NSObject, UITextViewDelegate{
+        var parent:AutoSizingTF
+        
+        init(parent: AutoSizingTF){
+            
+            self.parent = parent
+        }
+        
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            if textView.text == parent.hint{
+                textView.text = ""
+                textView.textColor = UIColor(Color.primary)
+            }
+        }
+        
+        func textViewDidChange(_ textView: UITextView) {
+            parent.text = textView.text
+            parent.containerHeight = textView.contentSize.height
+        }
+        
+        func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text == ""{
+                textView.text = parent.hint
+                textView.textColor = .gray
+            }
+        }
+        
+    }
+}
