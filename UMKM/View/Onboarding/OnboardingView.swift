@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OnboardingView: View {
     
+    @State var containerHeight:CGFloat = 0
+    
     @State var komunitas = ""
     @State var divisi = ""
     @State var pengalaman = ""
@@ -41,7 +43,7 @@ struct OnboardingView: View {
                         HStack{
                             Text(divisi.isEmpty ? placeholder : divisi)
                                 .foregroundColor(.black)
-//                                .foregroundColor(divisi.isEmpty ? .gray : .black)
+                            //                                .foregroundColor(divisi.isEmpty ? .gray : .black)
                                 .opacity(divisi.isEmpty ? 0.3 : 1)
                             Spacer()
                         }
@@ -51,16 +53,11 @@ struct OnboardingView: View {
             
             Divider()
             HStack(alignment:.top){
-                Image(systemName: "person.fill.questionmark").foregroundColor(.blue).padding(.vertical,3)
+                Image(systemName: "person.fill.questionmark").foregroundColor(.blue).padding(.vertical,10)
                 Spacer()
-                VStack(alignment:.leading) {
-                    Text("Tentang Kamu").font(.system(size: 18, weight: .regular, design: .rounded)).opacity(0.3)
-                    Text("Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting").font(.system(size: 14, weight: .regular, design: .rounded)).opacity(0.3)
-                    ZStack {
-                        TextEditor(text: $pengalaman)
-                        Text(pengalaman).opacity(0).padding(8)
-                    }
-                }
+                AutoSizingTF(hint: "Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting", text: $pengalaman, containerHeight: $containerHeight)
+                    .frame(height: containerHeight <= 300 ? containerHeight : 300).background(.white).cornerRadius(10)
+//                    .padding()
             }
             Divider()
             Spacer()
