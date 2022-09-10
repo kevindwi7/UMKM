@@ -12,10 +12,9 @@ struct ProfileView: View {
     @State var viewModel = notificationViewModel()
     var body: some View {
         Button {
-//            viewModel.requestNotificationPermission(){message in
-//                viewModel.subscribeToNotifications()
-//            }
-            viewModel.subscribeToNotifications()
+            viewModel.requestNotificationPermission(){message in
+                viewModel.subscribeToNotifications()
+            }
         } label: {
             Text("Get Notification")
         }
