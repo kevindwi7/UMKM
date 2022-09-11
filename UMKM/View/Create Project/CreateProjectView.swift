@@ -110,7 +110,7 @@ struct CreateProjectView: View {
                                     .frame(height:100)
                                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(.gray.opacity(0.2), lineWidth: 1))
                             }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("Tulis deskrisi proyek")
+                                .accessibilityLabel("Tulis deskripsi proyek")
                             
                             //tanggal mulai
                             HStack{
