@@ -15,7 +15,7 @@ struct OnboardingView: View {
     @State var divisi = ""
     @State var pengalaman = ""
     var placeholder = "Divisi"
-    @State var dropDownList = ["Humas", "Sekertariat"]
+    @State var dropDownList = ["Humas", "Sekertariat", "Sosmed", "Lainnya"]
     
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
