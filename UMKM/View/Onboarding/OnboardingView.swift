@@ -22,19 +22,26 @@ struct OnboardingView: View {
     
     var body: some View {
         VStack(spacing:10) {
-            HStack {
-                Text("Halo")
-                Text("\(firstName!) \(lastName!)").foregroundColor(.yellow)
-            }.font(.system(size: 34, weight: .bold, design: .default))
-            Text("Cerita dikit yuk!").font(.system(size: 34, weight: .regular, design: .default))
-            //            Spacer()
+            Group{
+                HStack {
+                    Text("Halo")
+                    Text("\(firstName!) \(lastName!)").foregroundColor(.yellow)
+                }.font(.system(size: 34, weight: .bold, design: .default))
+                Text("Cerita dikit yuk!").font(.system(size: 34, weight: .regular, design: .default))
+                //            Spacer()
+            }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Halo \(firstName!) \(lastName!), Cerita dikit yuk!")
             HStack{
                 Image(systemName: "house").foregroundColor(.blue)
+                    .accessibilityHidden(true)
                 TextField("Komunitas", text: $komunitas)
-            }
+            }.accessibilityElement(children: .combine)
+                .accessibilityLabel("Tulis nama komunitasmu")
             Divider()
             HStack{
                 Image(systemName: "person.2").foregroundColor(.blue)
+                    .accessibilityHidden(true)
                 Menu {
                     ForEach(dropDownList, id: \.self){ divisi in
                         Button(divisi) {
@@ -57,11 +64,13 @@ struct OnboardingView: View {
             Divider()
             HStack(alignment:.top){
                 Image(systemName: "person.fill.questionmark").foregroundColor(.blue).padding(.vertical,10)
+                    .accessibilityHidden(true)
                 Spacer()
                 AutoSizingTF(hint: "Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting", text: $pengalaman, containerHeight: $containerHeight)
                     .frame(height: containerHeight <= 300 ? containerHeight : 300).background(.white).cornerRadius(10)
 //                    .padding()
-            }
+            }.accessibilityElement(children: .combine)
+                .accessibilityLabel("Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting")
             Divider()
             Spacer()
         }.padding()
