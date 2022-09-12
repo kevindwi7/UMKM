@@ -82,11 +82,11 @@ struct DetailProjectCard4Views: View {
                             .accessibilityLabel("..... blabla") // need to further update dummy - vp
                         
                         //Tugasnya
-                        Text("\(project3.tasks.count)")
-                        ForEach (project3.tasks, id: \.self){ task in
-                            Text("Hellow") // need to further update dummy - vp
-                                .font(.system(.caption, design: .rounded))
-                        }
+//                        Text("\(project3.tasks.count)")
+//                        ForEach ($project3.tasks, id: \.self){ $task in
+//                            Text("Hellow") // need to further update dummy - vp
+//                                .font(.system(.caption, design: .rounded))
+//                        }
                         Text("Sapu halaman depan") // need to further update dummy - vp
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
