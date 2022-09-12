@@ -15,7 +15,7 @@ struct OnboardingView: View {
     @State var divisi = ""
     @State var pengalaman = ""
     var placeholder = "Divisi"
-    @State var dropDownList = ["Humas", "Sekertariat"]
+    @State var dropDownList = ["Humas", "Sekertariat", "Sosmed", "Lainnya"]
     
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
@@ -27,11 +27,11 @@ struct OnboardingView: View {
                     Text("Halo")
                     Text("\(firstName!) \(lastName!)").foregroundColor(.yellow)
                 }.font(.system(size: 34, weight: .bold, design: .default))
-                Text("Cerita dikit yuk!").font(.system(size: 34, weight: .regular, design: .default))
+                Text("Cerita sedikit yuk!").font(.system(size: 34, weight: .regular, design: .default))
                 //            Spacer()
             }
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("Halo \(firstName!) \(lastName!), Cerita dikit yuk!")
+                .accessibilityLabel("Halo \(firstName!) \(lastName!), Cerita sedikit yuk!")
             HStack{
                 Image(systemName: "house").foregroundColor(.blue)
                     .accessibilityHidden(true)
@@ -66,11 +66,11 @@ struct OnboardingView: View {
                 Image(systemName: "person.fill.questionmark").foregroundColor(.blue).padding(.vertical,10)
                     .accessibilityHidden(true)
                 Spacer()
-                AutoSizingTF(hint: "Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting", text: $pengalaman, containerHeight: $containerHeight)
+                AutoSizingTF(hint: "Ceritakan pengalaman atau keahlianmu, sampaikan juga hal-hal yang menurutmu menarik atau penting", text: $pengalaman, containerHeight: $containerHeight)
                     .frame(height: containerHeight <= 300 ? containerHeight : 300).background(.white).cornerRadius(10)
 //                    .padding()
             }.accessibilityElement(children: .combine)
-                .accessibilityLabel("Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting")
+                .accessibilityLabel("Ceritakan pengalaman atau keahlianmu, sampaikan juga hal-hal yang menurutmu menarik atau penting")
             Divider()
             Spacer()
         }.padding()
