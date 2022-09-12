@@ -132,7 +132,7 @@ struct CreateProjectView: View {
                                     .lineLimit(2)
                                 //                                    .frame(width: 130, height: 40, alignment: .center)
                             }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("Input tanggal mulai proyek")
+                                .accessibilityLabel("Pilih tanggal mulai proyek")
 
                             //tanggal selesai
                             HStack{
@@ -145,7 +145,7 @@ struct CreateProjectView: View {
                                 //                                    .frame(width: 130, height: 40, alignment: .center)
                                     .foregroundColor(.black)
                             }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("Input tanggal selesai proyek")
+                                .accessibilityLabel("Pilih tanggal selesai proyek")
 
                             //waktu mulai
                             HStack{
@@ -156,7 +156,7 @@ struct CreateProjectView: View {
                                     .minimumScaleFactor(0.01)
                                     .lineLimit(2)
                                 //                                    .frame(width: UIScreen.main.bounds.width/3.7, height: 40, alignment: .center)
-                                    .accessibilityLabel("Input waktu mulai proyek")
+                                    .accessibilityLabel("Pilih waktu mulai proyek")
 
                             }
 
@@ -170,7 +170,7 @@ struct CreateProjectView: View {
                                     .lineLimit(2)
                                 //                                    .frame(width: UIScreen.main.bounds.width/3.7, height: 40, alignment: .center)
                             }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("Input waktu selesai proyek")
+                                .accessibilityLabel("Pilih waktu selesai proyek")
 //
 //
                             
