@@ -104,7 +104,6 @@ struct AnggotaSheetView: View {
         }
         .onAppear{
             vm.fetchProject()
-            vm.fetchAllUser()
         }
     }
 }
