@@ -8,53 +8,98 @@
 import SwiftUI
 
 struct AnggotaSheetView: View {
-    
+    @Binding var tasks: [TaskViewModel]
     @StateObject var vm:HomeViewModel
+    @Binding var projects: ProjectViewModel
     @Environment(\.dismiss) var dismiss
     
-    init(vm: HomeViewModel) {
+    init(vm: HomeViewModel, tasks: Binding<[TaskViewModel]>, projects: Binding<ProjectViewModel>) {
         _vm = StateObject(wrappedValue: vm)
+        self._tasks = tasks
+        self._projects = projects
     }
     
     var body: some View {
         NavigationView {
-            VStack(alignment:.leading,spacing: 10) {
-                Text("Pilih anggota untuk tugas").font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
-                Text("Pel Lantai").font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
-                List(0..<30) {_ in
-                    VStack {
-                        HStack {
-                            Text("ASd").font(.system(size: 14, weight: .medium, design: .rounded))
+            ZStack{
+                Color(UIColor.systemGray6)
+                ScrollView{
+                    VStack(alignment:.leading) {
+                        HStack{
+                            Text("Pilih anggota untuk tugas")
+                                .font(.system(size: 14, weight: .regular, design: .default))
+                                .padding(.horizontal, 24)
                             Spacer()
-                            Image(systemName: "person.fill.checkmark").opacity(0.5)
-                            Image(systemName: "person.fill.xmark").opacity(0.5)
                         }
-                    }
-                }
-                .cornerRadius(10)
-                .padding()
-                .listStyle(.plain)
-            }
-            .frame(width: UIScreen.main.bounds.width)
-            .background(SwiftUI.Color.primaryGray)
-            .navigationTitle("Anggota")
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                        HapticManager.instance.notification(type: .warning)
-                    } label: {
-                        Text("Cancel").accessibilityLabel("Kembali")
+                      
+                        VStack{
+                            HStack{
+                                ForEach($tasks, id: \.self){ $taskss in
+                                    Text(taskss.taskName).font(.system(size: 14, weight: .regular, design: .default))
+                                       
+                                    Spacer()
+                            }
+                            
+                                
+                                ForEach(projects.participantList, id: \.self) { _ in
+                                    VStack {
+                                        HStack {
+                                            Text("Kevin").font(.system(size: 14, weight: .medium, design: .rounded))
+                                            Spacer()
+                                            Button(action: {
+                                                print("accept")
+                                            }, label: {
+                                                Image(systemName: "person.fill.checkmark").opacity(0.5)
+                                            })
+                                            
+                                            Button(action: {
+                                                print("deecline")
+                                            }, label: {
+                                                Image(systemName: "person.fill.xmark").opacity(0.5)
+                                            })
+                                            
+                                            
+                                        }
+                                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                                        .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
+                                        .background(.white)
+                                        .cornerRadius(15)
+                                        .minimumScaleFactor(0.01)
+                                        .padding(.top, 16)
+                                }
+                                .cornerRadius(10)
+                                .padding()
+                                //                    .listStyle(.plain)
+                            }
+                        }
+                        
+                        
                     }
                     
+                    .frame(width: UIScreen.main.bounds.width)
+                    
+                    .navigationTitle("Anggota")
+                    .toolbar(content: {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                dismiss()
+                                HapticManager.instance.notification(type: .warning)
+                            } label: {
+                                Text("Cancel").accessibilityLabel("Kembali")
+                            }
+                            
+                        }
+                        
+                    }
+                    )
+                    .navigationBarTitleDisplayMode(.inline)
                 }
-
             }
-            )
-            .navigationBarTitleDisplayMode(.inline)
+            
             
         }
         .onAppear{
+            vm.fetchProject()
             vm.fetchAllUser()
         }
     }

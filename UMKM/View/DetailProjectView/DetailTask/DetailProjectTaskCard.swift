@@ -10,12 +10,13 @@ import CloudKit
 
 struct DetailProjectTaskCard: View {
     @StateObject var vm:HomeViewModel
+    @StateObject var mvm:MainViewModel
     @Binding var project: ProjectViewModel
-    //    @Binding var task: TaskViewModel
+    @Binding var task: [TaskViewModel]
     @State var isLoading = false
     @State var showingSheet = false
     
-    @State var task: String = ""
+    @State var tasks: String = ""
     @State var isPM = true
     
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
@@ -29,114 +30,48 @@ struct DetailProjectTaskCard: View {
                     
                     Color.primaryGray
                     VStack(alignment:.leading,spacing: 10){
-                        ForEach(0...0, id: \.self){ project in
+                        ForEach($task, id: \.id){ $task in
                             HStack{
-                                Text("Handle acara pentas seni").font(.system(size: 14, weight: .regular, design: .default))
+                                Text(task.taskName).font(.system(size: 14, weight: .regular, design: .default))
                                     .accessibilityLabel("Handle acara pentas seni") //need to further update - vp
                                 Spacer()
                                 
                                 Button {
+                                    print(task.taskName)
                                     //handle assign to me
                                     //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
                                     //                                    task = "Kevin Dwi"
-                                    if(self.isPM == true){
+                                    if(project.hostId == userID){
                                         self.showingSheet.toggle()
                                     }else{
-                                        //handle daftar
-                                        task = "Kevin Dwi"
+                                        tasks = "Kevin Dwi"
                                     }
                                     
                                 } label: {
-                                    if (task.isEmpty) {
+                                    if (tasks.isEmpty) {
                                         if(self.isPM == true){
                                             Text("Pilih Anggota").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
                                         }else{
                                             Text("Daftar").font(.system(size: 14, weight: .regular, design: .default))
                                         }
                                     }else{
-                                        Text(task).font(.system(size: 14, weight: .regular, design: .default))
+                                        Text(tasks).font(.system(size: 14, weight: .regular, design: .default))
                                     }
-                                    
-                                    //                                    if (task.user.isEmpty) {
-                                    //                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
-                                    //                                    }else{
-                                    //                                        Text(task.user).font(.system(size: 12, weight: .regular, design: .default))
-                                    //                                    }
                                     
                                 }
                                 .frame(width: 103,height: 25)
                                 .foregroundColor(.white)
-                                .background(task.isEmpty ? .blue : .gray)
+                                .background(tasks.isEmpty ? .blue : .gray)
                                 .cornerRadius(8)
-                                .disabled(!task.isEmpty)
+                                .disabled(!tasks.isEmpty)
                                 .sheet(isPresented: $showingSheet) {
-                                    AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()))
+                                    AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$task, projects: $project)
                                 }
                                 
                                 
                             }
                         }
-                        //                        ForEach (self.project.project.tasks, id: \.id) { task in
-                        //                            HStack{
-                        //                                Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
-                        //                                    .accessibilityLabel("Sapu Lantai") //need to further update - vp
-                        //                                Spacer()
-                        //
-                        //                                Button {
-                        //                                    //handle assign to me
-                        //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
-                        //                                    print("Test")
-                        //
-                        //                                } label: {
-                        //                                    if (task.user.isEmpty) {
-                        //                                        Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
-                        //                                    }else{
-                        //                                        Text(task.user).font(.system(size: 12, weight: .regular, design: .default))
-                        //                                    }
-                        //
-                        //                                }
-                        //                                .frame(width: 103,height: 25)
-                        //                                .foregroundColor(.white)
-                        //                                .background(task.user.isEmpty ? .blue : .gray)
-                        //                                .cornerRadius(8)
-                        //                                .disabled(!task.user.isEmpty)
-                        //
-                        //
-                        //                            }
-                        //                            //                                DetailTaskCard(vm: HomeViewModel(container: CKContainer.default()), test: $test, task: $task)
-                        //
-                        //                        }
-                        
-                        //                        ForEach($vm.projects, id: \.id){ $testss in
-                        //                            ForEach ($vm.taskse, id: \.id) { $tests in
-                        //                                if ( testss.projectHost == tests.projectId){
-                        //                                    DetailTaskCard(test: $test, task: $tests)
-                        //                                }
-                        //
-                        //                            }
-                        //                        }
-                        //
-                        //                        ForEach(0...15, id: \.self){ project in
-                        //                            HStack{
-                        //                                Text("Sapu Lantai").font(.system(size: 12, weight: .regular, design: .default))
-                        //                                Spacer()
-                        //
-                        //                                Button {
-                        //                                    //handle assign to me
-                        //                                    print("Test")
-                        //
-                        //                                } label: {
-                        //                                    Text("Asign to Me").font(.system(size: 12, weight: .regular, design: .default))
-                        //                                }
-                        //                                .frame(width: 103,height: 25)
-                        //                                .foregroundColor(.white)
-                        //                                .background(test.participantList.contains(userID!) ? .blue : .gray)
-                        //                                .cornerRadius(8)
-                        //                                .disabled(!test.participantList.contains(userID!))
-                        //
-                        //
-                        //                            }
-                        //                        }
+                    
                     }
                     .padding()
                     .navigationTitle("Detail Tugas")

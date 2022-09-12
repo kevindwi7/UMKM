@@ -15,7 +15,8 @@ enum RecordType: String {
     case project = "Project"
     case task = "Task"
     case user = "UsersData"
-    case userProfile = "userProfile"
+    case userFirstTimeOnboarding = "UserFirstTimeOnboarding"
+    case userProfile = "UserProfile"
 }
 
 final class MainViewModel: ObservableObject{
@@ -24,12 +25,14 @@ final class MainViewModel: ObservableObject{
     
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
-    @Published var usersProfile: [UserProfileViewModel] = []
+    @Published var userFirstTimes: [UserFirstTimeOnboardingViewModel] = []
+//    @Published var usersProfile: [UserProfileViewModel] = []
     
     @Published var isSignedInToiCloud: Bool = false
     @Published var recentlyCreatedProjectId: String = ""
     @Published var userID: String = ""
     @Published var isLoading: Bool = false
+    @Published var isLoadingUserProfile: Bool = false
     @Published var currentUser:UsersData?
     
     let objectWillChange = PassthroughSubject<(), Never>()
@@ -94,11 +97,11 @@ final class MainViewModel: ObservableObject{
     }
     
     func createProject(projectHost: String, projectName: String, location: String,  startTime: Date, endTime: Date, participantList: [String],  description: String, goal: String, hostId: String, isFinish: Bool, startDate:Date, endDate: Date , projectID: String
-                       ,completionHandler:  @escaping () -> Void
+                       ,participantListName: [String],completionHandler:  @escaping () -> Void
     ){
         self.isLoading = true
         let record = CKRecord(recordType: RecordType.project.rawValue)
-        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,  startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID)
+        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,  startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID,participantListName: participantListName)
         
         record.setValuesForKeys(project.toDictionary())
         
@@ -152,8 +155,75 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func fetchTask(){
+    func createUserFirstTime(userID: String,isFirstTime: Bool)   {
         
+        let record = CKRecord(recordType: RecordType.userFirstTimeOnboarding.rawValue)
+        let userFirstTime = UserFirstTimeOnboarding(userID: userID, isFirstTime: isFirstTime)
+        
+        record.setValuesForKeys(userFirstTime.toDictionary())
+        
+        // saving record in database
+        self.database.save(record) { returnedRecord, returnedError in
+            if let returnedError = returnedError {
+                print("Error: \(returnedError)")
+            } else {
+                if let returnedRecord = returnedRecord {
+                    if let userFirstTimess = UserFirstTimeOnboarding.fromRecord(returnedRecord) {
+                        DispatchQueue.main.async {
+                            self.userFirstTimes.append(UserFirstTimeOnboardingViewModel(userFirstTime: userFirstTimess))
+                            self.objectWillChange.send()
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchUserFirstTime(){
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.userFirstTimeOnboarding.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedUserFirstTimes: [UserFirstTimeOnboarding] = []
+        
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            
+                            if let userFirstTime = UserFirstTimeOnboarding.fromRecord(record) {
+
+                                    returnedUserFirstTimes.append(userFirstTime)
+                                
+                        
+                            }
+//                            print(returnedRooms)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                
+                DispatchQueue.main.async {
+                    self.userFirstTimes = returnedUserFirstTimes.map(UserFirstTimeOnboardingViewModel.init)
+//                    defer {
+//                        self.objectWillChange.send()
+//                    }
+                    self.objectWillChange.send()
+//                    print("\(self.rooms)")
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchTask(project: ProjectViewModel){
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
@@ -170,7 +240,10 @@ final class MainViewModel: ObservableObject{
                         case .success(let record):
                             
                             if let task = Task.fromRecord(record) {
-                                returnedTasks.append(task)
+                                if task.projectId == project.projectID{
+                                    returnedTasks.append(task)
+                                }
+                        
                             }
 //                            print(returnedRooms)
                         case .failure(let error):
@@ -193,69 +266,45 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func createUserProfile(userID: String,userName: String, komunitas: String,pengalaman: String,divisi: String, isFirstTime: Bool)   {
-        
-        let record = CKRecord(recordType: RecordType.userProfile.rawValue)
-        let user = UserProfile(userID: userID, userName: userName, komunitas: komunitas, pengalaman: pengalaman, divisi: divisi, isFirstTime: isFirstTime)
-        
-        record.setValuesForKeys(user.toDictionary())
-        
-        // saving record in database
-        self.database.save(record) { returnedRecord, returnedError in
-            if let returnedError = returnedError {
-                print("Error: \(returnedError)")
-            } else {
-                if let returnedRecord = returnedRecord {
-                    if let user = UserProfile.fromRecord(returnedRecord) {
-                        DispatchQueue.main.async {
-                            self.usersProfile.append(UserProfileViewModel(user: user))
-                            self.objectWillChange.send()
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
     
-    func fetchUserProfile(){
-        
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: RecordType.userProfile.rawValue, predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        var returnedUsersProfile: [UserProfile] = []
-        
-        self.database.fetch(withQuery: query) { result in
-            switch result {
-            case .success(let result):
-
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            
-                            if let user = UserProfile.fromRecord(record) {
-                                returnedUsersProfile.append(user)
-                            }
-//                            print(returnedRooms)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    }
-                
-                DispatchQueue.main.async {
-                    self.usersProfile = returnedUsersProfile.map(UserProfileViewModel.init)
-//                    defer {
-//                        self.objectWillChange.send()
+//    func fetchUserProfile(){
+//
+//        let predicate = NSPredicate(value: true)
+//        let query = CKQuery(recordType: RecordType.userProfile.rawValue, predicate: predicate)
+//        let queryOperation = CKQueryOperation(query: query)
+//
+//        var returnedUsersProfile: [UserProfile] = []
+//
+//        self.database.fetch(withQuery: query) { result in
+//            switch result {
+//            case .success(let result):
+//
+//                result.matchResults.compactMap { $0.1 }
+//                    .forEach {
+//                        switch $0 {
+//                        case .success(let record):
+//
+//                            if let user = UserProfile.fromRecord(record) {
+//                                returnedUsersProfile.append(user)
+//                            }
+////                            print(returnedRooms)
+//                        case .failure(let error):
+//                            print(error)
+//                        }
 //                    }
-                    self.objectWillChange.send()
-//                    print("\(self.rooms)")
-                }
-
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+//
+//                DispatchQueue.main.async {
+//                    self.usersProfile = returnedUsersProfile.map(UserProfileViewModel.init)
+////                    defer {
+////                        self.objectWillChange.send()
+////                    }
+//                    self.objectWillChange.send()
+////                    print("\(self.rooms)")
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
 }

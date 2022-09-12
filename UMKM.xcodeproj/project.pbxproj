@@ -41,8 +41,9 @@
 		C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE662028B5D3D3000C0133 /* LoginView.swift */; };
 		C9AE662328B5D82D000C0133 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE662228B5D82D000C0133 /* HomeView.swift */; };
 		C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE662528B5D8A6000C0133 /* MainViewModel.swift */; };
-		C9B643D028C9838D00F7763C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B643CF28C9838D00F7763C /* UserProfile.swift */; };
-		C9B643D228C9865700F7763C /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B643D128C9865700F7763C /* UserProfileViewModel.swift */; };
+		C9DDF5DA28CE41FB007B3BF1 /* UserFirstTimeOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF5D928CE41FB007B3BF1 /* UserFirstTimeOnboarding.swift */; };
+		C9DDF5DC28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */; };
+		C9DDF5E228CE52A6007B3BF1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF5E128CE52A6007B3BF1 /* Test.swift */; };
 		C9FCAD7A28C8303F004A0FD9 /* Divisi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FCAD7928C8303F004A0FD9 /* Divisi.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,8 +84,9 @@
 		C9AE662028B5D3D3000C0133 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C9AE662228B5D82D000C0133 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C9AE662528B5D8A6000C0133 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		C9B643CF28C9838D00F7763C /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
-		C9B643D128C9865700F7763C /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		C9DDF5D928CE41FB007B3BF1 /* UserFirstTimeOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirstTimeOnboarding.swift; sourceTree = "<group>"; };
+		C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirstTimeOnboardingViewModel.swift; sourceTree = "<group>"; };
+		C9DDF5E128CE52A6007B3BF1 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		C9FCAD7828C6FC00004A0FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C9FCAD7928C8303F004A0FD9 /* Divisi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,7 +209,7 @@
 				C967B89F28BDAD0200B59CE2 /* Task.swift */,
 				9C52AE8D28C6DCBD0057AC72 /* User.swift */,
 				C9FCAD7928C8303F004A0FD9 /* Divisi.swift */,
-				C9B643CF28C9838D00F7763C /* UserProfile.swift */,
+				C9DDF5D928CE41FB007B3BF1 /* UserFirstTimeOnboarding.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,7 +236,7 @@
 				C967B8A128BDB84A00B59CE2 /* TaskViewModel.swift */,
 				146F744628BDC73600740D8C /* HapticModel.swift */,
 				9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */,
-				C9B643D128C9865700F7763C /* UserProfileViewModel.swift */,
+				C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -255,6 +257,7 @@
 				C9820E7128B5F28A0043724D /* ProfileView.swift */,
 				C9820E7328B5F2A00043724D /* TabBarView.swift */,
 				C9820E7528B5F37E0043724D /* TugaskuView.swift */,
+				C9DDF5E128CE52A6007B3BF1 /* Test.swift */,
 			);
 			path = TabBarView;
 			sourceTree = "<group>";
@@ -343,15 +346,16 @@
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
 				1439BAF228C985FB008A5109 /* DetailProjectCard4Views.swift in Sources */,
+				C9DDF5DC28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift in Sources */,
 				C9820E7428B5F2A00043724D /* TabBarView.swift in Sources */,
 				C967B89628BC5C6800B59CE2 /* DetailProjecrCard2View.swift in Sources */,
 				C978E52528B602BC0079C6AE /* ProjectViewModel.swift in Sources */,
 				C9820E7628B5F37E0043724D /* TugaskuView.swift in Sources */,
-				C9B643D028C9838D00F7763C /* UserProfile.swift in Sources */,
 				C958E9C028B639EF00DC7F8B /* DetailProjectView.swift in Sources */,
-				C9B643D228C9865700F7763C /* UserProfileViewModel.swift in Sources */,
+				C9DDF5DA28CE41FB007B3BF1 /* UserFirstTimeOnboarding.swift in Sources */,
 				9CB9DA7428B86F1B00A57A10 /* TaskView.swift in Sources */,
 				C967B8A228BDB84A00B59CE2 /* TaskViewModel.swift in Sources */,
+				C9DDF5E228CE52A6007B3BF1 /* Test.swift in Sources */,
 				C9AE662328B5D82D000C0133 /* HomeView.swift in Sources */,
 				C958E9BE28B639D700DC7F8B /* DetailProjectTaskCard.swift in Sources */,
 				C9AE660D28B5CEE5000C0133 /* ContentView.swift in Sources */,

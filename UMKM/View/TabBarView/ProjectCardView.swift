@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct ProjectCardView: View {
     @StateObject var vm: HomeViewModel
+    @StateObject var mvm: MainViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
     //    @State var task: TaskViewModel
@@ -132,7 +134,7 @@ struct ProjectCardView: View {
                 .accessibilityLabel("Proyek \(project.projectName), Lokasi di \(project.location), tanggal mulai \(project.startDate) sampai \(project.endDate), jam kegiatan \(project.startTime) sampai \(project.endTime), tugas yang terisi enam dari sepuluh tugas") // dummy data, need to further update - vp
         }
         .background(
-            NavigationLink(destination: DetailProjectView(vm: self.vm, project: $project), isActive: $isActive, label: {
+            NavigationLink(destination: DetailProjectView(vm: self.vm, mvm: self.mvm, project: $project), isActive: $isActive, label: {
                 EmptyView()
             })
         )
