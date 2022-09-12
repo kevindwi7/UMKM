@@ -122,7 +122,7 @@ struct DetailProjectCard4Views: View {
             self.isActive.toggle()
         }
     label: {
-        Text("Selesaikan Proyek").foregroundColor(.white)
+        Text("Selesai Proyek").foregroundColor(.white)
             .font(.system(.caption, design: .rounded)).bold()
             .frame(width: UIScreen.main.bounds.width/1.1,height: 38)
             .background(.blue)
