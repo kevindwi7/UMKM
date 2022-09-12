@@ -15,11 +15,14 @@ class HomeViewModel:ObservableObject{
     
     private var database: CKDatabase
     private var container: CKContainer
+    
     @Published var projects: [ProjectViewModel] = [ProjectViewModel]()
     @Published var tasks: [TaskViewModel] = []
     @Published var users: [UserViewModel] = []
     
+    
     @Published var isLoading: Bool = false
+    @Published var isFirstTime: Bool = false
     @Published var hasUpdated: Bool = false
     
     init(container: CKContainer) {
@@ -90,6 +93,7 @@ class HomeViewModel:ObservableObject{
         let startDate = project.startDate
         let endDate = project.endDate
         let projectID = project.projectID
+        let participantListName = project.participantListName
         
         if(command == "join") {
             if( !(newParticipant.contains(participantID))){
@@ -128,7 +132,7 @@ class HomeViewModel:ObservableObject{
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID))
+                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName))
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
@@ -221,7 +225,7 @@ class HomeViewModel:ObservableObject{
         let recordId = task.id
         let projectId = task.projectId
         let taskName = task.taskName
-    
+        let isFinish = task.isFinish
         if(command == "join") {
             if( !(newParticipant.contains(user))){
                 if(user != "" || !(user.isEmpty) ){
@@ -250,11 +254,13 @@ class HomeViewModel:ObservableObject{
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let user = record["user"] as? String else { return }
-                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user))
+                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user, isFinish: isFinish))
                         print(123)
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
+                        
+                        self.objectWillChange.send()
                         
                     }
                 }
@@ -279,6 +285,7 @@ class HomeViewModel:ObservableObject{
                         case .success(let record):
                             if let user = UsersData.fromRecord(record) {
                                 returnedUsers.append(user)
+                                print(123)
                             }
 //                            print(returnedRooms)
                         case .failure(let error):
@@ -301,10 +308,42 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func updateUserOnboarding(users: UserViewModel, user: String, komunitas: String, divisi: String, pengalaman: String){
+    func updateUserOnboarding(users: UserViewModel, komunitas: String,divisi: String, pengalaman: String, isFirstTime: Bool, completionHandler:  @escaping () -> Void){
+        self.isLoading = true
+       
+        var newKomunitas =  String()
+        var newdivisi =  String()
+        var newPengalaman =  String()
+        var newIsFirstTime =  Bool()
+        
+        
+//        newKomunitas.insert(contentsOf: users.komunitas, at: newKomunitas.startIndex )
+//        newdivisi.insert(contentsOf: users.divisi, at: newPengalaman.startIndex )
+//        newPengalaman.insert(contentsOf: users.pengalaman, at: newPengalaman.startIndex )
+        
+        newKomunitas = komunitas
+        newdivisi = divisi
+        newPengalaman = pengalaman
+        newIsFirstTime = false
         
         let recordId = users.id
-        
+        let komunitas = users.komunitas
+        let divisi = users.divisi
+        let pengalaman = users.pengalaman
+//        let isFirstTime = users.isFirstTime
+
+//        newIsFirstTime.description.insert(users.isFirstTime, at: newIsFirstTime.description.startIndex)
+//        newIsFirstTime.insert(contentsOf: users.isFirstTime, at: newIsFirstTime.startIndex )
+        if(!(newKomunitas.contains(komunitas)) || !(newdivisi.contains(divisi)) || !(newPengalaman.contains(pengalaman))){
+            print(222)
+//            if(komunitas != "" || !(komunitas.isEmpty) || divisi != "" || !(divisi.isEmpty) || pengalaman != "" || !(pengalaman.isEmpty) ){
+                newKomunitas.append(komunitas)
+                newdivisi.append(divisi)
+                newIsFirstTime = false
+                newPengalaman.append(pengalaman)
+                print("masukk")
+//            }
+        }
         
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -313,13 +352,13 @@ class HomeViewModel:ObservableObject{
                 }
                 guard let record = returnedRecord else { return }
                 
-                record.setValue(divisi, forKey: "divisi")
-                record.setValue(pengalaman, forKey: "pengalaman")
-                record.setValue(false, forKey: "isFirstTime")
-                record.setValue(komunitas, forKey: "komunitas")
+                record["komunitas"] = newKomunitas as CKRecordValue
+                record["divisi"] = newdivisi as CKRecordValue
+                record["pengalaman"] = newPengalaman as CKRecordValue
+                record["isFirstTime"] = newIsFirstTime as CKRecordValue
                 
-//                record["participantList"] = newParticipant as CKRecordValue
                 
+                print("print: \(newKomunitas)")
                 self.database.save(record) { record, error in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         if let error = error {
@@ -327,13 +366,29 @@ class HomeViewModel:ObservableObject{
                             
                         }
                         guard let record = returnedRecord else { return }
-                       
+                        let id = record.recordID
+                        guard let komunitas = record["komunitas"] as? String else { return }
+                        guard let divisi = record["divisi"] as? String else { return }
+                        guard let pengalaman = record["pengalaman"] as? String else { return }
+                        
+//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user))
+                        print("testttt")
+                        
+                        UserDefaults.standard.set(false, forKey: "isFirstTime")
+//                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
+                        self.isFirstTime = false
+                        
+                        self.objectWillChange.send()
+                        completionHandler()
                         
                     }
                 }
             }
         }
+        
     }
+    
+    
 }

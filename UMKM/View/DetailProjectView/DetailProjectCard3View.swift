@@ -9,10 +9,10 @@ import SwiftUI
 import CloudKit
 
 struct DetailProjectCard3View: View {
-//    @StateObject var hm:HomeViewModel
-    
+    @StateObject var hm:HomeViewModel
+    @StateObject var mvm:MainViewModel
     @Binding var project3: ProjectViewModel
-//    @Binding var task: TaskViewModel
+    @Binding var task: [TaskViewModel]
     @State var action: Int? = 0
     
 //    init(vm: HomeViewModel, project3: Binding<ProjectViewModel>, task: Binding<TaskViewModel>) {
@@ -30,17 +30,17 @@ struct DetailProjectCard3View: View {
                     .minimumScaleFactor(0.01)
                     .lineLimit(1)
                     .foregroundColor(.black)
-                    Text("1 Tugas")
+                Text("\(self.task.count)" )
                         .font(.system(.caption, design: .rounded))
                         .scaledFont(name: "", size: 12)
                         .minimumScaleFactor(0.01)
                         .lineLimit(1)
                         .foregroundColor(.black)
-                        .accessibilityLabel("Jumlah tugas ada satu tugas") //need to further update - vp
+                        .accessibilityLabel("Jumlah tugas ada \(self.task.count)") //need to further update - vp
             }
                 Spacer()
                     NavigationLink(destination: {
-                        DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), project: $project3)
+                        DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), project: $project3, task: $task)
     //                    TabBarView()
                     }, label: {
                         Text("Detail Tugas")
@@ -64,7 +64,9 @@ struct DetailProjectCard3View: View {
                 }
       
             
-        }.padding()
+        }
+       
+        .padding()
             .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
             .cornerRadius(16)

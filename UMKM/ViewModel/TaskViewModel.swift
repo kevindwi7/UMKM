@@ -36,4 +36,8 @@ struct TaskViewModel: Hashable, Identifiable{
         task.user
     }
     
+    var isFinish: Bool{
+        task.isFinish
+    }
+    
 }

@@ -8,23 +8,80 @@
 import SwiftUI
 
 struct AnggotaSheetView: View {
-    
+    @Binding var tasks: TaskViewModel
     @StateObject var vm:HomeViewModel
+    @Binding var projects: ProjectViewModel
     @Environment(\.dismiss) var dismiss
     @State var test:Int = 5
     @State var status = ""
     
-    init(vm: HomeViewModel) {
+    init(vm: HomeViewModel, tasks: Binding<TaskViewModel>, projects: Binding<ProjectViewModel>) {
         _vm = StateObject(wrappedValue: vm)
+        self._tasks = tasks
+        self._projects = projects
+        
     }
     
     var body: some View {
         NavigationView {
-            if(test == 0){
-                EmptyListView()
-                    .frame(width: UIScreen.main.bounds.width,height: UIScreen.main.bounds.height)
-                    .background(SwiftUI.Color.primaryGray)
-                    .padding()
+            ZStack{
+                Color(UIColor.systemGray6)
+                ScrollView{
+                    VStack(alignment:.leading) {
+                     
+                            Text("Pilih anggota untuk tugas")
+                                .font(.system(size: 14, weight: .regular, design: .default))
+                                .padding(.horizontal, 24)
+                                .padding(.horizontal)
+                        
+                      
+                        VStack{
+                           
+//                                ForEach($tasks, id: \.self){ $taskss in
+                            Text(tasks.taskName).font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
+                                       
+                                    Spacer()
+//                            }
+                            
+                                
+                                ForEach(projects.participantList, id: \.self) { _ in
+                                    VStack {
+                                        HStack {
+                                            Text("Kevin").font(.system(size: 14, weight: .medium, design: .rounded))
+                                            Spacer()
+                                            Button(action: {
+                                                print("accept")
+                                                print(tasks)
+                                            }, label: {
+                                                Image(systemName: "person.fill.checkmark").opacity(0.5)
+                                            })
+                                            
+                                            Button(action: {
+                                                print("deecline")
+                                            }, label: {
+                                                Image(systemName: "person.fill.xmark").opacity(0.5)
+                                            })
+                                            
+                                            
+                                        }
+                                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                                        .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
+                                        .background(.white)
+                                        .cornerRadius(15)
+                                        .minimumScaleFactor(0.01)
+                                        .padding(.top, 16)
+                                }
+                                .cornerRadius(10)
+                                .padding()
+                                //                    .listStyle(.plain)
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    .frame(width: UIScreen.main.bounds.width)
+                    
                     .navigationTitle("Anggota")
                     .toolbar(content: {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -40,61 +97,13 @@ struct AnggotaSheetView: View {
                     }
                     )
                     .navigationBarTitleDisplayMode(.inline)
-            }else{
-                VStack(alignment:.leading,spacing: 10) {
-                    Text("Pilih anggota untuk tugas").font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal).padding(.top)
-                    Text("Pel Lantai").font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
-                    List {
-                        ForEach(0..<test, id: \.self) { anggota in
-//                            var status = ""
-                            VStack {
-                                HStack (spacing:30){
-                                    Text("ASd").font(.system(size: 14, weight: .medium, design: .rounded))
-                                    Spacer()
-                                    Button {
-                                        self.status = "Accept"
-                                        print(status)
-                                    } label: {
-                                        Image(systemName: "person.fill.checkmark").opacity(0.5).foregroundColor(self.status=="Accept" ? .blue : .primary)
-
-                                    }
-                                    Button {
-                                        self.status = "Decline"
-                                        print("Decline")
-                                    } label: {
-                                        Image(systemName: "person.fill.xmark").opacity(0.5).foregroundColor(self.status=="Decline" ? .blue : .primary)
-                                    }
-    
-                                }.buttonStyle(PlainButtonStyle())
-                            }
-                            
-                        }
-                    }
-                    .cornerRadius(10)
-                    .listStyle(.automatic)
                 }
-                .frame(width: UIScreen.main.bounds.width)
-                .background(SwiftUI.Color.primaryGray)
-                .navigationTitle("Anggota")
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            dismiss()
-                            HapticManager.instance.notification(type: .warning)
-                        } label: {
-                            Text("Cancel").accessibilityLabel("Kembali")
-                        }
-                        
-                    }
-                    
-                }
-                )
-                .navigationBarTitleDisplayMode(.inline)
             }
             
             
         }
         .onAppear{
+            vm.fetchProject()
             vm.fetchAllUser()
         }
     }

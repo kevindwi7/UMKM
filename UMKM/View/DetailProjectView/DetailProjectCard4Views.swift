@@ -28,7 +28,7 @@ struct DetailProjectCard4Views: View {
     var body: some View {
         Spacer()
         Button(action: {
-//            self.isActive = !self.isActive
+            //            self.isActive = !self.isActive
             withAnimation(.easeInOut){self.isActive = !self.isActive}
         }){
             VStack(alignment:.leading,spacing: 15){
@@ -82,11 +82,11 @@ struct DetailProjectCard4Views: View {
                             .accessibilityLabel("..... blabla") // need to further update dummy - vp
                         
                         //Tugasnya
-                        Text("\(project3.tasks.count)")
-                        ForEach (project3.tasks, id: \.self){ task in
-                            Text("Hellow") // need to further update dummy - vp
-                                .font(.system(.caption, design: .rounded))
-                        }
+//                        Text("\(project3.tasks.count)")
+//                        ForEach ($project3.tasks, id: \.self){ $task in
+//                            Text("Hellow") // need to further update dummy - vp
+//                                .font(.system(.caption, design: .rounded))
+//                        }
                         Text("Sapu halaman depan") // need to further update dummy - vp
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
@@ -108,7 +108,23 @@ struct DetailProjectCard4Views: View {
                     .cornerRadius(16)
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: self.isActive ? 0 : .none)
             .clipped()
-//                        .animation(.easeOut)
-//                        .transition(.slide)
+        //                        .animation(.easeOut)
+        //                        .transition(.slide)
+        Button {
+            //Selesaikan project
+            //            self.isLoading = true
+            //            vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID){
+            self.isActive.toggle()
         }
+    label: {
+        Text("Selesai Proyek").foregroundColor(.white)
+            .font(.system(.caption, design: .rounded)).bold()
+            .frame(width: UIScreen.main.bounds.width/1.1,height: 38)
+            .background(.blue)
+            .cornerRadius(12)
+            .padding()
     }
+    }
+    
+}
+
