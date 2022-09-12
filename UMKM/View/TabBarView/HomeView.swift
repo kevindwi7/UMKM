@@ -11,7 +11,6 @@ import CloudKit
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
     @StateObject var mvm:MainViewModel
-    //    @State var tvm:TaskViewModel
     
     @State var isActive = false
     @State var isFirstTimeActive = false
@@ -32,9 +31,12 @@ struct HomeView: View {
                 ScrollView(.vertical){
                     VStack(alignment: .leading){
                         ForEach($vm.projects, id: \.id){ $project in
+            
+                            ProjectCardView(vm: self.vm, mvm: self.mvm, project: $project,task: $mvm.tasks)
+                            
                             //                            ForEach ($vm.tasks, id: \.id) { $taskHome in
                             
-                            ProjectCardView(vm: self.vm, mvm: self.mvm, project: $project)
+                          
                             
                             
                             //                            }
@@ -70,7 +72,7 @@ struct HomeView: View {
 //                    mvm.user
                     vm.fetchProject()
                     vm.fetchAllUser()
-                    
+                   
                     
                     //                    mvm.fetchUserProfile()
                     //                    mvm.fetchUserID()

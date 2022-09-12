@@ -14,17 +14,11 @@ struct DetailProjectCard4Views: View {
     
     @State var action: Int? = 0
     
-    @Binding var project3: ProjectViewModel
-//    @Binding var task: TaskViewModel
-    //    @Binding var task: TaskViewModel
-    //    @State var action: Int? = 0
+    @Binding var project: ProjectViewModel
     
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
-    
-    //    print(project3.participantList)
-    
     
     var body: some View {
         Spacer()
@@ -41,13 +35,13 @@ struct DetailProjectCard4Views: View {
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
-                        Text("\(project3.participantList.count) Orang")
+                        Text("\(project.participantListName.count) Orang")
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
-                            .accessibilityLabel("Jumlah anggota \(project3.participantList.count) orang")
+                            .accessibilityLabel("Jumlah anggota \(project.participantList.count) orang")
                     }
                     Spacer()
                     Image(systemName: self.isActive == true ? "chevron.down" : "chevron.up")
@@ -64,7 +58,7 @@ struct DetailProjectCard4Views: View {
         
 //   Form{
 //       Section{
-        ForEach (project3.participantList, id: \.self){ item in
+        ForEach (project.participantListName, id: \.self){ itemss in
 //            VStack(alignment:.leading, spacing: 15){
                 HStack(alignment:.top, spacing: 15){
                     Image(systemName: "person.crop.circle.fill")
@@ -74,7 +68,7 @@ struct DetailProjectCard4Views: View {
                         .foregroundColor(.black)
                         .accessibilityLabel("foto Tania") // need to further update dummy - vp
                     VStack(alignment:.leading){
-                        Text("nama") // need to further update dummy - vp
+                        Text(itemss.self) // need to further update dummy - vp
                             .font(.system(.body, design: .rounded)).bold()
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
@@ -112,8 +106,9 @@ struct DetailProjectCard4Views: View {
         //                        .animation(.easeOut)
         //                        .transition(.slide)
         Button {
-            vm.finishTask(project: project3)
-            self.isActive.toggle()
+            vm.finishProject(project: project, isFinish: true)
+            print("finish")
+//            self.isActive.toggle()
         }
     label: {
         Text("Selesai Proyek").foregroundColor(.white)

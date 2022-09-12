@@ -15,7 +15,7 @@ struct DetailProjectTaskCard: View {
     @Binding var task: [TaskViewModel]
     @State var isLoading = false
     @State var showingSheet = false
-    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true))
+    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"]))
     @State var tasks: String = ""
     @State var isPM = true
 
@@ -34,7 +34,7 @@ struct DetailProjectTaskCard: View {
                         ForEach($task, id: \.id){ $task in
                             HStack{
                                 Text(task.taskName).font(.system(size: 14, weight: .regular, design: .default))
-                                    .accessibilityLabel("Handle acara pentas seni") //need to further update - vp
+                                    .accessibilityLabel(task.taskName) //need to further update - vp
                                 Spacer()
                                 
                                 Button {
@@ -47,16 +47,20 @@ struct DetailProjectTaskCard: View {
                                     if(project.hostId == userID){
                                         self.showingSheet.toggle()
                                     }else{
-                                        tasks = "Kevin Dwi"
+                                        vm.updateTaskRegisterUser(task: task, user: firstName ?? "", userID: userID!   )
                                     }
                                     
                                 } label: {
                                     if (tasks.isEmpty) {
-                                        if(self.isPM == true){
+//                                        if (task.registerUserID.contains(userID!)){
+//                                            Text("Sudah Daftar").font(.system(size: 14, weight: .regular, design: .default)).disabled(true)
+//                                        }
+                                        if(project.hostId == userID){
                                             Text("Pilih Anggota").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
                                         }else{
                                             Text("Daftar").font(.system(size: 14, weight: .regular, design: .default))
                                         }
+                                     
                                     }else{
                                         Text(tasks).font(.system(size: 14, weight: .regular, design: .default))
                                     }
@@ -64,9 +68,9 @@ struct DetailProjectTaskCard: View {
                                 }
                                 .frame(width: 103,height: 25)
                                 .foregroundColor(.white)
-                                .background(tasks.isEmpty ? .blue : .gray)
+                                .background( !task.registerUserID.contains(userID!) ? .blue : .gray)
                                 .cornerRadius(8)
-                                .disabled(!tasks.isEmpty)
+                                .disabled( task.registerUserID.contains(userID!))
                                 
                                 
                                 
