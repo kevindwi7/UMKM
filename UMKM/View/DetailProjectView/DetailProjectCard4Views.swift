@@ -53,26 +53,14 @@ struct DetailProjectCard4Views: View {
                         .font(.system(.headline, design: .rounded).bold())
                         .accessibilityHidden(true)
                 }
-                //
-                //                NavigationLink(destination: {
-                //                    DetailProjectParticipantView(projectParticipant: $project3)
-                //                }, label: {
-                //                    Text("Detail Anggota")
-                //                        .font(.system(.caption, design: .rounded).bold())
-                //                        .foregroundColor(.white)
-                //                        .frame(width: 130, height: 30)
-                //                        .background(RoundedRectangle(cornerRadius: 10).fill(.cyan))
-                //                        .accessibilityLabel("Tombol lihat anggota terdaftar")
-                //                })
                 
             }
             .padding()
             .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
             .background(.white)
             .cornerRadius(16)
-            
-            
         }
+        
 //   Form{
 //       Section{
         ForEach (project3.participantList, id: \.self){ item in
@@ -85,13 +73,20 @@ struct DetailProjectCard4Views: View {
                         .foregroundColor(.black)
                         .accessibilityLabel("foto Tania") // need to further update dummy - vp
                     VStack(alignment:.leading){
-                        Text("Nama") // need to further update dummy - vp
+                        Text("nama") // need to further update dummy - vp
                             .font(.system(.body, design: .rounded)).bold()
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
                             .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                        
+                        //Tugasnya
+                        Text("\(project3.tasks.count)")
+                        ForEach (project3.tasks, id: \.self){ task in
+                            Text("Hellow") // need to further update dummy - vp
+                                .font(.system(.caption, design: .rounded))
+                        }
                         Text("Sapu halaman depan") // need to further update dummy - vp
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
