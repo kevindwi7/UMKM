@@ -59,28 +59,43 @@ struct TaskView: View {
             ZStack {
                 Color.primaryGray.ignoresSafeArea()
                 VStack {
-                    Spacer().frame(height:15)
-                    ScrollView {
-                        VStack{
-                            Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(size: 12, weight: .medium, design: .default))
+//                    Spacer().frame(height:15)
+                    Form {
+//                        VStack{
+//                            Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(.subheadline, design: .rounded))
+//                                .foregroundColor(.black)
+//                                .accessibilityLabel("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu")
                             ForEach(0...totalTask-1, id: \.self) { task in
-                                TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(CustomTextFieldStyle())
-                                    .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
+                                TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(.plain)
+//                                    .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
+                                    .foregroundColor(.black)
                             }
-                            Button {
-                                self.totalTask+=1
-                                tasks.append("")
-                            } label: {
-                                Text("Tambah Tugas").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.2,height: 30)
-                                    .background(.blue)
-                                    .cornerRadius(12)
-                                    .padding()
-                            }
-                            Spacer()
-                        }.navigationTitle("Atur Tugas")
+                        
+                        Button(action: {
+                            self.totalTask+=1
+                            tasks.append("")
+                        }){
+                                    HStack(spacing: 6){
+                                        Image(systemName:"plus.circle.fill")
+                                            .font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
+                                                .accessibilityHidden(true)
+                                        Text("Tambah Tugas")
+                                            .font(.system(.footnote, design: .rounded))
+                                            .scaledFont(name: "", size: 14)
+                                            .minimumScaleFactor(0.01)
+                                            .lineLimit(1)
+                                            .foregroundColor(.black)
+                                    }
+
+                        }.accessibilityLabel("Tombol Tambah Tugas")
+
+//                            Spacer()
+//                        }
                         //
-                        Spacer()
-                    }.frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
+        
+                    }
+                    .navigationTitle("Atur Tugas")
+//                    .frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
                     Button {
                         //handle save project
                         //                        self.isLoading = true
@@ -103,7 +118,7 @@ struct TaskView: View {
                     
                 }
             }
-        }
+        }.frame(width: UIScreen.main.bounds.width/0.95)
     }
 }
 

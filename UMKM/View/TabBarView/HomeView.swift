@@ -39,8 +39,10 @@ struct HomeView: View {
                             
                             //                            }
                             
-                        }.padding(.vertical, 6)
-                    }.padding()
+                        }
+                        .padding(.vertical, 6)
+                    }
+                    .padding()
                     
                 }
                 //            .frame(width: UIScreen.main.bounds.width)

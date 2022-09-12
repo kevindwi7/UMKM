@@ -15,6 +15,7 @@
 		9C52AE9028C6E4020057AC72 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */; };
 		9C52AE9228C77AB10057AC72 /* AnggotaSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */; };
 		9C52AE9728C8328D0057AC72 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE9628C8328D0057AC72 /* OnboardingView.swift */; };
+		9C8F6A9E28CCEE7C00068797 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */; };
 		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
 		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
 		9CB9DA7428B86F1B00A57A10 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9DA7328B86F1B00A57A10 /* TaskView.swift */; };
@@ -59,6 +60,7 @@
 		9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnggotaSheetView.swift; sourceTree = "<group>"; };
 		9C52AE9628C8328D0057AC72 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		9CB9DA7328B86F1B00A57A10 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,8 @@
 				146F744628BDC73600740D8C /* HapticModel.swift */,
 				9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */,
 				C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */,
+				C9B643D128C9865700F7763C /* UserProfileViewModel.swift */,
+				9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -352,6 +356,7 @@
 				C967B89A28BC5E5E00B59CE2 /* DetailProjectCard3View.swift in Sources */,
 				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
 				146F744728BDC73600740D8C /* HapticModel.swift in Sources */,
+				9C8F6A9E28CCEE7C00068797 /* NotificationViewModel.swift in Sources */,
 				C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */,
 				D847ECEE28CAF7EF00D3BBC9 /* EmptyListView.swift in Sources */,
 				C967B8A028BDAD0200B59CE2 /* Task.swift in Sources */,

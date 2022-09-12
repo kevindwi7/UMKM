@@ -19,7 +19,7 @@ struct OnboardingView: View {
     @Binding var updateUser: UserViewModel
     
     var placeholder = "Divisi"
-    @State var dropDownList = ["Humas", "Sekertariat"]
+    @State var dropDownList = ["Humas", "Sekertariat", "Sosmed", "Lainnya"]
     
     @Binding var isActive:Bool
     

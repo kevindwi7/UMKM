@@ -12,7 +12,8 @@ struct AnggotaSheetView: View {
     @StateObject var vm:HomeViewModel
     @Binding var projects: ProjectViewModel
     @Environment(\.dismiss) var dismiss
-    @State var test:Int = 0
+    @State var test:Int = 5
+    @State var status = ""
     
     init(vm: HomeViewModel, tasks: Binding<TaskViewModel>, projects: Binding<ProjectViewModel>) {
         _vm = StateObject(wrappedValue: vm)
