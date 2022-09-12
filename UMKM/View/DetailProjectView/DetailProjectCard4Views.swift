@@ -28,7 +28,7 @@ struct DetailProjectCard4Views: View {
     var body: some View {
         Spacer()
         Button(action: {
-//            self.isActive = !self.isActive
+            //            self.isActive = !self.isActive
             withAnimation(.easeInOut){self.isActive = !self.isActive}
         }){
             VStack(alignment:.leading,spacing: 15){
@@ -73,47 +73,63 @@ struct DetailProjectCard4Views: View {
             
             
         }
-//   Form{
-//       Section{
+        //   Form{
+        //       Section{
         ForEach (project3.participantList, id: \.self){ item in
-//            VStack(alignment:.leading, spacing: 15){
-                HStack(alignment:.top, spacing: 15){
-                    Image(systemName: "person.crop.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40.8, height: 40.8)
+            //            VStack(alignment:.leading, spacing: 15){
+            HStack(alignment:.top, spacing: 15){
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40.8, height: 40.8)
+                    .foregroundColor(.black)
+                    .accessibilityLabel("foto Tania") // need to further update dummy - vp
+                VStack(alignment:.leading){
+                    Text("Nama") // need to further update dummy - vp
+                        .font(.system(.body, design: .rounded)).bold()
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
                         .foregroundColor(.black)
-                        .accessibilityLabel("foto Tania") // need to further update dummy - vp
-                    VStack(alignment:.leading){
-                        Text("Nama") // need to further update dummy - vp
-                            .font(.system(.body, design: .rounded)).bold()
-                            .minimumScaleFactor(0.01)
-                            .lineLimit(1)
-                            .foregroundColor(.black)
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
-                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
-                        Text("Sapu halaman depan") // need to further update dummy - vp
-                            .font(.system(.caption, design: .rounded))
-                            .scaledFont(name: "", size: 12)
-                            .minimumScaleFactor(0.01)
-                            .lineLimit(1)
-                            .foregroundColor(.black)
-                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
-                        Text("Atur Keuangan (Bendahara)") // need to further update dummy - vp
-                            .font(.system(.caption, design: .rounded))
-                            .scaledFont(name: "", size: 12)
-                            .minimumScaleFactor(0.01)
-                            .lineLimit(1)
-                            .foregroundColor(.black)
-                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
-                    }
-                }.padding()
-                    .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
-                    .background(.white)
-                    .cornerRadius(16)
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
+                        .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                    Text("Sapu halaman depan") // need to further update dummy - vp
+                        .font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 12)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                        .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                    Text("Atur Keuangan (Bendahara)") // need to further update dummy - vp
+                        .font(.system(.caption, design: .rounded))
+                        .scaledFont(name: "", size: 12)
+                        .minimumScaleFactor(0.01)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                        .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                }
+            }.padding()
+                .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
+                .background(.white)
+                .cornerRadius(16)
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: self.isActive ? 0 : .none)
             .clipped()
-//                        .animation(.easeOut)
-//                        .transition(.slide)
+        //                        .animation(.easeOut)
+        //                        .transition(.slide)
+        Button {
+            //Selesaikan project
+            //            self.isLoading = true
+            //            vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID){
+            self.isActive.toggle()
         }
+    label: {
+        Text("Selesaikan Proyek").foregroundColor(.white)
+            .font(.system(.caption, design: .rounded)).bold()
+            .frame(width: UIScreen.main.bounds.width/1.1,height: 38)
+            .background(.blue)
+            .cornerRadius(12)
+            .padding()
     }
+    }
+    
+}
+

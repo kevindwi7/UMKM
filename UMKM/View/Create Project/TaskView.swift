@@ -87,14 +87,6 @@ struct TaskView: View {
                         vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID){
                             self.isActive.toggle()
                         }
-                        
-                        
-                        
-//                        for task in tasks {
-//                            vm.createTask(projectId: projectID, taskName: task, user: "")
-//
-//
-//                        }
                     }
                 label: {
                     Text("Selesai").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.1,height: 38)
