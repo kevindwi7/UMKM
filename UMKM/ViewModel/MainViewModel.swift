@@ -25,7 +25,6 @@ final class MainViewModel: ObservableObject{
     
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
-    @Published var userFirstTimes: [UserFirstTimeOnboardingViewModel] = []
 //    @Published var usersProfile: [UserProfileViewModel] = []
     
     @Published var isSignedInToiCloud: Bool = false
@@ -195,73 +194,6 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func createUserFirstTime(userID: String,isFirstTime: Bool)   {
-        
-        let record = CKRecord(recordType: RecordType.userFirstTimeOnboarding.rawValue)
-        let userFirstTime = UserFirstTimeOnboarding(userID: userID, isFirstTime: isFirstTime)
-        
-        record.setValuesForKeys(userFirstTime.toDictionary())
-        
-        // saving record in database
-        self.database.save(record) { returnedRecord, returnedError in
-            if let returnedError = returnedError {
-                print("Error: \(returnedError)")
-            } else {
-                if let returnedRecord = returnedRecord {
-                    if let userFirstTimess = UserFirstTimeOnboarding.fromRecord(returnedRecord) {
-                        DispatchQueue.main.async {
-                            self.userFirstTimes.append(UserFirstTimeOnboardingViewModel(userFirstTime: userFirstTimess))
-                            self.objectWillChange.send()
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func fetchUserFirstTime(){
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: RecordType.userFirstTimeOnboarding.rawValue, predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        var returnedUserFirstTimes: [UserFirstTimeOnboarding] = []
-        
-        self.database.fetch(withQuery: query) { result in
-            switch result {
-            case .success(let result):
-
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            
-                            if let userFirstTime = UserFirstTimeOnboarding.fromRecord(record) {
-
-                                    returnedUserFirstTimes.append(userFirstTime)
-                                
-                        
-                            }
-//                            print(returnedRooms)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    }
-                
-                DispatchQueue.main.async {
-                    self.userFirstTimes = returnedUserFirstTimes.map(UserFirstTimeOnboardingViewModel.init)
-//                    defer {
-//                        self.objectWillChange.send()
-//                    }
-                    self.objectWillChange.send()
-//                    print("\(self.rooms)")
-                }
-
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
     
     func fetchTask(project: ProjectViewModel){
         let predicate = NSPredicate(value: true)
