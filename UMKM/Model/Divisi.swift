@@ -15,4 +15,6 @@ struct Divisi: Hashable, Identifiable {
 let divisis = [
     Divisi(name: "Humas"),
     Divisi(name: "Sekertariat"),
+    Divisi(name: "Sosmed"),
+    Divisi(name: "Lainnya"),
 ]
