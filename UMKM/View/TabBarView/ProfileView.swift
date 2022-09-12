@@ -9,12 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-//    @StateObject var vm:HomeViewModel
-//    
-//    init(vm: HomeViewModel) {
-//        _vm = StateObject(wrappedValue: vm)
-//    }
-    
+    @State var viewModel = notificationViewModel()
     var body: some View {
         ZStack{
             Color(UIColor.systemGray6).ignoresSafeArea()
@@ -113,14 +108,20 @@ struct ProfileView: View {
                     .foregroundColor(.white))
                 
                 .accessibilityLabel("")
+        Button {
+            viewModel.requestNotificationPermission(){message in
+                viewModel.subscribeToNotifications()
             }
                 
             
+        } label: {
+            Text("Get Notification")
         }
 //        .onAppear{
 //            vm.fetchAllUser()
 ////            print(123)
 //        }
+
     }
 }
 

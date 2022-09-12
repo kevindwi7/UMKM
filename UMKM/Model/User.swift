@@ -14,7 +14,7 @@ struct UsersData{
     let email: String
     var lastName: String
     let iCloudID: String
-  
+
     
     init(id: CKRecord.ID? = nil, firstName: String ,email: String, lastName: String, iCloudID:String){
         self.id = id
@@ -22,7 +22,7 @@ struct UsersData{
         self.email = email
         self.lastName = lastName
         self.iCloudID = iCloudID
-      
+    
     }
     
     func toDictionary() -> [String: Any]{
@@ -36,7 +36,6 @@ struct UsersData{
             let email = record.value(forKey: "email") as? String,
             let lastName = record.value(forKey: "lastName") as? String,
             let iCloudID = record.value(forKey: "iCloudID") as? String
-        
                 
         else {
             return nil

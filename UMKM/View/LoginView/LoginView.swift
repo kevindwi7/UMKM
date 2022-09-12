@@ -17,11 +17,11 @@ struct LoginView: View {
     @State var selectedBookId: Int64 = 0
     @State var action: Int? = 0
     
-   
-//    let customFont = UIFont(name: "SF Compact Rounded", size: UIFont.labelFontSize)!
+    
+    //    let customFont = UIFont(name: "SF Compact Rounded", size: UIFont.labelFontSize)!
     
     var body: some View {
-
+        
         VStack{
             Spacer()
             let userID = UserDefaults.standard.object(forKey: "userID") as? String
@@ -30,20 +30,20 @@ struct LoginView: View {
                 VStack(spacing:80){
                     
                     Text("Atur proyek dan aktivitas\nanggota komunitas kamu dengan \(Text("Inty").foregroundColor(Color.blue))")
-                            .font(.system(.title3, design: .rounded).bold())
-                            .minimumScaleFactor(0.01)
-                            .multilineTextAlignment(.leading)
-                            .scaledFont(name: "", size: 24)
-                            .lineLimit(4)
+                        .font(.system(.title3, design: .rounded).bold())
+                        .minimumScaleFactor(0.01)
+                        .multilineTextAlignment(.leading)
+                        .scaledFont(name: "", size: 24)
+                        .lineLimit(4)
                     
                     Image("peeps")
                         .resizable()
                         .scaledToFit()
                         .frame(height:150)
                         .accessibilityHidden(true)
-                
+                    
                     Text("Aplikasi ini bantu atur jadwal project komunitasmu, dimanapun dan kapanpun")
-                            .font(.system(.footnote, design: .rounded))
+                            .font(.system(.caption2, design: .rounded))
                             .minimumScaleFactor(0.01)
                             .multilineTextAlignment(.leading)
                             .scaledFont(name: "", size: 14)
@@ -76,7 +76,7 @@ struct LoginView: View {
                                    let email = appleIDCredential.email{
                                     // For New user to signup, and
                                     // save the 3 records to CloudKit
-                                    let record = CKRecord(recordType: "UsersData", recordID: CKRecord.ID(recordName: userID))
+                                    let record = CKRecord(recordType: "usersData", recordID: CKRecord.ID(recordName: userID))
                                     record["email"] = email
                                     record["firstName"] = firstName
                                     record["lastName"] = lastName
@@ -124,11 +124,12 @@ struct LoginView: View {
                 .frame(width:280,height:50)         // Set Button Size (Read iOS 14 beta 7 release note)
                 Spacer()
             }else{
-                TabBarView()
+               TabBarView()
+                
                 
             }
             
-           Spacer()
+            Spacer()
             
             
         }
