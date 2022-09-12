@@ -45,6 +45,8 @@ struct CreateProjectView: View {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
+    let userID = UserDefaults.standard.object(forKey: "userID") as? String
+    
     var body: some View {
         
         NavigationView {
@@ -204,6 +206,7 @@ struct CreateProjectView: View {
                                 divisi2 = divisi.rawValue
                                 print(divisi2)
                                 projectID = randomString(length: 10)
+//                             
                                 self.action = 1
                             } label: {
                                 HStack{

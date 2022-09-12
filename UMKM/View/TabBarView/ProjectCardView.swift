@@ -13,7 +13,7 @@ struct ProjectCardView: View {
     @StateObject var mvm: MainViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
-    //    @State var task: TaskViewModel
+    @Binding var task: [TaskViewModel]
     @State var isListRoomView = false
     
     var dateFormatter: DateFormatter {
@@ -98,7 +98,7 @@ struct ProjectCardView: View {
                                 .foregroundColor(.white)
                                 .font(.caption)
                             Spacer().frame(width:20)
-                            Text("6/10") //need to update - backend for task - vp
+                            Text(" 1/\(self.task.count) ") //need to update - backend for task - vp
                                 .font(.system(.caption, design: .rounded).bold())
                                 .foregroundColor(.white)
                         }
