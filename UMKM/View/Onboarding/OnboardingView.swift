@@ -26,73 +26,59 @@ struct OnboardingView: View {
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
     
     var body: some View {
-        LoadingView(isShowing: $vm.isLoadingUserProfile){
-            VStack(spacing:10) {
+        VStack(spacing:10) {
+            Group{
                 HStack {
                     Text("Halo")
                     Text("\(firstName!) \(lastName!)").foregroundColor(.yellow)
                 }.font(.system(size: 34, weight: .bold, design: .default))
                 Text("Cerita dikit yuk!").font(.system(size: 34, weight: .regular, design: .default))
                 //            Spacer()
-                HStack{
-                    Image(systemName: "house").foregroundColor(.blue)
-                    TextField("Komunitas", text: $komunitas)
-                }
-                Divider()
-                HStack{
-                    Image(systemName: "person.2").foregroundColor(.blue)
-                    Menu {
-                        ForEach(dropDownList, id: \.self){ divisi in
-                            Button(divisi) {
-                                self.divisi = divisi
-                            }
+            }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Halo \(firstName!) \(lastName!), Cerita dikit yuk!")
+            HStack{
+                Image(systemName: "house").foregroundColor(.blue)
+                    .accessibilityHidden(true)
+                TextField("Komunitas", text: $komunitas)
+            }.accessibilityElement(children: .combine)
+                .accessibilityLabel("Tulis nama komunitasmu")
+            Divider()
+            HStack{
+                Image(systemName: "person.2").foregroundColor(.blue)
+                    .accessibilityHidden(true)
+                Menu {
+                    ForEach(dropDownList, id: \.self){ divisi in
+                        Button(divisi) {
+                            self.divisi = divisi
                         }
-                    } label: {
-                        VStack(spacing: 5){
-                            HStack{
-                                Text(divisi.isEmpty ? placeholder : divisi)
-                                    .foregroundColor(.black)
-                                //                                .foregroundColor(divisi.isEmpty ? .gray : .black)
-                                    .opacity(divisi.isEmpty ? 0.3 : 1)
-                                Spacer()
-                            }
+                    }
+                } label: {
+                    VStack(spacing: 5){
+                        HStack{
+                            Text(divisi.isEmpty ? placeholder : divisi)
+                                .foregroundColor(.black)
+                            //                                .foregroundColor(divisi.isEmpty ? .gray : .black)
+                                .opacity(divisi.isEmpty ? 0.3 : 1)
+                            Spacer()
                         }
                     }
                 }
-                
-                Divider()
-                HStack(alignment:.top){
-                    Image(systemName: "person.fill.questionmark").foregroundColor(.blue).padding(.vertical,3)
-                    Spacer()
-                    VStack(alignment:.leading) {
-                        Text("Tentang Kamu").font(.system(size: 18, weight: .regular, design: .rounded)).opacity(0.3)
-                        Text("Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting").font(.system(size: 14, weight: .regular, design: .rounded)).opacity(0.3)
-                        ZStack {
-                            TextEditor(text: $pengalaman)
-                            Text(pengalaman).opacity(0).padding(8)
-                        }
-                    }
-                }
-                Divider()
+            }
+            
+            Divider()
+            HStack(alignment:.top){
+                Image(systemName: "person.fill.questionmark").foregroundColor(.blue).padding(.vertical,10)
+                    .accessibilityHidden(true)
                 Spacer()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    //                        if(project.hostId == userID) {
-                    Button(action: {
-                        hm.updateUserOnboarding(users: updateUser, komunitas: komunitas,divisi: divisi,pengalaman: pengalaman)
-//                        hm.updateUserOnboarding(users: updateUser, komunitas: komunitas, divisi: divisi, pengalaman: pengalaman, isFirstTime: false)
-                        
-//                        vm.createUserFirstTime(userID: userID!, isFirstTime: false)
-                    }){
-                        Text("Simpan").foregroundColor(.white)
-                    }
-                    //                            .accessibilityLabel("Hapus \(project.projectName)")
-                    //                        }
-                }
-            }
-            .padding()
+                AutoSizingTF(hint: "Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting", text: $pengalaman, containerHeight: $containerHeight)
+                    .frame(height: containerHeight <= 300 ? containerHeight : 300).background(.white).cornerRadius(10)
+//                    .padding()
+            }.accessibilityElement(children: .combine)
+                .accessibilityLabel("Ceritakan pengalaman atau keahlian kamu, sampaikan juga hal-hal yang menurut kamu menarik atau penting")
+            Divider()
+            Spacer()
+        }.padding()
             .interactiveDismissDisabled(true)
         }
     

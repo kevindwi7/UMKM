@@ -45,6 +45,9 @@
 		C9DDF5DC28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */; };
 		C9DDF5E228CE52A6007B3BF1 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF5E128CE52A6007B3BF1 /* Test.swift */; };
 		C9FCAD7A28C8303F004A0FD9 /* Divisi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FCAD7928C8303F004A0FD9 /* Divisi.swift */; };
+		D847ECEE28CAF7EF00D3BBC9 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847ECED28CAF7EF00D3BBC9 /* EmptyListView.swift */; };
+		D847ECF028CAF83B00D3BBC9 /* EmptyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847ECEF28CAF83B00D3BBC9 /* EmptyHomeView.swift */; };
+		D847ECF228CAF92C00D3BBC9 /* EmptyTugasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847ECF128CAF92C00D3BBC9 /* EmptyTugasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +92,9 @@
 		C9DDF5E128CE52A6007B3BF1 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		C9FCAD7828C6FC00004A0FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C9FCAD7928C8303F004A0FD9 /* Divisi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisi.swift; sourceTree = "<group>"; };
+		D847ECED28CAF7EF00D3BBC9 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		D847ECEF28CAF83B00D3BBC9 /* EmptyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHomeView.swift; sourceTree = "<group>"; };
+		D847ECF128CAF92C00D3BBC9 /* EmptyTugasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTugasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,7 @@
 			children = (
 				C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */,
 				9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */,
+				D847ECED28CAF7EF00D3BBC9 /* EmptyListView.swift */,
 			);
 			path = DetailTask;
 			sourceTree = "<group>";
@@ -258,6 +265,8 @@
 				C9820E7328B5F2A00043724D /* TabBarView.swift */,
 				C9820E7528B5F37E0043724D /* TugaskuView.swift */,
 				C9DDF5E128CE52A6007B3BF1 /* Test.swift */,
+				D847ECEF28CAF83B00D3BBC9 /* EmptyHomeView.swift */,
+				D847ECF128CAF92C00D3BBC9 /* EmptyTugasView.swift */,
 			);
 			path = TabBarView;
 			sourceTree = "<group>";
@@ -337,11 +346,14 @@
 				9C52AE9728C8328D0057AC72 /* OnboardingView.swift in Sources */,
 				9C52AE8E28C6DCBD0057AC72 /* User.swift in Sources */,
 				9C281B9B28B7050800B437AC /* HomeViewModel.swift in Sources */,
+				D847ECF028CAF83B00D3BBC9 /* EmptyHomeView.swift in Sources */,
 				9C52AE9228C77AB10057AC72 /* AnggotaSheetView.swift in Sources */,
+				D847ECF228CAF92C00D3BBC9 /* EmptyTugasView.swift in Sources */,
 				C967B89A28BC5E5E00B59CE2 /* DetailProjectCard3View.swift in Sources */,
 				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
 				146F744728BDC73600740D8C /* HapticModel.swift in Sources */,
 				C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */,
+				D847ECEE28CAF7EF00D3BBC9 /* EmptyListView.swift in Sources */,
 				C967B8A028BDAD0200B59CE2 /* Task.swift in Sources */,
 				C9AE662628B5D8A6000C0133 /* MainViewModel.swift in Sources */,
 				C9AE662128B5D3D3000C0133 /* LoginView.swift in Sources */,
