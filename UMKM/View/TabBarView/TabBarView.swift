@@ -17,15 +17,15 @@ struct TabBarView: View {
         TabView{
             HomeView(vm: HomeViewModel(container: CKContainer.default()))
                 .tabItem{
-                    Label("Explore", systemImage: "person.3")
+                    Label("Explore", systemImage: "person.3.fill")
                 }
             TugaskuView(vm: HomeViewModel(container: CKContainer.default()))
                 .tabItem{
-                    Label("Tugasku", systemImage: "person.3")
+                    Label("Tugasku", systemImage: "list.bullet")
                 }
             ProfileView()
                 .tabItem{
-                    Label("Profile", systemImage: "person")
+                    Label("Profile", systemImage: "person.fill")
                     
                 }
         }

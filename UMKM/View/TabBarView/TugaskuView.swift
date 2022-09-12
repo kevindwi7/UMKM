@@ -16,10 +16,7 @@ struct TugaskuView: View {
     }
     var body: some View {
         VStack {
-            Text("Test")
-            ForEach($vm.users, id: \.id) { $test in
-                Text(test.email)
-            }
+            Image(systemName: "person.fill.checkmark").opacity(0.5)
         }.onAppear{
             vm.fetchAllUser()
 //            print(123)
