@@ -34,6 +34,8 @@ final class MainViewModel: ObservableObject{
     @Published var isLoading: Bool = false
     @Published var isLoadingUserProfile: Bool = false
     @Published var currentUser:UsersData?
+    @Published var user:UserViewModel = UserViewModel(user: UsersData(firstName: "", email: "", lastName: "", iCloudID: "", komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
+//    @Published var user:UserViewModel?
     
     let objectWillChange = PassthroughSubject<(), Never>()
     
@@ -130,10 +132,10 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func createTask(projectId: String,taskName: String, user: String)   {
+    func createTask(projectId: String,taskName: String, user: String, isFinish:Bool)   {
         
         let record = CKRecord(recordType: RecordType.task.rawValue)
-        let task = Task(projectId: projectId, taskName: taskName, user: user)
+        let task = Task(projectId: projectId, taskName: taskName, user: user, isFinish: isFinish)
         
         record.setValuesForKeys(task.toDictionary())
         
@@ -149,6 +151,42 @@ final class MainViewModel: ObservableObject{
                             self.objectWillChange.send()
                             
                         }
+                    }
+                }
+            }
+        }
+    }
+    
+    func finishTask(task: TaskViewModel, completionHandler:  @escaping () -> Void){
+        self.isLoading = true
+        let recordId = task.id
+        let projectId = task.projectId
+        let taskName = task.taskName
+        let user = task.user
+   
+        let isFinish = true
+        
+        database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let error = error {
+                    print(error)
+                }
+                guard let record = returnedRecord else { return }
+                
+                record["isFinish"] = isFinish as CKRecordValue
+                self.database.save(record) { record, error in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                        }
+                        guard let record = returnedRecord else { return }
+                        let id = record.recordID
+                        guard let finishStatus = record["isFinish"] as? Bool else { return }
+                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user, isFinish: finishStatus))
+
+//                        print(element)
+                        self.isLoading = false
+                        completionHandler()
                     }
                 }
             }

@@ -89,7 +89,7 @@ struct TaskView: View {
                         }
                         
                         for task in tasks {
-                            vm.createTask(projectId: projectID, taskName: task, user: "")
+                            vm.createTask(projectId: projectID, taskName: task, user: "", isFinish: false)
                             
                             
                         }

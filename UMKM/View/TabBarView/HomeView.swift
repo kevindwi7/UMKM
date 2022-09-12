@@ -44,9 +44,9 @@ struct HomeView: View {
                     
                 }
                 //            .frame(width: UIScreen.main.bounds.width)
-//                
+                //
 //                .navigationBarTitle(Text("Proyek").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
-//                                .uiFontMenuTitle(.title)
+                //                                .uiFontMenuTitle(.title)
                 
                 //                .background(NavigationConfigurator { nc in
                 //                                nc.navigationBar.barTintColor = .systemCyan
@@ -65,8 +65,10 @@ struct HomeView: View {
                 }
                 .onAppear {
                     //                vm.fetchUserID()
+//                    mvm.user
                     vm.fetchProject()
                     vm.fetchAllUser()
+                    
                     
                     //                    mvm.fetchUserProfile()
                     //                    mvm.fetchUserID()
@@ -82,25 +84,25 @@ struct HomeView: View {
                 //                )
             }
             .sheet(isPresented: $isFirstTime ){
-//                if (isFirstTime == true){
                 ForEach($vm.users, id: \.id){ $userss in
-                    NavigationView{
-                            OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: self.$isFirstTime)
+                    if (userss.id?.recordName ?? "" == usersID){
+//                        print(userss.id)
+                        OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
                         Text(userss.firstName)
-                        
                     }
-                   
                 }
-        
-//                    isFirstTimeActive = true
-//                }
-              
-                
-                
             }
+            //
+            //
+            //
+            //
             
             
-        }.navigationViewStyle(.stack)
+            .navigationTitle("Proyek")
+            .navigationBarTitleDisplayMode(.inline)
+        }.ignoresSafeArea()
+        
+        .navigationViewStyle(.stack)
             .onAppear {
                 let appearance = UINavigationBarAppearance()
                 appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)

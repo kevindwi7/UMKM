@@ -56,7 +56,8 @@ struct TugaskuView: View {
                                 .padding(.top, 16)
                         }
                     }
-                }  .navigationBarTitle(Text("Tugasku").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
+                }
+//                .navigationBarTitle(Text("Tugasku").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
             }
             
         }.navigationViewStyle(.stack)

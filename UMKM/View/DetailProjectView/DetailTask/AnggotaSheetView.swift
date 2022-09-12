@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct AnggotaSheetView: View {
-    @Binding var tasks: [TaskViewModel]
+    @Binding var tasks: TaskViewModel
     @StateObject var vm:HomeViewModel
     @Binding var projects: ProjectViewModel
     @Environment(\.dismiss) var dismiss
     @State var test:Int = 0
     
-    init(vm: HomeViewModel, tasks: Binding<[TaskViewModel]>, projects: Binding<ProjectViewModel>) {
+    init(vm: HomeViewModel, tasks: Binding<TaskViewModel>, projects: Binding<ProjectViewModel>) {
         _vm = StateObject(wrappedValue: vm)
         self._tasks = tasks
         self._projects = projects
+        
     }
     
     var body: some View {
@@ -26,20 +27,20 @@ struct AnggotaSheetView: View {
                 Color(UIColor.systemGray6)
                 ScrollView{
                     VStack(alignment:.leading) {
-                        HStack{
+                     
                             Text("Pilih anggota untuk tugas")
                                 .font(.system(size: 14, weight: .regular, design: .default))
                                 .padding(.horizontal, 24)
-                            Spacer()
-                        }
+                                .padding(.horizontal)
+                        
                       
                         VStack{
-                            HStack{
-                                ForEach($tasks, id: \.self){ $taskss in
-                                    Text(taskss.taskName).font(.system(size: 14, weight: .regular, design: .default))
+                           
+//                                ForEach($tasks, id: \.self){ $taskss in
+                            Text(tasks.taskName).font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
                                        
                                     Spacer()
-                            }
+//                            }
                             
                                 
                                 ForEach(projects.participantList, id: \.self) { _ in
@@ -49,6 +50,7 @@ struct AnggotaSheetView: View {
                                             Spacer()
                                             Button(action: {
                                                 print("accept")
+                                                print(tasks)
                                             }, label: {
                                                 Image(systemName: "person.fill.checkmark").opacity(0.5)
                                             })
@@ -71,7 +73,7 @@ struct AnggotaSheetView: View {
                                 .cornerRadius(10)
                                 .padding()
                                 //                    .listStyle(.plain)
-                            }
+                            
                         }
                         
                         

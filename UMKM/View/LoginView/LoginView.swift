@@ -94,7 +94,11 @@ struct LoginView: View {
                                     publicDatabase.save(record) { (_, _) in
                                         UserDefaults.standard.set(record.recordID.recordName, forKey: "userID")
                                     }
+                                    print(000)
+                                    print("Berhasil Login")
                                     // Change login state
+//                                    vm.user = UserViewModel(user: UsersData(firstName: firstName , email: email , lastName: lastName , iCloudID: vm.userID , komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
+//                                    print(vm.user)
                                     self.login = true
                                 } else {
                                     // For returning user to signin,
@@ -113,6 +117,8 @@ struct LoginView: View {
                                             UserDefaults.standard.set(lastName, forKey: "lastName")
                                             UserDefaults.standard.set(isFirstTime, forKey: "isFirstTime")
                                             // Change login state
+//                                            vm.user = UserViewModel(user: UsersData(firstName: firstName ?? "", email: email ?? "", lastName: lastName ?? "", iCloudID: vm.userID , komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
+//                                            print(vm.user)
                                             self.login = true
                                         }
                                     }

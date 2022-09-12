@@ -15,9 +15,10 @@ struct DetailProjectTaskCard: View {
     @Binding var task: [TaskViewModel]
     @State var isLoading = false
     @State var showingSheet = false
-    
+    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true))
     @State var tasks: String = ""
     @State var isPM = true
+
     
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
@@ -38,6 +39,8 @@ struct DetailProjectTaskCard: View {
                                 
                                 Button {
                                     print(task.taskName)
+                                    print(task)
+                                    tasks2 = task
                                     //handle assign to me
                                     //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
                                     //                                    task = "Kevin Dwi"
@@ -64,14 +67,16 @@ struct DetailProjectTaskCard: View {
                                 .background(tasks.isEmpty ? .blue : .gray)
                                 .cornerRadius(8)
                                 .disabled(!tasks.isEmpty)
-                                .sheet(isPresented: $showingSheet) {
-                                    AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$task, projects: $project)
-                                }
+                                
                                 
                                 
                             }
                         }
                     
+                    }
+                    .sheet(isPresented: $showingSheet) {
+//                                    print($task)
+                        AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$tasks2, projects: $project)
                     }
                     .padding()
                     .navigationTitle("Detail Tugas")
@@ -84,11 +89,11 @@ struct DetailProjectTaskCard: View {
                     
                     
                 }
-                //                .onAppear{
-                //                    vm.fetchTask()
-                //                }   .onReceive(vm.objectWillChange) { _ in
-                //                    vm.fetchTask()
-                //                }
+//                                .onAppear{
+//                                    vm.fetchTask()
+//                                }   .onReceive(vm.objectWillChange) { _ in
+//                                    vm.fetchTask()
+//                                }
             }
         }
         
