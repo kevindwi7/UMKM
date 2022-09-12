@@ -33,8 +33,8 @@ struct DetailProjectView: View {
                     
                     DetailProjectCard3View(hm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), project3: $project, task: $mvm.tasks)
                     //                        DetailProjectCard3View( project3: $project )
-                    
-                    DetailProjectCard4Views( project3: $project)
+                    DetailProjectCard4Views(vm: MainViewModel(container: CKContainer.default()), project3: $project)
+              
                     
                     
                     

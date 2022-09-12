@@ -24,8 +24,9 @@ struct Project{
     var endDate: Date
     var projectID: String
     var participantListName: [String]
+    var divisi: String
     
-    init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String,  startTime: Date, endTime: Date, participantList: [String], hostId: String, isFinish: Bool, startDate: Date, endDate: Date, projectID: String, participantListName: [String]){
+    init(id: CKRecord.ID? = nil, projectHost: String,projectName: String, goal: String, description: String, location: String,  startTime: Date, endTime: Date, participantList: [String], hostId: String, isFinish: Bool, startDate: Date, endDate: Date, projectID: String, participantListName: [String], divisi: String){
         self.id = id
         self.projectHost = projectHost
         self.projectName = projectName
@@ -41,10 +42,11 @@ struct Project{
         self.endDate = endDate
         self.projectID = projectID
         self.participantListName = participantListName
+        self.divisi = divisi
     }
     
     func toDictionary() -> [String: Any]{
-        return ["projectHost": projectHost, "projectName": projectName, "location": location, "goal": goal,"description": description,"startTime": startTime,"endTime": endTime, "participantList": participantList, "hostId": hostiD, "isFinish": isFinish, "startDate": startDate, "endDate": endDate, "projectID": projectID, "participantListName": participantListName]
+        return ["projectHost": projectHost, "projectName": projectName, "location": location, "goal": goal,"description": description,"startTime": startTime,"endTime": endTime, "participantList": participantList, "hostId": hostiD, "isFinish": isFinish, "startDate": startDate, "endDate": endDate, "projectID": projectID, "participantListName": participantListName, "divisi":divisi]
     }
     
     static func fromRecord(_ record: CKRecord) -> Project? {
@@ -62,12 +64,13 @@ struct Project{
             let startDate = record.value(forKey: "startDate") as? Date,
             let endDate = record.value(forKey: "endDate") as? Date,
             let projectID = record.value(forKey: "projectID") as? String,
-            let participantListName = record.value(forKey: "participantListName") as? [String]
+            let participantListName = record.value(forKey: "participantListName") as? [String],
+            let divisi = record.value(forKey: "divisi") as? String
                 
         else {
             return nil
         }
         
-        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID,participantListName: participantListName)
+        return Project(id: record.recordID, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID,participantListName: participantListName,divisi: divisi)
     }
 }

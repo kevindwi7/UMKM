@@ -92,7 +92,7 @@ struct HomeView: View {
                     if (userss.id?.recordName ?? "" == usersID){
 //                        print(userss.id)
                         OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
-                        Text(userss.firstName)
+                      
                     }
                 }
             }

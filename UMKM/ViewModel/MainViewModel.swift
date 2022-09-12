@@ -99,11 +99,11 @@ final class MainViewModel: ObservableObject{
     }
     
     func createProject(projectHost: String, projectName: String, location: String,  startTime: Date, endTime: Date, participantList: [String],  description: String, goal: String, hostId: String, isFinish: Bool, startDate:Date, endDate: Date , projectID: String
-                       ,participantListName: [String],completionHandler:  @escaping () -> Void
+                       ,participantListName: [String],divisi: String,completionHandler:  @escaping () -> Void
     ){
         self.isLoading = true
         let record = CKRecord(recordType: RecordType.project.rawValue)
-        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,  startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID,participantListName: participantListName)
+        let project = Project(projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location,  startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID,participantListName: participantListName, divisi: divisi)
         
         record.setValuesForKeys(project.toDictionary())
         
@@ -157,12 +157,9 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func finishTask(task: TaskViewModel, completionHandler:  @escaping () -> Void){
+    func finishTask(project: ProjectViewModel){
         self.isLoading = true
-        let recordId = task.id
-        let projectId = task.projectId
-        let taskName = task.taskName
-        let user = task.user
+        let recordId = project.id
    
         let isFinish = true
         
@@ -179,14 +176,19 @@ final class MainViewModel: ObservableObject{
                         if let error = error {
                             print(error)
                         }
+                        let ids = record?["projectId"] as? String
+                        if (project.projectID == ids){
+                            record?["isFinish"] = true
+                            print("Success")
+                        }
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let finishStatus = record["isFinish"] as? Bool else { return }
-                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user, isFinish: finishStatus))
+//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user, isFinish: finishStatus))
 
 //                        print(element)
                         self.isLoading = false
-                        completionHandler()
+                      
                     }
                 }
             }

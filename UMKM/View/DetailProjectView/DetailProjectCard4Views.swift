@@ -9,12 +9,13 @@ import SwiftUI
 import CloudKit
 
 struct DetailProjectCard4Views: View {
-    
+    @StateObject var vm: MainViewModel
     @State var isActive = false
     
     @State var action: Int? = 0
     
     @Binding var project3: ProjectViewModel
+//    @Binding var task: TaskViewModel
     //    @Binding var task: TaskViewModel
     //    @State var action: Int? = 0
     
@@ -111,9 +112,7 @@ struct DetailProjectCard4Views: View {
         //                        .animation(.easeOut)
         //                        .transition(.slide)
         Button {
-            //Selesaikan project
-            //            self.isLoading = true
-            //            vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID){
+            vm.finishTask(project: project3)
             self.isActive.toggle()
         }
     label: {
