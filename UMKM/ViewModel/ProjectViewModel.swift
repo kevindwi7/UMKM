@@ -80,5 +80,9 @@ struct ProjectViewModel: Hashable, Identifiable {
     var participantListName: [String] {
         project.participantListName
     }
+    
+    var divisi: String{
+        project.divisi
+    }
 }
 

@@ -94,6 +94,7 @@ class HomeViewModel:ObservableObject{
         let endDate = project.endDate
         let projectID = project.projectID
         let participantListName = project.participantListName
+        let divisi = project.divisi
         
         if(command == "join") {
             if( !(newParticipant.contains(participantID))){
@@ -132,7 +133,7 @@ class HomeViewModel:ObservableObject{
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName))
+                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName, divisi: divisi))
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
@@ -309,17 +310,11 @@ class HomeViewModel:ObservableObject{
     }
     
     func updateUserOnboarding(users: UserViewModel, komunitas: String,divisi: String, pengalaman: String, isFirstTime: Bool, completionHandler:  @escaping () -> Void){
-        self.isLoading = true
        
         var newKomunitas =  String()
         var newdivisi =  String()
         var newPengalaman =  String()
         var newIsFirstTime =  Bool()
-        
-        
-//        newKomunitas.insert(contentsOf: users.komunitas, at: newKomunitas.startIndex )
-//        newdivisi.insert(contentsOf: users.divisi, at: newPengalaman.startIndex )
-//        newPengalaman.insert(contentsOf: users.pengalaman, at: newPengalaman.startIndex )
         
         newKomunitas = komunitas
         newdivisi = divisi
@@ -330,18 +325,16 @@ class HomeViewModel:ObservableObject{
         let komunitas = users.komunitas
         let divisi = users.divisi
         let pengalaman = users.pengalaman
-//        let isFirstTime = users.isFirstTime
 
-//        newIsFirstTime.description.insert(users.isFirstTime, at: newIsFirstTime.description.startIndex)
-//        newIsFirstTime.insert(contentsOf: users.isFirstTime, at: newIsFirstTime.startIndex )
         if(!(newKomunitas.contains(komunitas)) || !(newdivisi.contains(divisi)) || !(newPengalaman.contains(pengalaman))){
             print(222)
-//            if(komunitas != "" || !(komunitas.isEmpty) || divisi != "" || !(divisi.isEmpty) || pengalaman != "" || !(pengalaman.isEmpty) ){
+            self.isLoading = true
                 newKomunitas.append(komunitas)
                 newdivisi.append(divisi)
                 newIsFirstTime = false
                 newPengalaman.append(pengalaman)
                 print("masukk")
+            
 //            }
         }
         
@@ -371,7 +364,6 @@ class HomeViewModel:ObservableObject{
                         guard let divisi = record["divisi"] as? String else { return }
                         guard let pengalaman = record["pengalaman"] as? String else { return }
                         
-//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user))
                         print("testttt")
                         
                         UserDefaults.standard.set(false, forKey: "isFirstTime")

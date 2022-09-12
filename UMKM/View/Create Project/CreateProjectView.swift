@@ -27,12 +27,12 @@ struct CreateProjectView: View {
     
     
     enum DivisiEnum: String, CaseIterable, Identifiable {
-        case Humas, Sosmed, Seketariat, Lainya
+        case Humas, Sosmed, Seketariat, Lainnya
         var id: Self { self }
     }
     
-    @State private var divisi: DivisiEnum = .Humas
-    
+    @State var divisi: DivisiEnum = .Humas
+    @State var divisi2: String = ""
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -53,7 +53,7 @@ struct CreateProjectView: View {
                 //            ScrollView {
                 VStack(){
                     VStack{
-                        NavigationLink(destination:  TaskView(vm: MainViewModel(container: CKContainer.default()), namaProjectTask: $namaProject, tujuanProjectTask: $tujuanProject, deskripsiProjectTask: $deskripsiProject, startDateTask: $startDate, endDateTask: $endDate, startTimeTask: $startTime, endTimeTask: $endTime, lokasiProjectTask: $lokasiProject, projectID: $projectID, isActive: $isActive), tag: 1, selection: $action){
+                        NavigationLink(destination:  TaskView(vm: MainViewModel(container: CKContainer.default()), namaProjectTask: $namaProject, tujuanProjectTask: $tujuanProject, deskripsiProjectTask: $deskripsiProject, startDateTask: $startDate, endDateTask: $endDate, startTimeTask: $startTime, endTimeTask: $endTime, lokasiProjectTask: $lokasiProject, projectID: $projectID, isActive: $isActive, divisi: $divisi2), tag: 1, selection: $action){
                             EmptyView()
                         }
                         
@@ -95,8 +95,11 @@ struct CreateProjectView: View {
                                 Picker(selection: $divisi, label: Text("Divisi").foregroundColor(.black).font(.system(.subheadline, design: .rounded))) {
                                     ForEach(CreateProjectView.DivisiEnum.allCases) { flavor in
                                         Text(flavor.rawValue.capitalized)
+                                        
                                     }.foregroundColor(.black)
+                                 
                                 }
+                              
                                 
                                 //                            Image(systemName: "chevron.right").foregroundColor(.cyan)
                                 //                                                            .font(.system(.body, design: .rounded).bold())
@@ -198,6 +201,8 @@ struct CreateProjectView: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
+                                divisi2 = divisi.rawValue
+                                print(divisi2)
                                 projectID = randomString(length: 10)
                                 self.action = 1
                             } label: {
