@@ -156,7 +156,7 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func finishProject(project: ProjectViewModel, isFinish:Bool){
+    func finishProject(project: ProjectViewModel,isFinish:Bool){
         self.isLoading = true
         var newIsFinish =  Bool()
         
@@ -260,6 +260,7 @@ final class MainViewModel: ObservableObject{
                                 guard let id = record["userID"] as? String else { return }
                                 if(userID == id){
                                     returnedTasks.append(task)
+                                    print("success")
                                 }
                             }
                         case .failure(let error):
