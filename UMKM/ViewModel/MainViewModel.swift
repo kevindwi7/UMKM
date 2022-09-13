@@ -25,7 +25,7 @@ final class MainViewModel: ObservableObject{
     
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
-//    @Published var usersProfile: [UserProfileViewModel] = []
+    //    @Published var usersProfile: [UserProfileViewModel] = []
     
     @Published var isSignedInToiCloud: Bool = false
     @Published var recentlyCreatedProjectId: String = ""
@@ -180,32 +180,20 @@ final class MainViewModel: ObservableObject{
                             print(error)
                             
                         }
-                       
+                        
                         guard let record = returnedRecord else { return }
-                      
+                        
                         print("testttt")
                         self.isLoading = false
                         self.objectWillChange.send()
-                   
+                        
                         
                     }
-                
-                DispatchQueue.main.async {
-                    self.userFirstTimes = returnedUserFirstTimes.map(UserFirstTimeOnboardingViewModel.init)
-                    //                    defer {
-                    //                        self.objectWillChange.send()
-                    //                    }
-                    self.objectWillChange.send()
-                    //                    print("\(self.rooms)")
                 }
-                
-            case .failure(let error):
-                print(error)
             }
         }
         
     }
-    
     
     func fetchTask(project: ProjectViewModel){
         let predicate = NSPredicate(value: true)
@@ -237,16 +225,17 @@ final class MainViewModel: ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.tasks = returnedTasks.map(TaskViewModel.init)
-//                    defer {
-//                        self.objectWillChange.send()
-//                    }
+                    //                    defer {
+                    //                        self.objectWillChange.send()
+                    //                    }
                     self.objectWillChange.send()
-//                    print("\(self.rooms)")
+                    //                    print("\(self.rooms)")
                 }
-
+                
             case .failure(let error):
                 print(error)
             }
         }
     }
 }
+

@@ -48,8 +48,8 @@ struct TugaskuCardView: View {
     }
 }
 
-struct TugaskuViewCard_Previews: PreviewProvider {
-    static var previews: some View {
-        TugaskuCardView()
-    }
-}
+//struct TugaskuViewCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TugaskuCardView()
+//    }
+//}

@@ -21,7 +21,7 @@ struct TugaskuView: View {
                 ScrollView{
                     VStack(alignment: .leading){
                         ForEach(1...5, id: \.self){_ in
-                            TugaskuCardView()
+//                            TugaskuCardView()
                         }
                     }
                 }
