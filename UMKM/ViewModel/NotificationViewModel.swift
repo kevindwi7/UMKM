@@ -21,6 +21,7 @@ class notificationViewModel:ObservableObject{
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
+                UserDefaults.standard.set(true, forKey: "notification")
                 completion("Success")
                 
             }
