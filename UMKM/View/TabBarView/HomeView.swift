@@ -93,8 +93,9 @@ struct HomeView: View {
                         OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
                             .onDisappear{
                                 nvm.requestNotificationPermission { finish in
-                                    nvm.subscribeToNotifications()
-                                    print("Success")
+                                    nvm.subscribeToNotifications { finish in
+                                        UserDefaults.standard.set(true, forKey: "notification")
+                                    }
                                 }
                             }
                       
