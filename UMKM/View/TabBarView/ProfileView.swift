@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     
 //    @State var viewModel = notificationViewModel()
-    
+    @State var notification = UserDefaults.standard.bool(forKey: "notification")
     @State var isActive = false
     @State private var vibrationOnRing = true
     @StateObject var nvm:notificationViewModel
@@ -243,15 +243,17 @@ struct ProfileView: View {
                 
                 VStack(alignment:.leading,spacing: 15){
                     HStack{
-                       Toggle("Notifikasi", isOn: $vibrationOnRing).font(.system(.headline, design: .rounded))
+                        Toggle("Notifikasi", isOn: $notification).font(.system(.headline, design: .rounded))
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
 //                            .foregroundColor(.black)
                             .accessibilityLabel("Komunitas Mata Hati")
-                            .onChange(of: vibrationOnRing) { newValue in
-                                if(vibrationOnRing == false){
+                            .onChange(of: notification) { newValue in
+                                if(notification == false){
+                                    UserDefaults.standard.set(false, forKey: "notification")
                                     nvm.unsubscribeNotifications()
                                 }else{
+                                    UserDefaults.standard.set(true, forKey: "notification")
                                     nvm.subscribeToNotifications()
                                 }
                             }
