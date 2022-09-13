@@ -73,7 +73,7 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func updateProjectMember(project: ProjectViewModel, participantID: String, command: String){
+    func updateProjectMember(project: ProjectViewModel, participantID: String){
         
         self.isLoading = true
         
@@ -96,21 +96,22 @@ class HomeViewModel:ObservableObject{
         let participantListName = project.participantListName
         let divisi = project.divisi
         
-        if(command == "join") {
             if( !(newParticipant.contains(participantID))){
                 if(participantID != "" || !(participantID.isEmpty) ){
                     newParticipant.append(participantID)
                     print("masukk")
                 }
-            }
-        } else if (command == "leave") {
-            if(newParticipant.contains(participantID)){
-                if let index = newParticipant.firstIndex(of: participantID) {
-                    print("Leave Room : \(newParticipant[index])")
-                    newParticipant.remove(at: index)
-                }
-            }
+            
         }
+//        else if (command == "leave") {
+//            if(newParticipant.contains(participantID)){
+//                if let index = newParticipant.firstIndex(of: participantID) {
+//                    print("Leave Room : \(newParticipant[index])")
+//                    newParticipant.remove(at: index)
+//                }
+//            }
+//        }
+     
         
         newParticipant.removeAll(where: { $0 == "" })
         
@@ -178,12 +179,15 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func updateTaskRegisterUser(task: TaskViewModel, user: String, userID: String){
+    func updateTaskRegisterUser(task: TaskViewModel, user: String, userRegisterID: String, userID: String, command: String){
         self.isLoading = true
         var newRegisterUser =  [String]()
         var newRegisterUserID =  [String]()
+        var newUserID = String()
+        
         newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
-        newRegisterUserID.insert(contentsOf: task.registerUser, at: 0)
+        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
+        newUserID = userID
         
         let recordId = task.id
         let projectId = task.projectId
@@ -191,17 +195,27 @@ class HomeViewModel:ObservableObject{
         let isFinish = task.isFinish
         let userss = task.user
     
-        
-        if(!(newRegisterUser.contains(user)) || !(newRegisterUserID.contains(userID))){
-            if(user != "" || !(user.isEmpty) || (userID != "") || !(userID.isEmpty)){
-                print(222)
+        if (command == "join"){
+            if(!(newRegisterUser.contains(user)) || !(newRegisterUserID.contains(userRegisterID)) ){
+                if(user != "" || !(user.isEmpty) || (userRegisterID != "") || !(userID.isEmpty)){
+                    print(222)
+                    
+                    newRegisterUser.append(user)
+                    newRegisterUserID.append(userRegisterID)
+                    newUserID.append(userID)
+                        print("masukk")
+                }
                 
-                newRegisterUser.append(user)
-                newRegisterUserID.append(userID)
-                    print("masukk")
             }
-            
+        }else if (command == "delete") {
+            if(newRegisterUser.contains(userRegisterID)){
+                if let index = newRegisterUser.firstIndex(of: userRegisterID) {
+                    print("Leave Room : \(newRegisterUser[index])")
+                    newRegisterUser.remove(at: index)
+                }
+            }
         }
+       
         
         newRegisterUser.removeAll(where: { $0 == "" })
         newRegisterUserID.removeAll(where: { $0 == "" })
@@ -217,6 +231,7 @@ class HomeViewModel:ObservableObject{
                 
                 record["registerUser"] = newRegisterUser as CKRecordValue
                 record["registerUserID"] = newRegisterUserID as CKRecordValue
+                record["userID"] = newUserID as CKRecordValue
                 
                 print("dispatch")
                 self.database.save(record) { record, error in
