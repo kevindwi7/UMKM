@@ -103,7 +103,7 @@ struct TaskView: View {
                     Button {
                         //handle save project
                         //                        self.isLoading = true
-                        vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID,participantListName: ["\(firstName ?? "")\(lastName ?? "")"], divisi: divisi){
+                        vm.createProject(projectHost: "\(firstName ?? "") \(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID,participantListName: ["\(firstName ?? "")\(lastName ?? "")"], divisi: divisi){
                             self.isActive.toggle()
                         }
                         

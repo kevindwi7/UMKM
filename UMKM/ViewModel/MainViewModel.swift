@@ -156,7 +156,7 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func finishProject(project: ProjectViewModel, isFinish:Bool){
+    func finishProject(project: ProjectViewModel,isFinish:Bool){
         self.isLoading = true
         var newIsFinish =  Bool()
         

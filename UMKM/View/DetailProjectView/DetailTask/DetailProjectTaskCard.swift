@@ -13,6 +13,7 @@ struct DetailProjectTaskCard: View {
     @StateObject var mvm:MainViewModel
     @Binding var project: ProjectViewModel
     @Binding var task: [TaskViewModel]
+    @Binding var isActive:Bool
     @State var isLoading = false
     @State var showingSheet = false
     @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"], userID: "ndsjds", projectName: "asd"))
@@ -47,7 +48,7 @@ struct DetailProjectTaskCard: View {
                                     if(project.hostId == userID){
                                         self.showingSheet.toggle()
                                     }else{
-                                        vm.updateTaskRegisterUser(task: task, user: firstName ?? "", userRegisterID: userID!, userID: "", command: "join")
+                                        vm.updateTaskRegisterUser(task: task, user:  "\(firstName ?? "")\(lastName ?? "")", userRegisterID: userID!, userID: "", command: "join")
                                     }
                                     
                                 } label: {
@@ -68,7 +69,8 @@ struct DetailProjectTaskCard: View {
                                 }
                                 .frame(width: 103,height: 25)
                                 .foregroundColor(.white)
-                                .background( !task.registerUserID.contains(userID!) ? .blue : .gray)
+                                .background(.blue)
+//                                .background( !task.registerUserID.contains(userID!) ? .blue : .gray)
                                 .cornerRadius(8)
 //                                .disabled( task.registerUserID.contains(userID!))
                                 
@@ -80,7 +82,7 @@ struct DetailProjectTaskCard: View {
                     }
                     .sheet(isPresented: $showingSheet) {
 //                                    print($task)
-                        AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$tasks2, projects: $project)
+                        AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$tasks2, projects: $project, isActive: $isActive)
                     }
                     .padding()
                     .navigationTitle("Detail Tugas")

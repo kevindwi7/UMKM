@@ -14,6 +14,7 @@ struct DetailProjectCard3View: View {
     @Binding var project3: ProjectViewModel
     @Binding var task: [TaskViewModel]
     @State var action: Int? = 0
+    @State var isActive = false
     
 //    init(vm: HomeViewModel, project3: Binding<ProjectViewModel>, task: Binding<TaskViewModel>) {
 //        _vm = StateObject(wrappedValue: vm)
@@ -40,7 +41,7 @@ struct DetailProjectCard3View: View {
             }
                 Spacer()
                     NavigationLink(destination: {
-                        DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), project: $project3, task: $task)
+                        DetailProjectTaskCard(vm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), project: $project3, task: $task, isActive: $isActive)
     //                    TabBarView()
                     }, label: {
                         Text("Detail Tugas")

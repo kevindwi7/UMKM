@@ -21,7 +21,7 @@ class notificationViewModel:ObservableObject{
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
-                UserDefaults.standard.set(true, forKey: "notification")
+                
                 completion("Success")
                 
             }
@@ -46,6 +46,7 @@ class notificationViewModel:ObservableObject{
                 print(error)
             }else{
                 print("Success to subcribe")
+                UserDefaults.standard.set(true, forKey: "notification")
             }
         }
         

@@ -69,20 +69,16 @@ struct HomeView: View {
                         .accessibilityLabel("Tambah Proyek")
                 }
                 .onAppear {
-                    //                vm.fetchUserID()
-//                    mvm.user
                     vm.fetchProject()
                     vm.fetchAllUser()
                    
-                    
-                    //                    mvm.fetchUserProfile()
-                    //                    mvm.fetchUserID()
-                    //vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
                     vm.fetchProject()
+                   
                     //vm.fetchTask()
                 }
+               
                 //                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
                 //                    EmptyView()
                 //                })
@@ -97,6 +93,7 @@ struct HomeView: View {
                         OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
                             .onDisappear{
                                 nvm.requestNotificationPermission { finish in
+                                    nvm.subscribeToNotifications()
                                     print("Success")
                                 }
                             }
@@ -111,7 +108,9 @@ struct HomeView: View {
             
             
             
-        }.ignoresSafeArea()
+        }
+        
+        .ignoresSafeArea()
         
         .navigationViewStyle(.stack)
             .onAppear {
