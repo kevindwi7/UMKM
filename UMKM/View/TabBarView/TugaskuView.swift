@@ -10,9 +10,13 @@ import SwiftUI
 struct TugaskuView: View {
     
     @StateObject var vm:HomeViewModel
+    @StateObject var mvm:MainViewModel
     
-    init(vm: HomeViewModel) {
+    @State var usersID = UserDefaults.standard.object(forKey: "userID") as? String
+    
+    init(vm: HomeViewModel, mvm: MainViewModel) {
         _vm = StateObject(wrappedValue: vm)
+        _mvm = StateObject(wrappedValue: mvm)
     }
     var body: some View {
         NavigationView{
@@ -39,7 +43,7 @@ struct TugaskuView: View {
                     .foregroundColor : UIColor.white]
                 
                 UINavigationBar.appearance().scrollEdgeAppearance = appearance
-                
+                mvm.fetchUserTasks(userID: usersID ?? "")
             }
     }
 }
