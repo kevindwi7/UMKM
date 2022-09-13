@@ -31,7 +31,8 @@ struct TugaskuView: View {
                 }
 //                .navigationBarTitle(Text("Tugasku").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
             }
-            
+            .navigationTitle("Tugasku")
+            .navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(.stack)
             .onAppear {
                 let appearance = UINavigationBarAppearance()

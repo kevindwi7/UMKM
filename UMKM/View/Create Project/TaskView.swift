@@ -25,10 +25,11 @@ struct TaskView: View {
     @Binding var lokasiProjectTask: String
     @Binding var projectID: String
     @Binding var divisi: String
+    @Binding var projectName:String
     
     @StateObject private var vm: MainViewModel
     
-    init(vm: MainViewModel, namaProjectTask: Binding<String>, tujuanProjectTask: Binding<String>, deskripsiProjectTask: Binding<String>, startDateTask: Binding<Date>, endDateTask: Binding<Date>, startTimeTask: Binding<Date>, endTimeTask: Binding<Date>, lokasiProjectTask: Binding<String>, projectID: Binding<String>, isActive:Binding<Bool>, divisi:Binding<String>) {
+    init(vm: MainViewModel, namaProjectTask: Binding<String>, tujuanProjectTask: Binding<String>, deskripsiProjectTask: Binding<String>, startDateTask: Binding<Date>, endDateTask: Binding<Date>, startTimeTask: Binding<Date>, endTimeTask: Binding<Date>, lokasiProjectTask: Binding<String>, projectID: Binding<String>, isActive:Binding<Bool>, divisi:Binding<String>, projectName:Binding<String>) {
         _vm = StateObject(wrappedValue: vm)
         self._namaProjectTask = namaProjectTask
         self._tujuanProjectTask = tujuanProjectTask
@@ -41,6 +42,7 @@ struct TaskView: View {
         self._projectID = projectID
         self._isActive = isActive
         self._divisi = divisi
+        self._projectName = projectName
     }
     
     
@@ -106,7 +108,7 @@ struct TaskView: View {
                         }
                         
                         for task in tasks {
-                            vm.createTask(projectId: projectID, taskName: task, user: "", isFinish: false, registerUser: [""], registerUserID: [""], userID: "")
+                            vm.createTask(projectId: projectID, taskName: task, user: "", isFinish: false, registerUser: [""], registerUserID: [""], userID: "", projectName: projectName)
                             
                             
                         }
