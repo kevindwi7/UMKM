@@ -19,6 +19,7 @@ class HomeViewModel:ObservableObject{
     @Published var projects: [ProjectViewModel] = [ProjectViewModel]()
     @Published var tasks: [TaskViewModel] = []
     @Published var users: [UserViewModel] = []
+    @Published var sortedProjects: [ProjectViewModel] = [ProjectViewModel]()
     
     
     @Published var isLoading: Bool = false
@@ -63,6 +64,7 @@ class HomeViewModel:ObservableObject{
 //                    defer {
 //                        self.objectWillChange.send()
 //                    }
+                    self.projects = self.projects.sorted(by: {$0.startDate.compare($1.startDate) == .orderedAscending})
                     self.objectWillChange.send()
 //                    print("\(self.rooms)")
                 }

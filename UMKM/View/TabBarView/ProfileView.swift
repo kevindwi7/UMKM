@@ -254,7 +254,9 @@ struct ProfileView: View {
                                     nvm.unsubscribeNotifications()
                                 }else{
                                     UserDefaults.standard.set(true, forKey: "notification")
-                                    nvm.subscribeToNotifications()
+                                    nvm.subscribeToNotifications{finish in
+                                        print("Success to unsubscribe")
+                                    }
                                 }
                             }
                         

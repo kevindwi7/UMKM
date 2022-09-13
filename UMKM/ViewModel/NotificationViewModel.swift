@@ -21,7 +21,7 @@ class notificationViewModel:ObservableObject{
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
-                UserDefaults.standard.set(true, forKey: "notification")
+                
                 completion("Success")
                 
             }
@@ -29,7 +29,7 @@ class notificationViewModel:ObservableObject{
     }
     
     
-    func subscribeToNotifications(){
+    func subscribeToNotifications(completion:@escaping((String?) -> ())){
         print(123)
         let predicate = NSPredicate(value: true)
         let subscription = CKQuerySubscription(recordType: RecordType.project.rawValue, predicate: predicate, subscriptionID: "project_added_to_databse", options: .firesOnRecordCreation)
@@ -46,6 +46,7 @@ class notificationViewModel:ObservableObject{
                 print(error)
             }else{
                 print("Success to subcribe")
+                completion("success subscribe")
             }
         }
         
