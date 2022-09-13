@@ -15,7 +15,7 @@ struct DetailProjectTaskCard: View {
     @Binding var task: [TaskViewModel]
     @State var isLoading = false
     @State var showingSheet = false
-    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"]))
+    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"], userID: "ndsjds"))
     @State var tasks: String = ""
     @State var isPM = true
 
@@ -47,7 +47,7 @@ struct DetailProjectTaskCard: View {
                                     if(project.hostId == userID){
                                         self.showingSheet.toggle()
                                     }else{
-                                        vm.updateTaskRegisterUser(task: task, user: firstName ?? "", userID: userID!   )
+                                        vm.updateTaskRegisterUser(task: task, user: firstName ?? "", userRegisterID: userID!, userID: "", command: "join")
                                     }
                                     
                                 } label: {
