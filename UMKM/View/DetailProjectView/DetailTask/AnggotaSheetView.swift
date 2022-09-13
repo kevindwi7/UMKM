@@ -23,31 +23,23 @@ struct AnggotaSheetView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack{
-                Color(UIColor.systemGray6)
-                ScrollView{
-                    VStack(alignment:.leading) {
-                     
+        LoadingView(isShowing: $vm.isLoading){
+            NavigationView {
+                ZStack{
+                    Color(UIColor.systemGray6)
+                    ScrollView{
+                        VStack(alignment:.leading) {
+                            
                             Text("Pilih anggota untuk tugas")
                                 .font(.system(size: 14, weight: .regular, design: .default))
-                                .padding(.horizontal, 24)
                                 .padding(.horizontal)
-                        
-                      
-                        VStack{
-                           
-//                                ForEach($tasks, id: \.self){ $taskss in
-                            Text(tasks.taskName).font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
-                                       
-                                    Spacer()
-//                            }
                             
-                                
-                                ForEach(projects.participantList, id: \.self) { _ in
+                            Text(tasks.taskName).font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
+                    
+                                ForEach(tasks.registerUser, id: \.self) { items in
                                     VStack {
                                         HStack {
-                                            Text("Kevin").font(.system(size: 14, weight: .medium, design: .rounded))
+                                            Text(items.self).font(.system(size: 14, weight: .medium, design: .rounded))
                                             Spacer()
                                             Button(action: {
                                                 print("accept")
@@ -58,53 +50,56 @@ struct AnggotaSheetView: View {
                                             
                                             Button(action: {
                                                 print("deecline")
+                                                vm.deleteTaskRegisterUser(task: tasks, registerUser: items)
+//                                                vm.deleteCloudData(recordID: items)
                                             }, label: {
                                                 Image(systemName: "person.fill.xmark").opacity(0.5)
                                             })
                                             
                                             
                                         }
-                                    }.padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                                    }
+                                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
                                         .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
                                         .background(.white)
                                         .cornerRadius(15)
-                                        .minimumScaleFactor(0.01)
-                                        .padding(.top, 16)
+    //                                    .minimumScaleFactor(0.01)
+    //                                    .padding(.top, 16)
                                 }
-                                .cornerRadius(10)
+                                .padding(.vertical,0)
+                                .cornerRadius(8)
                                 .padding()
-                                //                    .listStyle(.plain)
-                            
-                        }
-                        
-                        
-                    }
-                    
-                    .frame(width: UIScreen.main.bounds.width)
-                    
-                    .navigationTitle("Anggota")
-                    .toolbar(content: {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button {
-                                dismiss()
-                                HapticManager.instance.notification(type: .warning)
-                            } label: {
-                                Text("Cancel").accessibilityLabel("Kembali")
+                               
+                        }.padding(.vertical, 16)
+
+                        .frame(width: UIScreen.main.bounds.width)
+                        .navigationTitle("Anggota")
+                        .toolbar(content: {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button {
+                                    dismiss()
+                                    HapticManager.instance.notification(type: .warning)
+                                } label: {
+                                    Text("Cancel").accessibilityLabel("Kembali")
+                                }
+                                
                             }
                             
                         }
-                        
+                        )
+                        .navigationBarTitleDisplayMode(.inline)
                     }
-                    )
-                    .navigationBarTitleDisplayMode(.inline)
                 }
+                
+                
             }
+            .onAppear{
+                vm.fetchProject()
+            }
+
+        }
             
             
-        }
-        .onAppear{
-            vm.fetchProject()
-        }
     }
 }
 

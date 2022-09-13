@@ -13,7 +13,7 @@ struct ProjectCardView: View {
     @StateObject var mvm: MainViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
-    //    @State var task: TaskViewModel
+    @Binding var task: [TaskViewModel]
     @State var isListRoomView = false
     
     var dateFormatter: DateFormatter {
@@ -98,7 +98,7 @@ struct ProjectCardView: View {
                                 .foregroundColor(.white)
                                 .font(.caption)
                             Spacer().frame(width:20)
-                            Text("6/10") //need to update - backend for task - vp
+                            Text(" 1/\(self.task.count) ") //need to update - backend for task - vp
                                 .font(.system(.caption, design: .rounded).bold())
                                 .foregroundColor(.white)
                         }
@@ -110,7 +110,7 @@ struct ProjectCardView: View {
                         Spacer().frame(width:10)
                         
                         //                        label
-                        Text("Humas") //need to update - backend for labeling - vp
+                        Text(project.divisi) //need to update - backend for labeling - vp
                             .font(.system(.caption, design: .rounded).bold())
                             .foregroundColor(.black.opacity(0.85))
                             .minimumScaleFactor(0.01)
@@ -120,7 +120,7 @@ struct ProjectCardView: View {
                                     .strokeBorder(Color.yellow,lineWidth: 1)
                                     .background(RoundedRectangle(cornerRadius:20)
                                         .foregroundColor(Color.yellow.opacity(0.2)))    )
-                            .accessibilityLabel("Divisi humas") //need to update - backend for labeling - vp
+                            .accessibilityLabel("Divisi \(project.divisi)") //need to update - backend for labeling - vp
                         
                     }.padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
 

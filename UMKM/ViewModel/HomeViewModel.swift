@@ -59,7 +59,7 @@ class HomeViewModel:ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.projects = returnedProjects.map(ProjectViewModel.init)
-                    self.fetchTask()
+//                    self.fetchTask()
 //                    defer {
 //                        self.objectWillChange.send()
 //                    }
@@ -94,6 +94,7 @@ class HomeViewModel:ObservableObject{
         let endDate = project.endDate
         let projectID = project.projectID
         let participantListName = project.participantListName
+        let divisi = project.divisi
         
         if(command == "join") {
             if( !(newParticipant.contains(participantID))){
@@ -114,6 +115,7 @@ class HomeViewModel:ObservableObject{
         newParticipant.removeAll(where: { $0 == "" })
         
         print(newParticipant)
+        
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if let error = error {
@@ -132,7 +134,7 @@ class HomeViewModel:ObservableObject{
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
                         guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName))
+                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName, divisi: divisi))
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
@@ -159,83 +161,53 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func fetchTask(){
+    func deleteTaskRegisterUser(task: TaskViewModel, registerUser: String){
+        self.isLoading = true
+        let recordId = task.id
         
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        var returnedTasks: [Task] = []
-        
-//        projects[0].projectName = "asdas"
-        self.database.fetch(withQuery: query) { result in
-            switch result {
-            case .success(let result):
-
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            
-                            if let task = Task.fromRecord(record) {
-                                for i in 0 ..< self.projects.count{
-                                    if self.projects[i].projectID == task.projectId{
-//                                        returnedTasks.append(task)
-//                                        self.projects[i].projectName = "ASD"
-//                                        self.projects[i].tasks.append(TaskViewModel(task: task))
-                                    }
-                                }
-                                
-//                                returnedTasks.append(task)
-                            }
-//                            print(returnedRooms)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    }
-                
-                DispatchQueue.main.async {
-                    self.tasks = returnedTasks.map(TaskViewModel.init)
+        database.delete(withRecordID: recordId!) { deletedRecordId, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+                } else {
+                    self.isLoading = false
                     
-                    
-//                    defer {
-//                        self.objectWillChange.send()
-                    
-                    // Cek Task id dari projectID
-                    
-//                    }
-                    self.objectWillChange.send()
-//                    print("\(self.rooms)")
                 }
-
-            case .failure(let error):
-                print(error)
+                print("here")
             }
         }
     }
     
-    func updateTaskParticipant(task: TaskViewModel, user: String, command: String){
-        
+    func updateTaskRegisterUser(task: TaskViewModel, user: String, userID: String){
         self.isLoading = true
-        
-        var newParticipant =  String()
-
-        newParticipant.insert(contentsOf: task.user, at: newParticipant.startIndex )
+        var newRegisterUser =  [String]()
+        var newRegisterUserID =  [String]()
+        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
+        newRegisterUserID.insert(contentsOf: task.registerUser, at: 0)
         
         let recordId = task.id
         let projectId = task.projectId
         let taskName = task.taskName
         let isFinish = task.isFinish
-        if(command == "join") {
-            if( !(newParticipant.contains(user))){
-                if(user != "" || !(user.isEmpty) ){
-                    newParticipant.append(user)
+        let userss = task.user
+    
+        
+        if(!(newRegisterUser.contains(user)) || !(newRegisterUserID.contains(userID))){
+            if(user != "" || !(user.isEmpty) || (userID != "") || !(userID.isEmpty)){
+                print(222)
+                
+                newRegisterUser.append(user)
+                newRegisterUserID.append(userID)
                     print("masukk")
-                }
             }
+            
         }
         
-        print(newParticipant)
+        newRegisterUser.removeAll(where: { $0 == "" })
+        newRegisterUserID.removeAll(where: { $0 == "" })
+        
+        print(newRegisterUser)
+        print(newRegisterUserID)
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if let error = error {
@@ -243,22 +215,28 @@ class HomeViewModel:ObservableObject{
                 }
                 guard let record = returnedRecord else { return }
                 
-                record["user"] = newParticipant as CKRecordValue
+                record["registerUser"] = newRegisterUser as CKRecordValue
+                record["registerUserID"] = newRegisterUserID as CKRecordValue
                 
+                print("dispatch")
                 self.database.save(record) { record, error in
+                    print("saveee")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         if let error = error {
                             print(error)
                             
                         }
+                        self.isLoading =  false
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
-                        guard let user = record["user"] as? String else { return }
-                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user, isFinish: isFinish))
+//                        guard let user = record["user"] as? [String] else { return }
+//                        guard let userID = record["user"] as? [String] else { return }
+//                        
+//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: userss, isFinish: isFinish, registerUser: user, registerUserID: <#[String]#>))
                         print(123)
 //                        print(element)
                         self.hasUpdated = true
-                        self.isLoading =  false
+                      
                         
                         self.objectWillChange.send()
                         
@@ -309,17 +287,11 @@ class HomeViewModel:ObservableObject{
     }
     
     func updateUserOnboarding(users: UserViewModel, komunitas: String,divisi: String, pengalaman: String, isFirstTime: Bool, completionHandler:  @escaping () -> Void){
-        self.isLoading = true
        
         var newKomunitas =  String()
         var newdivisi =  String()
         var newPengalaman =  String()
         var newIsFirstTime =  Bool()
-        
-        
-//        newKomunitas.insert(contentsOf: users.komunitas, at: newKomunitas.startIndex )
-//        newdivisi.insert(contentsOf: users.divisi, at: newPengalaman.startIndex )
-//        newPengalaman.insert(contentsOf: users.pengalaman, at: newPengalaman.startIndex )
         
         newKomunitas = komunitas
         newdivisi = divisi
@@ -330,18 +302,16 @@ class HomeViewModel:ObservableObject{
         let komunitas = users.komunitas
         let divisi = users.divisi
         let pengalaman = users.pengalaman
-//        let isFirstTime = users.isFirstTime
 
-//        newIsFirstTime.description.insert(users.isFirstTime, at: newIsFirstTime.description.startIndex)
-//        newIsFirstTime.insert(contentsOf: users.isFirstTime, at: newIsFirstTime.startIndex )
         if(!(newKomunitas.contains(komunitas)) || !(newdivisi.contains(divisi)) || !(newPengalaman.contains(pengalaman))){
             print(222)
-//            if(komunitas != "" || !(komunitas.isEmpty) || divisi != "" || !(divisi.isEmpty) || pengalaman != "" || !(pengalaman.isEmpty) ){
+            self.isLoading = true
                 newKomunitas.append(komunitas)
                 newdivisi.append(divisi)
                 newIsFirstTime = false
                 newPengalaman.append(pengalaman)
                 print("masukk")
+            
 //            }
         }
         
@@ -370,8 +340,7 @@ class HomeViewModel:ObservableObject{
                         guard let komunitas = record["komunitas"] as? String else { return }
                         guard let divisi = record["divisi"] as? String else { return }
                         guard let pengalaman = record["pengalaman"] as? String else { return }
-                        
-//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user))
+
                         print("testttt")
                         
                         UserDefaults.standard.set(false, forKey: "isFirstTime")
