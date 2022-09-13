@@ -13,6 +13,7 @@ struct ProfileView: View {
     
     @State var isActive = false
     @State private var vibrationOnRing = true
+    @StateObject var nvm:notificationViewModel
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -247,6 +248,13 @@ struct ProfileView: View {
                             .lineLimit(1)
 //                            .foregroundColor(.black)
                             .accessibilityLabel("Komunitas Mata Hati")
+                            .onChange(of: vibrationOnRing) { newValue in
+                                if(vibrationOnRing == false){
+                                    nvm.unsubscribeNotifications()
+                                }else{
+                                    nvm.subscribeToNotifications()
+                                }
+                            }
                         
                     }
                 }.padding()
@@ -382,6 +390,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(nvm: notificationViewModel())
     }
 }
