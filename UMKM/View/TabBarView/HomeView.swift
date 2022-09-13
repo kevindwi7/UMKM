@@ -89,15 +89,15 @@ struct HomeView: View {
             }
             .navigationTitle("Proyek")
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $isFirstTime ){
-                ForEach($vm.users, id: \.id){ $userss in
-                    if (userss.id?.recordName ?? "" == usersID){
-//                        print(userss.id)
-                        OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
-                      
-                    }
-                }
-            }
+//            .sheet(isPresented: $isFirstTime ){
+//                ForEach($vm.users, id: \.id){ $userss in
+//                    if (userss.id?.recordName ?? "" == usersID){
+////                        print(userss.id)
+//                        OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
+//                      
+//                    }
+//                }
+//            }
             //
             //
             //
