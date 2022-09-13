@@ -36,4 +36,20 @@ struct TaskViewModel: Hashable, Identifiable{
         task.user
     }
     
+    var isFinish: Bool{
+        task.isFinish
+    }
+    
+    var registerUser: [String]{
+        task.registerUser
+    }
+    
+    
+    var registerUserID: [String]{
+        task.registerUserID
+    }
+    
+    var userID: String{
+        task.userID
+    }
 }

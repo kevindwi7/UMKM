@@ -24,10 +24,12 @@ struct TaskView: View {
     @Binding var endTimeTask: Date
     @Binding var lokasiProjectTask: String
     @Binding var projectID: String
+    @Binding var divisi: String
+    @Binding var projectName:String
     
     @StateObject private var vm: MainViewModel
     
-    init(vm: MainViewModel, namaProjectTask: Binding<String>, tujuanProjectTask: Binding<String>, deskripsiProjectTask: Binding<String>, startDateTask: Binding<Date>, endDateTask: Binding<Date>, startTimeTask: Binding<Date>, endTimeTask: Binding<Date>, lokasiProjectTask: Binding<String>, projectID: Binding<String>, isActive:Binding<Bool>) {
+    init(vm: MainViewModel, namaProjectTask: Binding<String>, tujuanProjectTask: Binding<String>, deskripsiProjectTask: Binding<String>, startDateTask: Binding<Date>, endDateTask: Binding<Date>, startTimeTask: Binding<Date>, endTimeTask: Binding<Date>, lokasiProjectTask: Binding<String>, projectID: Binding<String>, isActive:Binding<Bool>, divisi:Binding<String>, projectName:Binding<String>) {
         _vm = StateObject(wrappedValue: vm)
         self._namaProjectTask = namaProjectTask
         self._tujuanProjectTask = tujuanProjectTask
@@ -39,6 +41,8 @@ struct TaskView: View {
         self._lokasiProjectTask = lokasiProjectTask
         self._projectID = projectID
         self._isActive = isActive
+        self._divisi = divisi
+        self._projectName = projectName
     }
     
     
@@ -98,9 +102,15 @@ struct TaskView: View {
 //                    .frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
                     Button {
                         //handle save project
-                        self.isLoading = true
-                        vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID){
+                        //                        self.isLoading = true
+                        vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID,participantListName: ["\(firstName ?? "")\(lastName ?? "")"], divisi: divisi){
                             self.isActive.toggle()
+                        }
+                        
+                        for task in tasks {
+                            vm.createTask(projectId: projectID, taskName: task, user: "", isFinish: false, registerUser: [""], registerUserID: [""], userID: "", projectName: projectName)
+                            
+                            
                         }
                     }
                 label: {

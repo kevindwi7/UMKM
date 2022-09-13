@@ -11,20 +11,18 @@ import CloudKit
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
     @StateObject var mvm:MainViewModel
-    //    @State var tvm:TaskViewModel
     
     @State var isActive = false
     @State var isFirstTimeActive = false
     @State var isListRoomView = false
     
     @State var usersID = UserDefaults.standard.object(forKey: "userID") as? String
+    @State var isFirstTime = UserDefaults.standard.object(forKey: "isFirstTime") as? Bool ?? true
     
     init(vm: HomeViewModel, mvm: MainViewModel) {
         _vm = StateObject(wrappedValue: vm)
         _mvm = StateObject(wrappedValue: mvm)
     }
-    
-    
     
     var body: some View {
         NavigationView{
@@ -33,9 +31,12 @@ struct HomeView: View {
                 ScrollView(.vertical){
                     VStack(alignment: .leading){
                         ForEach($vm.projects, id: \.id){ $project in
+            
+                            ProjectCardView(vm: self.vm, mvm: self.mvm, project: $project,task: $mvm.tasks)
+                            
                             //                            ForEach ($vm.tasks, id: \.id) { $taskHome in
                             
-                            ProjectCardView(vm: self.vm, project: $project)
+                          
                             
                             
                             //                            }
@@ -47,29 +48,34 @@ struct HomeView: View {
                     
                 }
                 //            .frame(width: UIScreen.main.bounds.width)
+                //
+//                .navigationBarTitle(Text("Proyek").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
+                //                                .uiFontMenuTitle(.title)
                 
-                .navigationBarTitle(Text("Proyek").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
-//                .uiFontMenuTitle(.title)
-
-//                .background(NavigationConfigurator { nc in
-//                                nc.navigationBar.barTintColor = .systemCyan
-//                                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-//                            })
+                //                .background(NavigationConfigurator { nc in
+                //                                nc.navigationBar.barTintColor = .systemCyan
+                //                                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+                //                            })
                 .toolbar {
                     Button {
                         self.isActive = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }.sheet(isPresented: $isActive) {
+                        
                         CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
                     }.foregroundColor(.white)
-                    .accessibilityLabel("Tambah Proyek")
+                        .accessibilityLabel("Tambah Proyek")
                 }
                 .onAppear {
                     //                vm.fetchUserID()
+//                    mvm.user
                     vm.fetchProject()
-                    mvm.fetchUserProfile()
-//                    mvm.fetchUserID()
+                    vm.fetchAllUser()
+                   
+                    
+                    //                    mvm.fetchUserProfile()
+                    //                    mvm.fetchUserID()
                     //vm.fetchTask()
                 }
                 .onReceive(vm.objectWillChange) { _ in
@@ -81,36 +87,49 @@ struct HomeView: View {
                 //                })
                 //                )
             }
-            
-            .sheet(isPresented: $isFirstTimeActive){
-                OnboardingView()
-   
-            }
-          
-            
-        }.navigationViewStyle(.stack)
-            .onAppear {
-                        let appearance = UINavigationBarAppearance()
-                        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-                        appearance.backgroundColor = UIColor(Color.cyan
-//                            .opacity(0.2)
-                        )
-                        appearance.titleTextAttributes = [NSAttributedString.Key
-                                        .foregroundColor : UIColor.white]
-
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-
-            }
-//                UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia", size: 20)!]
-                
-                
+            .navigationTitle("Proyek")
+            .navigationBarTitleDisplayMode(.inline)
+//            .sheet(isPresented: $isFirstTime ){
+//                ForEach($vm.users, id: \.id){ $userss in
+//                    if (userss.id?.recordName ?? "" == usersID){
+////                        print(userss.id)
+//                        OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
+//                      
+//                    }
+//                }
 //            }
+            //
+            //
+            //
+            //
+            
+            
+            
+        }.ignoresSafeArea()
+        
+        .navigationViewStyle(.stack)
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+                appearance.backgroundColor = UIColor(Color.cyan
+                                                     //                            .opacity(0.2)
+                )
+                appearance.titleTextAttributes = [NSAttributedString.Key
+                    .foregroundColor : UIColor.white]
+                
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                
+            }
+        //                UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia", size: 20)!]
+        
+        
+        //            }
     }
 }
 
 struct NavigationConfigurator: UIViewControllerRepresentable {
     var configure: (UINavigationController) -> Void = { _ in }
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
         UIViewController()
     }
@@ -119,7 +138,7 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
             self.configure(nc)
         }
     }
-
+    
 }
 
 //struct HomeView_Previews: PreviewProvider {

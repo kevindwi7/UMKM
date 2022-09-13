@@ -31,19 +31,19 @@ struct UserViewModel{
         user.iCloudID
     }
     
-//    var divisi: String{
-//        user.divisi
-//    }
-//    
-//    var komunitas: String{
-//        user.komunitas
-//    }
-//    
-//    var pengalaman: String{
-//        user.pengalaman
-//    }
-//    
-//    var isFirstTime: Bool{
-//        user.isFirstTime
-//    }
+    var divisi: String{
+        user.divisi
+    }
+    
+    var komunitas: String{
+        user.komunitas
+    }
+    
+    var pengalaman: String{
+        user.pengalaman
+    }
+    
+    var isFirstTime: Bool{
+        user.isFirstTime
+    }
 }

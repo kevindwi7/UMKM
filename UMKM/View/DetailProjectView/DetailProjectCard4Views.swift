@@ -9,21 +9,16 @@ import SwiftUI
 import CloudKit
 
 struct DetailProjectCard4Views: View {
-    
+    @StateObject var vm: MainViewModel
     @State var isActive = false
     
     @State var action: Int? = 0
     
-    @Binding var project3: ProjectViewModel
-    //    @Binding var task: TaskViewModel
-    //    @State var action: Int? = 0
+    @Binding var project: ProjectViewModel
     
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
-    
-    //    print(project3.participantList)
-    
     
     var body: some View {
         Spacer()
@@ -40,13 +35,13 @@ struct DetailProjectCard4Views: View {
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
-                        Text("\(project3.participantList.count) Orang")
+                        Text("\(project.participantListName.count) Orang")
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
-                            .accessibilityLabel("Jumlah anggota \(project3.participantList.count) orang")
+                            .accessibilityLabel("Jumlah anggota \(project.participantList.count) orang")
                     }
                     Spacer()
                     Image(systemName: self.isActive == true ? "chevron.down" : "chevron.up")
@@ -63,7 +58,7 @@ struct DetailProjectCard4Views: View {
         
 //   Form{
 //       Section{
-        ForEach (project3.participantList, id: \.self){ item in
+        ForEach (project.participantListName, id: \.self){ itemss in
 //            VStack(alignment:.leading, spacing: 15){
                 HStack(alignment:.top, spacing: 15){
                     Image(systemName: "person.crop.circle.fill")
@@ -73,7 +68,7 @@ struct DetailProjectCard4Views: View {
                         .foregroundColor(.black)
                         .accessibilityLabel("foto Tania") // need to further update dummy - vp
                     VStack(alignment:.leading){
-                        Text("nama") // need to further update dummy - vp
+                        Text(itemss.self) // need to further update dummy - vp
                             .font(.system(.body, design: .rounded)).bold()
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
@@ -82,11 +77,11 @@ struct DetailProjectCard4Views: View {
                             .accessibilityLabel("..... blabla") // need to further update dummy - vp
                         
                         //Tugasnya
-                        Text("\(project3.tasks.count)")
-                        ForEach (project3.tasks, id: \.self){ task in
-                            Text("Hellow") // need to further update dummy - vp
-                                .font(.system(.caption, design: .rounded))
-                        }
+//                        Text("\(project3.tasks.count)")
+//                        ForEach ($project3.tasks, id: \.self){ $task in
+//                            Text("Hellow") // need to further update dummy - vp
+//                                .font(.system(.caption, design: .rounded))
+//                        }
                         Text("Sapu halaman depan") // need to further update dummy - vp
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
@@ -111,10 +106,9 @@ struct DetailProjectCard4Views: View {
         //                        .animation(.easeOut)
         //                        .transition(.slide)
         Button {
-            //Selesaikan project
-            //            self.isLoading = true
-            //            vm.createProject(projectHost: "\(firstName ?? "")\(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID){
-            self.isActive.toggle()
+            vm.finishProject(project: project, isFinish: true)
+            print("finish")
+//            self.isActive.toggle()
         }
     label: {
         Text("Selesai Proyek").foregroundColor(.white)

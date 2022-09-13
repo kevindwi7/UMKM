@@ -81,15 +81,24 @@ struct LoginView: View {
                                     record["firstName"] = firstName
                                     record["lastName"] = lastName
                                     record["iCloudID"] = vm.userID
+                                    record["komunitas"] = ""
+                                    record["pengalaman"] = ""
+                                    record["divisi"] = ""
+                                    record["isFirstTime"] = true
                                     // Save to local
                                     UserDefaults.standard.set(email, forKey: "email")
                                     UserDefaults.standard.set(firstName, forKey: "firstName")
                                     UserDefaults.standard.set(lastName, forKey: "lastName")
+                                    
                                     let publicDatabase = CKContainer.default().publicCloudDatabase
                                     publicDatabase.save(record) { (_, _) in
                                         UserDefaults.standard.set(record.recordID.recordName, forKey: "userID")
                                     }
+                                    print(000)
+                                    print("Berhasil Login")
                                     // Change login state
+//                                    vm.user = UserViewModel(user: UsersData(firstName: firstName , email: email , lastName: lastName , iCloudID: vm.userID , komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
+//                                    print(vm.user)
                                     self.login = true
                                 } else {
                                     // For returning user to signin,
@@ -100,12 +109,16 @@ struct LoginView: View {
                                             let email = fetchedInfo["email"] as? String
                                             let firstName = fetchedInfo["firstName"] as? String
                                             let lastName = fetchedInfo["lastName"] as? String
+                                            let isFirstTime = fetchedInfo["isFirstTime"] as? Bool
                                             // Save to local
                                             UserDefaults.standard.set(userID, forKey: "userID")
                                             UserDefaults.standard.set(email, forKey: "email")
                                             UserDefaults.standard.set(firstName, forKey: "firstName")
                                             UserDefaults.standard.set(lastName, forKey: "lastName")
+                                            UserDefaults.standard.set(isFirstTime, forKey: "isFirstTime")
                                             // Change login state
+//                                            vm.user = UserViewModel(user: UsersData(firstName: firstName ?? "", email: email ?? "", lastName: lastName ?? "", iCloudID: vm.userID , komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
+//                                            print(vm.user)
                                             self.login = true
                                         }
                                     }
