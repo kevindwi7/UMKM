@@ -15,6 +15,10 @@ struct AnggotaSheetView: View {
     @State var test:Int = 5
     @State var status = ""
     
+    let userID = UserDefaults.standard.object(forKey: "userID") as? String
+    let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
+    let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
+    
     init(vm: HomeViewModel, tasks: Binding<TaskViewModel>, projects: Binding<ProjectViewModel>) {
         _vm = StateObject(wrappedValue: vm)
         self._tasks = tasks
@@ -43,6 +47,7 @@ struct AnggotaSheetView: View {
                                             Spacer()
                                             Button(action: {
                                                 print("accept")
+                                               
                                                 print(tasks)
                                             }, label: {
                                                 Image(systemName: "person.fill.checkmark").opacity(0.5)
@@ -50,7 +55,7 @@ struct AnggotaSheetView: View {
                                             
                                             Button(action: {
                                                 print("deecline")
-                                                vm.deleteTaskRegisterUser(task: tasks, registerUser: items)
+                                                vm.deleteTaskRegisterUser(task: tasks, userRegister:  firstName ?? "", userRegisterID: userID!)
 //                                                vm.deleteCloudData(recordID: items)
                                             }, label: {
                                                 Image(systemName: "person.fill.xmark").opacity(0.5)

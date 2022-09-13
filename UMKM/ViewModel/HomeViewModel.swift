@@ -162,21 +162,70 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func deleteTaskRegisterUser(task: TaskViewModel, registerUser: String){
+    func deleteTaskRegisterUser(task: TaskViewModel, userRegister: String,  userRegisterID: String){
         self.isLoading = true
+        var newRegisterUser =  [String]()
+        var newRegisterUserID =  [String]()
+        
+        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
+        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
+        
         let recordId = task.id
         
-        database.delete(withRecordID: recordId!) { deletedRecordId, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print(error)
-                } else {
-                    self.isLoading = false
-                    
-                }
-                print("here")
+        if(newRegisterUser.contains(userRegisterID) || newRegisterUserID.contains(userRegisterID)){
+            if let index = newRegisterUser.firstIndex(of: userRegisterID)  {
+                print("\(newRegisterUser[index])")
+                newRegisterUser.remove(at: index)
+            }
+            if let index2 = newRegisterUserID.firstIndex(of: userRegisterID){
+                print("\(newRegisterUserID[index2])")
+                newRegisterUserID.remove(at: index2)
             }
         }
+        
+        newRegisterUser.removeAll(where: { $0 == "" })
+        newRegisterUserID.removeAll(where: { $0 == "" })
+        
+        print(newRegisterUser)
+        print(newRegisterUserID)
+        
+        database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let error = error {
+                    print(error)
+                }
+                guard let record = returnedRecord else { return }
+                
+                record["registerUser"] = newRegisterUser as CKRecordValue
+                record["registerUserID"] = newRegisterUserID as CKRecordValue
+                
+                print("dispatch")
+                self.database.save(record) { record, error in
+                    print("saveee")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                            
+                        }
+                        self.isLoading =  false
+                        guard let record = returnedRecord else { return }
+//                        let id = record.recordID
+//                        guard let user = record["user"] as? [String] else { return }
+//                        guard let userID = record["user"] as? [String] else { return }
+//
+//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: userss, isFinish: isFinish, registerUser: user, registerUserID: <#[String]#>))
+                        print(123)
+//                        print(element)
+                        self.hasUpdated = true
+                      
+                        
+                        self.objectWillChange.send()
+                        
+                    }
+                }
+            }
+        }
+      
     }
     
     func updateTaskRegisterUser(task: TaskViewModel, user: String, userRegisterID: String, userID: String, command: String){
@@ -208,10 +257,14 @@ class HomeViewModel:ObservableObject{
                 
             }
         }else if (command == "delete") {
-            if(newRegisterUser.contains(userRegisterID)){
-                if let index = newRegisterUser.firstIndex(of: userRegisterID) {
+            if(newRegisterUser.contains(userRegisterID) || newRegisterUserID.contains(userRegisterID)){
+                if let index = newRegisterUser.firstIndex(of: userRegisterID)  {
                     print("Leave Room : \(newRegisterUser[index])")
                     newRegisterUser.remove(at: index)
+                }
+                if let index2 = newRegisterUserID.firstIndex(of: userRegisterID){
+                    print("Leave Room : \(newRegisterUserID[index2])")
+                    newRegisterUserID.remove(at: index2)
                 }
             }
         }

@@ -17,7 +17,7 @@ struct TugaskuCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height:24)
-                Text("Sapu Lantai")
+                Text(task.taskName)
                     .font(.system(.title3, design: .rounded).bold())
                     .minimumScaleFactor(0.01)
                     .scaledFont(name: "", size: 24)
@@ -26,7 +26,7 @@ struct TugaskuCardView: View {
                 Spacer()
             }
             HStack{
-                Text("Proyek Bersih Bersih Basecamp")
+                Text(task.projectId)
                     .font(.system(.subheadline, design: .rounded))
                     .scaledFont(name: "", size: 14)
                     .minimumScaleFactor(0.01)
