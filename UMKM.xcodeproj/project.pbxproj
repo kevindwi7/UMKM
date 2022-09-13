@@ -19,6 +19,7 @@
 		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
 		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
 		9CB9DA7428B86F1B00A57A10 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB9DA7328B86F1B00A57A10 /* TaskView.swift */; };
+		9CFA8FAB28D00ED700D70C31 /* TugaskuViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFA8FAA28D00ED700D70C31 /* TugaskuViewCard.swift */; };
 		C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */; };
 		C958E9BE28B639D700DC7F8B /* DetailProjectTaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */; };
 		C958E9C028B639EF00DC7F8B /* DetailProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */; };
@@ -64,6 +65,7 @@
 		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		9CB9DA7328B86F1B00A57A10 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		9CFA8FAA28D00ED700D70C31 /* TugaskuViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TugaskuViewCard.swift; sourceTree = "<group>"; };
 		C958E9BB28B6395B00DC7F8B /* DetailProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectCardView.swift; sourceTree = "<group>"; };
 		C958E9BD28B639D700DC7F8B /* DetailProjectTaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectTaskCard.swift; sourceTree = "<group>"; };
 		C958E9BF28B639EF00DC7F8B /* DetailProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProjectView.swift; sourceTree = "<group>"; };
@@ -246,7 +248,6 @@
 				146F744628BDC73600740D8C /* HapticModel.swift */,
 				9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */,
 				C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */,
-				C9B643D128C9865700F7763C /* UserProfileViewModel.swift */,
 				9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
@@ -271,6 +272,7 @@
 				C9DDF5E128CE52A6007B3BF1 /* Test.swift */,
 				D847ECEF28CAF83B00D3BBC9 /* EmptyHomeView.swift */,
 				D847ECF128CAF92C00D3BBC9 /* EmptyTugasView.swift */,
+				9CFA8FAA28D00ED700D70C31 /* TugaskuViewCard.swift */,
 			);
 			path = TabBarView;
 			sourceTree = "<group>";
@@ -356,6 +358,7 @@
 				C967B89A28BC5E5E00B59CE2 /* DetailProjectCard3View.swift in Sources */,
 				9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */,
 				146F744728BDC73600740D8C /* HapticModel.swift in Sources */,
+				9CFA8FAB28D00ED700D70C31 /* TugaskuViewCard.swift in Sources */,
 				9C8F6A9E28CCEE7C00068797 /* NotificationViewModel.swift in Sources */,
 				C958E9BC28B6395B00DC7F8B /* DetailProjectCardView.swift in Sources */,
 				D847ECEE28CAF7EF00D3BBC9 /* EmptyListView.swift in Sources */,

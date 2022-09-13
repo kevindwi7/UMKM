@@ -26,7 +26,8 @@ final class MainViewModel: ObservableObject{
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
     @Published var userFirstTimes: [UserFirstTimeOnboardingViewModel] = []
-//    @Published var usersProfile: [UserProfileViewModel] = []
+    @Published var userTasks: [TaskViewModel] = []
+    //    @Published var usersProfile: [UserProfileViewModel] = []
     
     @Published var isSignedInToiCloud: Bool = false
     @Published var recentlyCreatedProjectId: String = ""
@@ -35,7 +36,7 @@ final class MainViewModel: ObservableObject{
     @Published var isLoadingUserProfile: Bool = false
     @Published var currentUser:UsersData?
     @Published var user:UserViewModel = UserViewModel(user: UsersData(firstName: "", email: "", lastName: "", iCloudID: "", komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
-//    @Published var user:UserViewModel?
+    //    @Published var user:UserViewModel?
     
     let objectWillChange = PassthroughSubject<(), Never>()
     
@@ -43,7 +44,7 @@ final class MainViewModel: ObservableObject{
         self.container = container
         self.database = self.container.publicCloudDatabase
         iCloudUserIDAsync()
-       
+        
     }
     
     func iCloudUserIDAsync() {
@@ -56,7 +57,7 @@ final class MainViewModel: ObservableObject{
                     self.isSignedInToiCloud = true
                     self.userID = returnedID
                     
-//                    print("uid : \(returnedID)")
+                    //                    print("uid : \(returnedID)")
                 }
             }
         }
@@ -78,11 +79,11 @@ final class MainViewModel: ObservableObject{
                     .forEach {
                         switch $0 {
                         case .success(let record):
-//                            self.currentUser?.firstName = record.recordID
+                            //                            self.currentUser?.firstName = record.recordID
                             self.userID = record.recordID.recordName
-//                            if let project = Project.fromRecord(record) {
-//                                returnedProjects.append(project)
-//                            }
+                            //                            if let project = Project.fromRecord(record) {
+                            //                                returnedProjects.append(project)
+                            //                            }
                             if let currentUser = self.currentUser {
                                 self.currentUser = currentUser
                             }
@@ -118,13 +119,13 @@ final class MainViewModel: ObservableObject{
                             self.isLoading = false
                             self.projects.append(ProjectViewModel(project: project))
                             self.objectWillChange.send()
-                           
+                            
                         }
-//                        self.recentlyCreatedProjectId = project.projectID
-//                        print("---- ROOM ID NYA INI : \(self.recentlyCreatedProjectId) -----")
+                        //                        self.recentlyCreatedProjectId = project.projectID
+                        //                        print("---- ROOM ID NYA INI : \(self.recentlyCreatedProjectId) -----")
                         completionHandler()
-//                        self.recentlyCreatedProjectId = project.id?.recordName ?? ""
-//                        completionHandler(self.recentlyCreatedProjectId)
+                        //                        self.recentlyCreatedProjectId = project.id?.recordName ?? ""
+                        //                        completionHandler(self.recentlyCreatedProjectId)
                         
                     }
                 }
@@ -163,7 +164,7 @@ final class MainViewModel: ObservableObject{
         let projectId = task.projectId
         let taskName = task.taskName
         let user = task.user
-   
+        
         let isFinish = true
         
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
@@ -183,8 +184,8 @@ final class MainViewModel: ObservableObject{
                         let id = record.recordID
                         guard let finishStatus = record["isFinish"] as? Bool else { return }
                         let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: user, isFinish: finishStatus))
-
-//                        print(element)
+                        
+                        //                        print(element)
                         self.isLoading = false
                         completionHandler()
                     }
@@ -228,19 +229,19 @@ final class MainViewModel: ObservableObject{
         self.database.fetch(withQuery: query) { result in
             switch result {
             case .success(let result):
-
+                
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
                         case .success(let record):
                             
                             if let userFirstTime = UserFirstTimeOnboarding.fromRecord(record) {
-
-                                    returnedUserFirstTimes.append(userFirstTime)
                                 
-                        
+                                returnedUserFirstTimes.append(userFirstTime)
+                                
+                                
                             }
-//                            print(returnedRooms)
+                            //                            print(returnedRooms)
                         case .failure(let error):
                             print(error)
                         }
@@ -248,13 +249,13 @@ final class MainViewModel: ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.userFirstTimes = returnedUserFirstTimes.map(UserFirstTimeOnboardingViewModel.init)
-//                    defer {
-//                        self.objectWillChange.send()
-//                    }
+                    //                    defer {
+                    //                        self.objectWillChange.send()
+                    //                    }
                     self.objectWillChange.send()
-//                    print("\(self.rooms)")
+                    //                    print("\(self.rooms)")
                 }
-
+                
             case .failure(let error):
                 print(error)
             }
@@ -271,7 +272,7 @@ final class MainViewModel: ObservableObject{
         self.database.fetch(withQuery: query) { result in
             switch result {
             case .success(let result):
-
+                
                 result.matchResults.compactMap { $0.1 }
                     .forEach {
                         switch $0 {
@@ -281,9 +282,9 @@ final class MainViewModel: ObservableObject{
                                 if task.projectId == project.projectID{
                                     returnedTasks.append(task)
                                 }
-                        
+                                
                             }
-//                            print(returnedRooms)
+                            //                            print(returnedRooms)
                         case .failure(let error):
                             print(error)
                         }
@@ -291,13 +292,53 @@ final class MainViewModel: ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.tasks = returnedTasks.map(TaskViewModel.init)
-//                    defer {
-//                        self.objectWillChange.send()
-//                    }
+                    //                    defer {
+                    //                        self.objectWillChange.send()
+                    //                    }
                     self.objectWillChange.send()
-//                    print("\(self.rooms)")
+                    //                    print("\(self.rooms)")
                 }
-
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchAllTask(userID:String){
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedTasks: [Task] = []
+        
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+                
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            print("Success")
+                            if let task = Task.fromRecord(record){
+                                let taskUser = record["user"] as! String
+                                if taskUser == userID{
+                                    returnedTasks.append(task)
+                                }
+                                
+                                
+                            }
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                
+                DispatchQueue.main.async {
+                    self.userTasks = returnedTasks.map(TaskViewModel.init)
+                    self.objectWillChange.send()
+                }
+                
             case .failure(let error):
                 print(error)
             }
@@ -305,44 +346,44 @@ final class MainViewModel: ObservableObject{
     }
     
     
-//    func fetchUserProfile(){
-//
-//        let predicate = NSPredicate(value: true)
-//        let query = CKQuery(recordType: RecordType.userProfile.rawValue, predicate: predicate)
-//        let queryOperation = CKQueryOperation(query: query)
-//
-//        var returnedUsersProfile: [UserProfile] = []
-//
-//        self.database.fetch(withQuery: query) { result in
-//            switch result {
-//            case .success(let result):
-//
-//                result.matchResults.compactMap { $0.1 }
-//                    .forEach {
-//                        switch $0 {
-//                        case .success(let record):
-//
-//                            if let user = UserProfile.fromRecord(record) {
-//                                returnedUsersProfile.append(user)
-//                            }
-////                            print(returnedRooms)
-//                        case .failure(let error):
-//                            print(error)
-//                        }
-//                    }
-//
-//                DispatchQueue.main.async {
-//                    self.usersProfile = returnedUsersProfile.map(UserProfileViewModel.init)
-////                    defer {
-////                        self.objectWillChange.send()
-////                    }
-//                    self.objectWillChange.send()
-////                    print("\(self.rooms)")
-//                }
-//
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
+    //    func fetchUserProfile(){
+    //
+    //        let predicate = NSPredicate(value: true)
+    //        let query = CKQuery(recordType: RecordType.userProfile.rawValue, predicate: predicate)
+    //        let queryOperation = CKQueryOperation(query: query)
+    //
+    //        var returnedUsersProfile: [UserProfile] = []
+    //
+    //        self.database.fetch(withQuery: query) { result in
+    //            switch result {
+    //            case .success(let result):
+    //
+    //                result.matchResults.compactMap { $0.1 }
+    //                    .forEach {
+    //                        switch $0 {
+    //                        case .success(let record):
+    //
+    //                            if let user = UserProfile.fromRecord(record) {
+    //                                returnedUsersProfile.append(user)
+    //                            }
+    ////                            print(returnedRooms)
+    //                        case .failure(let error):
+    //                            print(error)
+    //                        }
+    //                    }
+    //
+    //                DispatchQueue.main.async {
+    //                    self.usersProfile = returnedUsersProfile.map(UserProfileViewModel.init)
+    ////                    defer {
+    ////                        self.objectWillChange.send()
+    ////                    }
+    //                    self.objectWillChange.send()
+    ////                    print("\(self.rooms)")
+    //                }
+    //
+    //            case .failure(let error):
+    //                print(error)
+    //            }
+    //        }
+    //    }
 }
