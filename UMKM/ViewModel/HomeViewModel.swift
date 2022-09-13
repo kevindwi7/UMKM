@@ -81,21 +81,21 @@ class HomeViewModel:ObservableObject{
         newParticipant.insert(contentsOf: project.participantList, at: 0)
         
         let recordId = project.id
-        let projectHost = project.projectHost
-        let projectName = project.projectName
-        let hostId = project.hostId
-        let goal = project.goal
-        let description = project.description
-        let location = project.location
-        let startTime = project.startTime
-        let endTime = project.endTime
-        let isFinish = project.isFinish
-        let startDate = project.startDate
-        let endDate = project.endDate
-        let projectID = project.projectID
-        let participantListName = project.participantListName
-        let divisi = project.divisi
-        
+//        let projectHost = project.projectHost
+//        let projectName = project.projectName
+//        let hostId = project.hostId
+//        let goal = project.goal
+//        let description = project.description
+//        let location = project.location
+//        let startTime = project.startTime
+//        let endTime = project.endTime
+//        let isFinish = project.isFinish
+//        let startDate = project.startDate
+//        let endDate = project.endDate
+//        let projectID = project.projectID
+//        let participantListName = project.participantListName
+//        let divisi = project.divisi
+//
             if( !(newParticipant.contains(participantID))){
                 if(participantID != "" || !(participantID.isEmpty) ){
                     newParticipant.append(participantID)
@@ -103,15 +103,6 @@ class HomeViewModel:ObservableObject{
                 }
             
         }
-//        else if (command == "leave") {
-//            if(newParticipant.contains(participantID)){
-//                if let index = newParticipant.firstIndex(of: participantID) {
-//                    print("Leave Room : \(newParticipant[index])")
-//                    newParticipant.remove(at: index)
-//                }
-//            }
-//        }
-     
         
         newParticipant.removeAll(where: { $0 == "" })
         
@@ -134,8 +125,8 @@ class HomeViewModel:ObservableObject{
                         }
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
-                        guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName, divisi: divisi))
+//                        guard let participantList = record["participantList"] as? [String] else { return }
+//                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName, divisi: divisi))
 //                        print(element)
                         self.hasUpdated = true
                         self.isLoading =  false
@@ -172,15 +163,14 @@ class HomeViewModel:ObservableObject{
         
         let recordId = task.id
         
-        if(newRegisterUser.contains(userRegisterID) || newRegisterUserID.contains(userRegisterID)){
-            if let index = newRegisterUser.firstIndex(of: userRegisterID)  {
-                print("\(newRegisterUser[index])")
-                newRegisterUser.remove(at: index)
+        if(newRegisterUser.contains(userRegister) || newRegisterUserID.contains(userRegisterID)){
+            if let index2 = newRegisterUser.firstIndex(of: userRegister){
+//                print("\(newRegisterUser[index])")
+                print("\(newRegisterUser[index2])")
+//                newRegisterUser.remove(at: index)
+                newRegisterUser.remove(at: index2)
             }
-            if let index2 = newRegisterUserID.firstIndex(of: userRegisterID){
-                print("\(newRegisterUserID[index2])")
-                newRegisterUserID.remove(at: index2)
-            }
+//
         }
         
         newRegisterUser.removeAll(where: { $0 == "" })

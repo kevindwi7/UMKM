@@ -54,8 +54,8 @@ struct AnggotaSheetView: View {
                                             })
                                             
                                             Button(action: {
-                                                print("deecline")
-                                                vm.deleteTaskRegisterUser(task: tasks, userRegister:  firstName ?? "", userRegisterID: userID!)
+                                                print(firstName!)
+                                                vm.deleteTaskRegisterUser(task: tasks, userRegister: firstName!, userRegisterID: userID!)
 //                                                vm.deleteCloudData(recordID: items)
                                             }, label: {
                                                 Image(systemName: "person.fill.xmark").opacity(0.5)

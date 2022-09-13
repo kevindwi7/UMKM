@@ -70,7 +70,7 @@ struct DetailProjectTaskCard: View {
                                 .foregroundColor(.white)
                                 .background( !task.registerUserID.contains(userID!) ? .blue : .gray)
                                 .cornerRadius(8)
-                                .disabled( task.registerUserID.contains(userID!))
+//                                .disabled( task.registerUserID.contains(userID!))
                                 
                                 
                                 

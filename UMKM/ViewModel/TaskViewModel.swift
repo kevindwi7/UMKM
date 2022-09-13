@@ -52,4 +52,7 @@ struct TaskViewModel: Hashable, Identifiable{
     var userID: String{
         task.userID
     }
+    var projectName: String{
+        task.projectName
+    }
 }

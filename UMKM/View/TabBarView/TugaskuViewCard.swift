@@ -26,7 +26,7 @@ struct TugaskuCardView: View {
                 Spacer()
             }
             HStack{
-                Text(task.projectId)
+                Text(task.projectName)
                     .font(.system(.subheadline, design: .rounded))
                     .scaledFont(name: "", size: 14)
                     .minimumScaleFactor(0.01)
