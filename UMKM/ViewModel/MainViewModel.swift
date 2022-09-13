@@ -131,10 +131,10 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func createTask(projectId: String,taskName: String, user: String, isFinish:Bool, registerUser: [String],registerUserID: [String], userID: String)   {
+    func createTask(projectId: String,taskName: String, user: String, isFinish:Bool, registerUser: [String],registerUserID: [String], userID: String, projectName:String)   {
         
         let record = CKRecord(recordType: RecordType.task.rawValue)
-        let task = Task(projectId: projectId, taskName: taskName, user: user, isFinish: isFinish, registerUser: registerUser, registerUserID: registerUserID, userID: userID)
+        let task = Task(projectId: projectId, taskName: taskName, user: user, isFinish: isFinish, registerUser: registerUser, registerUserID: registerUserID, userID: userID, projectName: projectName)
         
         record.setValuesForKeys(task.toDictionary())
         
