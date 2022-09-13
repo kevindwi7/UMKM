@@ -88,7 +88,7 @@ struct ProfileView: View {
                     
                         //kotak 2
                     VStack(spacing: 2){
-                        Text("Tugas yang\nharus dikerjakan")
+                        Text("Dalam Pengerjaan")
                             .multilineTextAlignment(.center)
                                 .font(.system(.caption2, design: .rounded))
                                 .minimumScaleFactor(0.0001)
@@ -121,7 +121,7 @@ struct ProfileView: View {
                     
                         //kotak3
                     VStack(spacing: 2){
-                        Text("Tugas yang \n harus dikerjakan")
+                        Text("Selesai")
                             .multilineTextAlignment(.center)
                                 .font(.system(.caption2, design: .rounded))
                                 .minimumScaleFactor(0.0001)
