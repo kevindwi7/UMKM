@@ -11,6 +11,7 @@ import CloudKit
 struct HomeView: View {
     @StateObject var vm:HomeViewModel
     @StateObject var mvm:MainViewModel
+    @StateObject var nvm:notificationViewModel
     
     @State var isActive = false
     @State var isFirstTimeActive = false
@@ -19,9 +20,10 @@ struct HomeView: View {
     @State var usersID = UserDefaults.standard.object(forKey: "userID") as? String
     @State var isFirstTime = UserDefaults.standard.object(forKey: "isFirstTime") as? Bool ?? true
     
-    init(vm: HomeViewModel, mvm: MainViewModel) {
+    init(vm: HomeViewModel, mvm: MainViewModel, nvm:notificationViewModel) {
         _vm = StateObject(wrappedValue: vm)
         _mvm = StateObject(wrappedValue: mvm)
+        _nvm = StateObject(wrappedValue: nvm)
     }
     
     var body: some View {
@@ -62,7 +64,6 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                     }.sheet(isPresented: $isActive) {
-                        
                         CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
                     }.foregroundColor(.white)
                         .accessibilityLabel("Tambah Proyek")
@@ -89,15 +90,20 @@ struct HomeView: View {
             }
             .navigationTitle("Proyek")
             .navigationBarTitleDisplayMode(.inline)
-//            .sheet(isPresented: $isFirstTime ){
-//                ForEach($vm.users, id: \.id){ $userss in
-//                    if (userss.id?.recordName ?? "" == usersID){
-////                        print(userss.id)
-//                        OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
-//                      
-//                    }
-//                }
-//            }
+            .sheet(isPresented: $isFirstTime ){
+                ForEach($vm.users, id: \.id){ $userss in
+                    if (userss.id?.recordName ?? "" == usersID){
+//                        print(userss.id)
+                        OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
+                            .onDisappear{
+                                nvm.requestNotificationPermission { finish in
+                                    print("Success")
+                                }
+                            }
+                      
+                    }
+                }
+            }
             //
             //
             //
