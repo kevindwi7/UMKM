@@ -15,7 +15,7 @@ struct DetailProjectTaskCard: View {
     @Binding var task: [TaskViewModel]
     @State var isLoading = false
     @State var showingSheet = false
-    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"], userID: "ndsjds"))
+    @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"], userID: "ndsjds", projectName: "asd"))
     @State var tasks: String = ""
     @State var isPM = true
 
