@@ -54,7 +54,6 @@ struct DetailProjectCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height:30)
-                    
                 }.accessibilityLabel("Bergabung Masuk ke Whatsapp Komunitas")
             }
             
@@ -79,7 +78,7 @@ struct DetailProjectCardView: View {
                         .lineLimit(1)
                         .foregroundColor(.black)
                 }   .accessibilityElement(children: .combine)
-                    .accessibilityLabel("Tanggal kegiatan pada hari \(dateFormatter.string(from: project.startDate))")
+                    .accessibilityLabel("Tanggal kegiatan pada hari \(dateFormatter.string(from: project.startDate)) sampai tanggal \(dateFormatter.string(from: project.endDate))")
             
                 VStack(alignment:.leading, spacing: 6){
                     //                    Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
