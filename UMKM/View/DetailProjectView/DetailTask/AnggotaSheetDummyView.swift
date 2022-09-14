@@ -10,6 +10,9 @@ import SwiftUI
 struct AnggotaSheetDummyView: View {
     
     @State var tasks2:[Task] = [Task(projectId: "asdsad", taskName: "asdasd", user: "asdsad", isFinish: false, registerUser: [""], registerUserID: [""], userID: "asd", projectName: "asdasd")]
+    @Binding var pmButton:String
+    @Binding var showingSheet:Bool
+    @Binding var task:String
     
     var body: some View {
     
@@ -35,6 +38,10 @@ struct AnggotaSheetDummyView: View {
                                         Spacer()
                                         Button(action: {
                                             print("accept")
+                                            self.pmButton = "Selesai Pilih"
+                                            self.task = "Keisi"
+                                            self.showingSheet = false
+                                            
                                       
                                             
                                         }, label: {

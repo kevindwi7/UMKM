@@ -19,6 +19,7 @@ struct DetailProjectTaskCard: View {
     @State var tasks2:TaskViewModel = TaskViewModel(task: Task(projectId: "asdasd", taskName: "asdsad", user: "asdasd", isFinish: true, registerUser: ["dsds"], registerUserID: ["dsds"], userID: "ndsjds", projectName: "asd"))
     @State var tasks: String = ""
     @State var isPM = true
+    @State var pmButton:String = ""
 
     
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
@@ -43,6 +44,7 @@ struct DetailProjectTaskCard: View {
                                     print(task)
                                     tasks2 = task
                                     if(project.hostId == userID){
+//                                    if(isPM == true){
                                         self.showingSheet.toggle()
                                     }else{
                                         tasks = "\(firstName) \(lastName)"
@@ -55,6 +57,7 @@ struct DetailProjectTaskCard: View {
 //                                            Text("Sudah Daftar").font(.system(size: 14, weight: .regular, design: .default)).disabled(true)
 //                                        }
                                         if(project.hostId == userID){
+//                                        if(isPM == true){
                                             Text("Pilih Anggota").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
                                         }else{
                                             Text("Daftar").font(.system(size: 14, weight: .regular, design: .default))
@@ -62,7 +65,8 @@ struct DetailProjectTaskCard: View {
                                      
                                     }else{
                                         if(project.hostId == userID){
-                                            Text("Selesai Pilih").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+//                                        if(isPM == true){
+                                            Text("\(pmButton)").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
                                         }else{
                                             Text("Sudah Terisi").font(.system(size: 14, weight: .regular, design: .default))
                                         }
@@ -71,11 +75,11 @@ struct DetailProjectTaskCard: View {
                                 }
                                 .frame(width: 103,height: 25)
                                 .foregroundColor(.white)
-                                .background(.blue)
+                                .background(self.tasks.isEmpty ? .blue:.gray)
 //                                .background( !task.registerUserID.contains(userID!) ? .blue : .gray)
                                 .cornerRadius(8)
 //                                .disabled( task.registerUserID.contains(userID!))
-                                .disabled(tasks.isEmpty ? false:true)
+                                .disabled(self.tasks.isEmpty ? false:true)
                                 
                                 
                                 
@@ -86,7 +90,7 @@ struct DetailProjectTaskCard: View {
                     .sheet(isPresented: $showingSheet) {
 //                                    print($task)
 //                        AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$tasks2, projects: $project, isActive: $isActive)
-                        AnggotaSheetDummyView()
+                        AnggotaSheetDummyView(pmButton: self.$pmButton, showingSheet: self.$showingSheet, task: self.$tasks)
                     }
                     .padding()
                     .navigationTitle("Detail Tugas")
