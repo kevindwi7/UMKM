@@ -15,6 +15,7 @@ struct DetailProjectView: View {
     @StateObject var mvm: MainViewModel
     @State var isActive = false
     @Binding var project: ProjectViewModel
+    @Binding var tasks:[TaskViewModel]
 
     @State var isLoading = false
     @State var isPresented: Bool = false
@@ -49,7 +50,7 @@ struct DetailProjectView: View {
                                             .minimumScaleFactor(0.01)
                                             .lineLimit(1)
                                             .foregroundColor(.black)
-                                        Text("\(project.participantListName.count) Orang")
+                                        Text("\(project.participantListName.count-1) Orang")
                                             .font(.system(.caption, design: .rounded))
                                             .scaledFont(name: "", size: 12)
                                             .minimumScaleFactor(0.01)
@@ -72,7 +73,7 @@ struct DetailProjectView: View {
 
                 //   Form{
                 //       Section{
-                        ForEach (project.participantListName, id: \.self){ itemss in
+                        ForEach ($mvm.takenTasks, id: \.self){ $task in
                 //            VStack(alignment:.leading, spacing: 15){
                                 HStack(alignment:.top, spacing: 15){
                                     Image(systemName: "person.crop.circle.fill")
@@ -82,21 +83,14 @@ struct DetailProjectView: View {
                                         .foregroundColor(.black)
                                         .accessibilityLabel("foto Tania") // need to further update dummy - vp
                                     VStack(alignment:.leading){
-                                        Text(itemss.self) // need to further update dummy - vp
+                                        Text(task.user) // need to further update dummy - vp
                                             .font(.system(.body, design: .rounded)).bold()
                                             .minimumScaleFactor(0.01)
                                             .lineLimit(1)
                                             .foregroundColor(.black)
                                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
-                                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
-
-                                        //Tugasnya
-                //                        Text("\(project3.tasks.count)")
-                //                        ForEach ($project3.tasks, id: \.self){ $task in
-                //                            Text("Hellow") // need to further update dummy - vp
-                //                                .font(.system(.caption, design: .rounded))
-                //                        }
-                                        Text("Sapu halaman depan") // need to further update dummy - vp
+                                            .accessibilityLabel("..... blabla")
+                                        Text(task.taskName) // need to further update dummy - vp
                                             .font(.system(.caption, design: .rounded))
                                             .scaledFont(name: "", size: 12)
                                             .minimumScaleFactor(0.01)
@@ -137,8 +131,10 @@ struct DetailProjectView: View {
                 }
                 .navigationTitle(project.projectName).navigationBarTitleDisplayMode(.inline)
             }.onAppear{
+//                print(self.project)
                 mvm.tasks = []
                 mvm.fetchTask(project: project)
+                mvm.fetchTakenTasks(project: self.project)
             }
             
             .onReceive(vm.objectWillChange ) {_ in

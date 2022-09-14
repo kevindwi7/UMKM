@@ -47,7 +47,7 @@ final class TaskCountViewModel:ObservableObject{
                             print(error)
                         }
                     }
-                print("Task")
+//                print("Task")
                 DispatchQueue.main.async {
 //                    self.tasks = returnedTasks.map(TaskViewModel.init)
                     self.objectWillChange.send()

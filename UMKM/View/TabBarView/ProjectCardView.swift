@@ -138,7 +138,7 @@ struct ProjectCardView: View {
             viewModel.fetchTask(project: project)
         }
         .background(
-            NavigationLink(destination: DetailProjectView(vm: self.vm, mvm: self.mvm, project: $project), isActive: $isActive, label: {
+            NavigationLink(destination: DetailProjectView(vm: self.vm, mvm: self.mvm, project: $project, tasks: self.$task), isActive: $isActive, label: {
                 EmptyView()
             })
         )

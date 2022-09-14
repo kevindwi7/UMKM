@@ -26,6 +26,7 @@ final class MainViewModel: ObservableObject{
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
     @Published var userTasks: [TaskViewModel] = []
+    @Published var takenTasks: [TaskViewModel] = []
     
     //    @Published var usersProfile: [UserProfileViewModel] = []
     
@@ -267,6 +268,50 @@ final class MainViewModel: ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.userTasks = returnedTasks.map(TaskViewModel.init)
+                    self.objectWillChange.send()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchTakenTasks(project:ProjectViewModel){
+//        print(project)
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        
+        var returnedTasks: [Task] = []
+        
+        self.database.fetch(withQuery: query) { result in
+            switch result {
+            case .success(let result):
+                
+                result.matchResults.compactMap { $0.1 }
+                    .forEach {
+                        switch $0 {
+                        case .success(let record):
+                            
+                            if let task = Task.fromRecord(record) {
+                                if(task.projectId == project.projectID){
+                                    if !task.userID.isEmpty{
+                                        returnedTasks.append(task)
+                                        print("Taken")
+                                        print(task.projectName)
+                                        print(task.user)
+                                    }
+                                }
+                            }
+                            //                            print(returnedRooms)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                print("Task")
+                DispatchQueue.main.async {
+                    self.takenTasks = returnedTasks.map(TaskViewModel.init)
                     self.objectWillChange.send()
                 }
                 
