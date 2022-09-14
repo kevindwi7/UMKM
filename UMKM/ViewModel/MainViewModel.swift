@@ -110,20 +110,22 @@ final class MainViewModel: ObservableObject{
         
         // saving record in database
         self.database.save(record) { returnedRecord, returnedError in
+            print("return from create \(returnedError) \(returnedRecord)")
             if let returnedError = returnedError {
                 print("Error: \(returnedError)")
             } else {
                 if let returnedRecord = returnedRecord {
                     if let project = Project.fromRecord(returnedRecord) {
                         DispatchQueue.main.async {
-                            self.isLoading = false
+                            
                             self.projects.append(ProjectViewModel(project: project))
                             self.objectWillChange.send()
                             
                         }
+                        completionHandler()
                         //                        self.recentlyCreatedProjectId = project.projectID
                         //                        print("---- ROOM ID NYA INI : \(self.recentlyCreatedProjectId) -----")
-                        completionHandler()
+                        
                         //                        self.recentlyCreatedProjectId = project.id?.recordName ?? ""
                         //                        completionHandler(self.recentlyCreatedProjectId)
                         
@@ -133,15 +135,16 @@ final class MainViewModel: ObservableObject{
         }
     }
     
-    func createTask(projectId: String,taskName: String, user: String, isFinish:Bool, registerUser: [String],registerUserID: [String], userID: String, projectName:String)   {
+    func createTask(projectId: String,taskName: String, user: String, isFinish:Bool, registerUser: [String],registerUserID: [String], userID: String, projectName:String, completionHandler: @escaping () -> Void)   {
         
         let record = CKRecord(recordType: RecordType.task.rawValue)
         let task = Task(projectId: projectId, taskName: taskName, user: user, isFinish: isFinish, registerUser: registerUser, registerUserID: registerUserID, userID: userID, projectName: projectName)
         
         record.setValuesForKeys(task.toDictionary())
-        
+        print("masuk create task")
         // saving record in database
         self.database.save(record) { returnedRecord, returnedError in
+            print("\(returnedRecord)")
             if let returnedError = returnedError {
                 print("Error: \(returnedError)")
             } else {
@@ -150,8 +153,9 @@ final class MainViewModel: ObservableObject{
                         DispatchQueue.main.async {
                             self.tasks.append(TaskViewModel(task: task))
                             self.objectWillChange.send()
-                            
+                            self.isLoading = false
                         }
+                        completionHandler()
                     }
                 }
             }
@@ -320,5 +324,70 @@ final class MainViewModel: ObservableObject{
             }
         }
     }
+    
+//    func fetchTask(project: ProjectViewModel){
+//        let predicate = NSPredicate(value: true)
+//        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
+//        let queryOperation = CKQueryOperation(query: query)
+//        queryOperation.qualityOfService = .userInitiated
+//
+//        var returnedTasks: [Task] = []
+//
+//        queryOperation.recordMatchedBlock = { id, result in
+//            switch result {
+//                case .success(let record):
+//                if let task = Task.fromRecord(record) {
+//                                                if task.projectId == project.projectID{
+//                                                    returnedTasks.append(task)
+//                                                }
+//
+//                                            }
+//
+//                    DispatchQueue.main.async {
+//                        self.tasks = returnedTasks.map(TaskViewModel.init)
+////                        self.tasks = self.tasks.sorted(by: {$0.startDate.compare($1.startDate) == .orderedAscending})
+//                        self.objectWillChange.send()
+//    //                    print("\(self.rooms)")
+//                    }
+//                    break
+//                case .failure(let error):
+//                    print(error)
+//                    break
+//            }
+//        }
+//
+//        database.add(queryOperation)
+//
+////        self.database.fetch(withQuery: query) { result in
+////            switch result {
+////            case .success(let result):
+////
+////                result.matchResults.compactMap { $0.1 }
+////                    .forEach {
+////                        switch $0 {
+////                        case .success(let record):
+////
+////                            if let task = Task.fromRecord(record) {
+////                                if task.projectId == project.projectID{
+////                                    returnedTasks.append(task)
+////                                }
+////
+////                            }
+////                            //                            print(returnedRooms)
+////                        case .failure(let error):
+////                            print(error)
+////                        }
+////                    }
+//////                print("Task")
+////                DispatchQueue.main.async {
+////                    self.tasks = returnedTasks.map(TaskViewModel.init)
+////                    self.objectWillChange.send()
+////                }
+////
+////            case .failure(let error):
+////                print(error)
+////            }
+////        }
+//    }
 }
 

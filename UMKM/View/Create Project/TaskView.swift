@@ -63,55 +63,61 @@ struct TaskView: View {
             ZStack {
                 Color.primaryGray.ignoresSafeArea()
                 VStack {
-//                    Spacer().frame(height:15)
+                    //                    Spacer().frame(height:15)
                     Form {
-//                        VStack{
-//                            Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(.subheadline, design: .rounded))
-//                                .foregroundColor(.black)
-//                                .accessibilityLabel("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu")
-                            ForEach(0...totalTask-1, id: \.self) { task in
-                                TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(.plain)
-//                                    .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
-                                    .foregroundColor(.black)
-                            }
+                        //                        VStack{
+                        //                            Text("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu").font(.system(.subheadline, design: .rounded))
+                        //                                .foregroundColor(.black)
+                        //                                .accessibilityLabel("Tulis tugas apa saja yang di perlukan untuk menjalankan proyek komunitasmu")
+                        ForEach(0...totalTask-1, id: \.self) { task in
+                            TextField("Tugas \(task+1)", text: self.$tasks[task]).textFieldStyle(.plain)
+                            //                                    .frame(width: UIScreen.main.bounds.width/1.2,height: 50)
+                                .foregroundColor(.black)
+                        }
                         
                         Button(action: {
                             self.totalTask+=1
                             tasks.append("")
                         }){
-                                    HStack(spacing: 6){
-                                        Image(systemName:"plus.circle.fill")
-                                            .font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
-                                                .accessibilityHidden(true)
-                                        Text("Tambah Tugas")
-                                            .font(.system(.footnote, design: .rounded))
-                                            .scaledFont(name: "", size: 14)
-                                            .minimumScaleFactor(0.01)
-                                            .lineLimit(1)
-                                            .foregroundColor(.black)
-                                    }
-
+                            HStack(spacing: 6){
+                                Image(systemName:"plus.circle.fill")
+                                    .font(.system(size: 14, weight: .medium, design: .default)).foregroundColor(.cyan)
+                                    .accessibilityHidden(true)
+                                Text("Tambah Tugas")
+                                    .font(.system(.footnote, design: .rounded))
+                                    .scaledFont(name: "", size: 14)
+                                    .minimumScaleFactor(0.01)
+                                    .lineLimit(1)
+                                    .foregroundColor(.black)
+                            }
+                            
                         }.accessibilityLabel("Tombol Tambah Tugas")
-
-//                            Spacer()
-//                        }
+                        
+                        //                            Spacer()
+                        //                        }
                         //
-        
+                        
                     }
                     .navigationTitle("Atur Tugas")
-//                    .frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
+                    //                    .frame(width:UIScreen.main.bounds.width/1.2).padding().background(.white).cornerRadius(8)
                     Button {
                         //handle save project
                         //                        self.isLoading = true
                         vm.createProject(projectHost: "\(firstName ?? "") \(lastName ?? "")", projectName: namaProjectTask, location: lokasiProjectTask, startTime: startTimeTask, endTime: endTimeTask, participantList: [userID!], description: deskripsiProjectTask, goal: tujuanProjectTask, hostId: userID!, isFinish: isFinish, startDate: startDateTask, endDate: endDateTask, projectID: projectID,participantListName: ["\(firstName ?? "")\(lastName ?? "")"], divisi: divisi){
-                            self.isActive.toggle()
+                            print("Selesai")
+                            for task in tasks {
+                                print("ASDASD")
+                                vm.createTask(projectId: projectID, taskName: task, user: "", isFinish: false, registerUser: [""], registerUserID: [""], userID: "", projectName: projectName){
+                                    self.isActive.toggle()
+                                }
+                                
+                            }
+                            
                         }
                         
-                        for task in tasks {
-                            vm.createTask(projectId: projectID, taskName: task, user: "", isFinish: false, registerUser: [""], registerUserID: [""], userID: "", projectName: projectName)
-                            
-                            
-                        }
+                        
+                        
+                        
                     }
                 label: {
                     Text("Selesai").foregroundColor(.white).font(.system(size: 12, weight: .medium, design: .default)).frame(width: UIScreen.main.bounds.width/1.1,height: 38)

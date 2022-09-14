@@ -124,6 +124,6 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        HomeView(vm: HomeViewModel(container: CKContainer.default()))
-//        
+//
 //    }
 //}

@@ -14,10 +14,10 @@ struct ProfileView: View {
     @State var isActive = false
     @State private var vibrationOnRing = true
     @StateObject var nvm:notificationViewModel
-    let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
-    let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
-    let komunitas = UserDefaults.standard.object(forKey: "komunitas") as? String
-    let divisi = UserDefaults.standard.object(forKey: "divisi") as? String
+    @State var firstName = UserDefaults.standard.object(forKey: "firstName") as? String
+    @State var lastName = UserDefaults.standard.object(forKey: "lastName") as? String
+    @State var komunitas = UserDefaults.standard.object(forKey: "komunitas") as? String
+    @State var divisi = UserDefaults.standard.object(forKey: "divisi") as? String
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -428,6 +428,8 @@ struct ProfileView: View {
         }.onAppear{
             print("asdsds")
             self.notification = UserDefaults.standard.bool(forKey: "notification")
+            self.komunitas = UserDefaults.standard.object(forKey: "komunitas") as? String ?? ""
+            self.divisi = UserDefaults.standard.object(forKey: "divisi") as? String ?? ""
         }
 
     }

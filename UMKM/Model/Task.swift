@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-struct Task{
+struct Task:Hashable{
     let id: CKRecord.ID?
     let projectId: String
     var taskName: String
