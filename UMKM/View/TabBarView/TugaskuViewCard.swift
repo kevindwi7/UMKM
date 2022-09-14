@@ -17,6 +17,7 @@ struct TugaskuCardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height:24)
+                    .accessibilityLabel("Centang Tugas")
                 Text(task.taskName)
                     .font(.system(.title3, design: .rounded).bold())
                     .minimumScaleFactor(0.01)
