@@ -14,6 +14,10 @@ struct ProfileView: View {
     @State var isActive = false
     @State private var vibrationOnRing = true
     @StateObject var nvm:notificationViewModel
+    let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
+    let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
+    let komunitas = UserDefaults.standard.object(forKey: "komunitas") as? String
+    let divisi = UserDefaults.standard.object(forKey: "divisi") as? String
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -172,7 +176,7 @@ struct ProfileView: View {
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .accessibilityLabel("Nama")
-                            Text("Tania Wilona")
+                            Text("\(firstName ?? "") \(lastName ?? "")")
                                 .font(.system(.subheadline, design: .rounded)).bold()
                                 .minimumScaleFactor(0.01)
                                 .lineLimit(1)
@@ -203,7 +207,7 @@ struct ProfileView: View {
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .accessibilityLabel("Komunitas")
-                            Text("Komunitas Mata Hati")
+                            Text("\(komunitas ?? "")")
                                 .font(.system(.subheadline, design: .rounded)).bold()
                                 .minimumScaleFactor(0.01)
                                 .lineLimit(1)
@@ -234,7 +238,7 @@ struct ProfileView: View {
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .accessibilityLabel("Divisi")
-                            Text("Humas") //need to update - backend for labeling - data dummy divisi
+                            Text("\(divisi ?? "")") //need to update - backend for labeling - data dummy divisi
                                 .font(.system(.caption, design: .rounded).bold())
                                 .foregroundColor(.black.opacity(0.85))
                                 .minimumScaleFactor(0.01)

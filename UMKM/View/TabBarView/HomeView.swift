@@ -35,29 +35,12 @@ struct HomeView: View {
                         ForEach($vm.projects, id: \.id){ $project in
             
                             ProjectCardView(vm: self.vm, mvm: self.mvm, project: $project,task: $mvm.tasks)
-                            
-                            //                            ForEach ($vm.tasks, id: \.id) { $taskHome in
-                            
-                          
-                            
-                            
-                            //                            }
-                            
                         }
                         .padding(.vertical, 6)
                     }
                     .padding()
                     
                 }
-                //            .frame(width: UIScreen.main.bounds.width)
-                //
-//                .navigationBarTitle(Text("Proyek").font(.largeTitle).bold(), displayMode: .inline).accentColor(Color(.label))
-                //                                .uiFontMenuTitle(.title)
-                
-                //                .background(NavigationConfigurator { nc in
-                //                                nc.navigationBar.barTintColor = .systemCyan
-                //                                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-                //                            })
                 .toolbar {
                     Button {
                         self.isActive = true
@@ -102,12 +85,6 @@ struct HomeView: View {
                     }
                 }
             }
-            //
-            //
-            //
-            //
-            
-            
             
         }
         
@@ -126,10 +103,6 @@ struct HomeView: View {
                 UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
             }
-        //                UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Georgia", size: 20)!]
-        
-        
-        //            }
     }
 }
 

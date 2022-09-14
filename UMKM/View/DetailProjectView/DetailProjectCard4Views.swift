@@ -15,6 +15,7 @@ struct DetailProjectCard4Views: View {
     @State var action: Int? = 0
     
     @Binding var project: ProjectViewModel
+    @Binding var tasks:[TaskViewModel]
     
     let firstName = UserDefaults.standard.object(forKey: "firstName") as? String
     let lastName = UserDefaults.standard.object(forKey: "lastName") as? String
