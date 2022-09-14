@@ -24,8 +24,8 @@ struct TugaskuView: View {
                 Color(UIColor.systemGray6)
                 ScrollView{
                     VStack(alignment: .leading){
-                        ForEach(1...5, id: \.self){_ in
-//                            TugaskuCardView()
+                        ForEach($mvm.userTasks, id: \.self){$task in
+                            TugaskuCardView(task: $task)
                         }
                     }
                 }

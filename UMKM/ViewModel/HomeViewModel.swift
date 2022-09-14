@@ -75,49 +75,60 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func updateProjectMember(project: ProjectViewModel, participantID: String){
+    func updateProjectMember(project: ProjectViewModel,task: TaskViewModel, participantID: String, participantName: String, userID: String, userName: String,userRegister: String,  userRegisterID: String, completionHandler:  @escaping () -> Void){
         
         self.isLoading = true
         
-        var newParticipant =  [String]()
-        newParticipant.insert(contentsOf: project.participantList, at: 0)
+        var newParticipantID =  [String]()
+        var newParticipantName = [String]()
+        var newUserName = String()
+        var newUserID = String()
+        var newRegisterUser =  [String]()
+        var newRegisterUserID =  [String]()
         
+        newParticipantID.insert(contentsOf: project.participantList, at: 0)
+        newParticipantName.insert(contentsOf: project.participantListName, at: 0)
+        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
+        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
+        
+        newUserName = userName
+        newUserID = userID
+
         let recordId = project.id
-        let projectHost = project.projectHost
-        let projectName = project.projectName
-        let hostId = project.hostId
-        let goal = project.goal
-        let description = project.description
-        let location = project.location
-        let startTime = project.startTime
-        let endTime = project.endTime
-        let isFinish = project.isFinish
-        let startDate = project.startDate
-        let endDate = project.endDate
-        let projectID = project.projectID
-        let participantListName = project.participantListName
-        let divisi = project.divisi
+        let recordId2 = task.id
         
-            if( !(newParticipant.contains(participantID))){
-                if(participantID != "" || !(participantID.isEmpty) ){
-                    newParticipant.append(participantID)
+        let userName = task.user
+        let userID = task.userID
+        
+      
+//
+//
+        if( !(newParticipantID.contains(participantID)) || !(newParticipantName.contains(participantName)) || !(newUserName.contains(userName)) || !(newUserID.contains(userID)) || newRegisterUser.contains(userRegister) || newRegisterUserID.contains(userRegisterID)){
+            if let index2 = newRegisterUser.firstIndex(of: userRegister), let index1 = newRegisterUserID.firstIndex(of: userRegisterID){
+                print("\(newRegisterUser[index1])")
+                print("\(newRegisterUser[index2])")
+                newRegisterUser.remove(at: index1)
+                newRegisterUserID.remove(at: index2)
+            }
+            if(participantID != "" || !(participantID.isEmpty) || participantName != "" || !(participantName.isEmpty) || userName != "" || !(userName.isEmpty) || userID != "" || !(userID.isEmpty) ){
+                newParticipantID.append(participantID)
+                newParticipantName.append(participantName)
+                newUserName.append(userName)
+                newUserID.append(userID)
                     print("masukk")
                 }
-            
+
         }
-//        else if (command == "leave") {
-//            if(newParticipant.contains(participantID)){
-//                if let index = newParticipant.firstIndex(of: participantID) {
-//                    print("Leave Room : \(newParticipant[index])")
-//                    newParticipant.remove(at: index)
-//                }
-//            }
-//        }
-     
+
+        newParticipantID.removeAll(where: { $0 == "" })
+        newParticipantName.removeAll(where: { $0 == "" })
+        newRegisterUser.removeAll(where: { $0 == "" })
+        newRegisterUserID.removeAll(where: { $0 == "" })
         
-        newParticipant.removeAll(where: { $0 == "" })
+        print(newRegisterUser)
+        print(newRegisterUserID)
+        print(newParticipantID)
         
-        print(newParticipant)
         
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -126,7 +137,8 @@ class HomeViewModel:ObservableObject{
                 }
                 guard let record = returnedRecord else { return }
                 
-                record["participantList"] = newParticipant as CKRecordValue
+                record["participantList"] = newParticipantID as CKRecordValue
+                record["participantListName"] = newParticipantName as CKRecordValue
                 
                 self.database.save(record) { record, error in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -134,18 +146,102 @@ class HomeViewModel:ObservableObject{
                             print(error)
                             
                         }
-                        guard let record = returnedRecord else { return }
-                        let id = record.recordID
-                        guard let participantList = record["participantList"] as? [String] else { return }
-                        let element = ProjectViewModel(project: Project(id: id, projectHost: projectHost, projectName: projectName, goal: goal, description: description, location: location, startTime: startTime, endTime: endTime, participantList: participantList, hostId: hostId, isFinish: isFinish, startDate: startDate, endDate: endDate, projectID: projectID, participantListName: participantListName, divisi: divisi))
-//                        print(element)
+
                         self.hasUpdated = true
                         self.isLoading =  false
+                        self.objectWillChange.send()
+                    }
+                }
+            }
+        }
+        
+        database.fetch(withRecordID: recordId2!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let error = error {
+                    print(error)
+                }
+                guard let record = returnedRecord else { return }
+                
+                record["user"] = newUserName as CKRecordValue
+                record["userID"] = newUserID as CKRecordValue
+                
+                record["registerUser"] = newRegisterUser as CKRecordValue
+                record["registerUserID"] = newRegisterUserID as CKRecordValue
+                
+                self.database.save(record) { record, error in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                            
+                        }
+                    
+                        self.hasUpdated = true
+                        self.isLoading =  false
+                        completionHandler()
+                    }
+                }
+            }
+        }
+    }
+    
+    func deleteTaskRegisterUserAccept(task: TaskViewModel, userRegister: String,  userRegisterID: String, completionHandler:  @escaping () -> Void){
+        self.isLoading = true
+        var newRegisterUser =  [String]()
+        var newRegisterUserID =  [String]()
+        
+        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
+        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
+        
+        let recordId = task.id
+        
+        if(newRegisterUser.contains(userRegister) || newRegisterUserID.contains(userRegisterID)){
+            if let index2 = newRegisterUser.firstIndex(of: userRegister), let index1 = newRegisterUserID.firstIndex(of: userRegisterID){
+                print("\(newRegisterUser[index1])")
+                print("\(newRegisterUser[index2])")
+                newRegisterUser.remove(at: index1)
+                newRegisterUserID.remove(at: index2)
+            }
+//
+        }
+        
+        newRegisterUser.removeAll(where: { $0 == "" })
+        newRegisterUserID.removeAll(where: { $0 == "" })
+        
+        print(newRegisterUser)
+        print(newRegisterUserID)
+        
+        database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                if let error = error {
+                    print(error)
+                }
+                guard let record = returnedRecord else { return }
+                
+                record["registerUser"] = newRegisterUser as CKRecordValue
+                record["registerUserID"] = newRegisterUserID as CKRecordValue
+                
+                print("dispatch")
+                self.database.save(record) { record, error in
+                    print("saveee")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                            
+                        }
+                        self.isLoading =  false
+                        guard let record = returnedRecord else { return }
+//
+                        print(123)
+//
+                        self.hasUpdated = true
+                        
+                        completionHandler()
                         
                     }
                 }
             }
         }
+      
     }
     
     func deleteProject(project: ProjectViewModel){
@@ -164,21 +260,69 @@ class HomeViewModel:ObservableObject{
         }
     }
     
-    func deleteTaskRegisterUser(task: TaskViewModel, registerUser: String){
+    func deleteTaskRegisterUser(task: TaskViewModel, userRegister: String,  userRegisterID: String){
         self.isLoading = true
+        var newRegisterUser =  [String]()
+        var newRegisterUserID =  [String]()
+        
+        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
+        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
+        
         let recordId = task.id
         
-        database.delete(withRecordID: recordId!) { deletedRecordId, error in
-            DispatchQueue.main.async {
+        if(newRegisterUser.contains(userRegister) || newRegisterUserID.contains(userRegisterID)){
+            if let index2 = newRegisterUser.firstIndex(of: userRegister), let index1 = newRegisterUserID.firstIndex(of: userRegisterID){
+                print("\(newRegisterUser[index1])")
+                print("\(newRegisterUser[index2])")
+                newRegisterUser.remove(at: index1)
+                newRegisterUserID.remove(at: index2)
+            }
+//
+        }
+        
+        newRegisterUser.removeAll(where: { $0 == "" })
+        newRegisterUserID.removeAll(where: { $0 == "" })
+        
+        print(newRegisterUser)
+        print(newRegisterUserID)
+        
+        database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if let error = error {
                     print(error)
-                } else {
-                    self.isLoading = false
-                    
                 }
-                print("here")
+                guard let record = returnedRecord else { return }
+                
+                record["registerUser"] = newRegisterUser as CKRecordValue
+                record["registerUserID"] = newRegisterUserID as CKRecordValue
+                
+                print("dispatch")
+                self.database.save(record) { record, error in
+                    print("saveee")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        if let error = error {
+                            print(error)
+                            
+                        }
+                        self.isLoading =  false
+                        guard let record = returnedRecord else { return }
+//                        let id = record.recordID
+//                        guard let user = record["user"] as? [String] else { return }
+//                        guard let userID = record["user"] as? [String] else { return }
+//
+//                        let element = TaskViewModel(task: Task(id: id, projectId: projectId, taskName: taskName, user: userss, isFinish: isFinish, registerUser: user, registerUserID: <#[String]#>))
+                        print(123)
+//                        print(element)
+                        self.hasUpdated = true
+                      
+                        
+                        self.objectWillChange.send()
+                        
+                    }
+                }
             }
         }
+      
     }
     
     func updateTaskRegisterUser(task: TaskViewModel, user: String, userRegisterID: String, userID: String, command: String){
@@ -210,10 +354,14 @@ class HomeViewModel:ObservableObject{
                 
             }
         }else if (command == "delete") {
-            if(newRegisterUser.contains(userRegisterID)){
-                if let index = newRegisterUser.firstIndex(of: userRegisterID) {
+            if(newRegisterUser.contains(userRegisterID) || newRegisterUserID.contains(userRegisterID)){
+                if let index = newRegisterUser.firstIndex(of: userRegisterID)  {
                     print("Leave Room : \(newRegisterUser[index])")
                     newRegisterUser.remove(at: index)
+                }
+                if let index2 = newRegisterUserID.firstIndex(of: userRegisterID){
+                    print("Leave Room : \(newRegisterUserID[index2])")
+                    newRegisterUserID.remove(at: index2)
                 }
             }
         }
@@ -265,6 +413,7 @@ class HomeViewModel:ObservableObject{
     
     func fetchAllUser(){
 //        print(222)
+        self.isLoading = true
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: RecordType.user.rawValue, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
@@ -290,6 +439,7 @@ class HomeViewModel:ObservableObject{
                 
                 DispatchQueue.main.async {
                     self.users = returnedUsers.map(UserViewModel.init)
+                    self.isLoading = false
 //                    defer {
 //                        self.objectWillChange.send()
 //                    }

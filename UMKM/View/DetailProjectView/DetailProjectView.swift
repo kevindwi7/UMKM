@@ -34,7 +34,7 @@ struct DetailProjectView: View {
                         
                         DetailProjectCard3View(hm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), project3: $project, task: $mvm.tasks)
                     
-    //                   DetailProjectCard4Views(vm: MainViewModel(container: CKContainer.default()), project3: $project)
+//                        DetailProjectCard4Views(vm: MainViewModel(container: CKContainer.default()), project: $project, task: $mvm.tasks)
                         Spacer()
                         Button(action: {
                             //            self.isActive = !self.isActive
@@ -62,14 +62,14 @@ struct DetailProjectView: View {
                                         .font(.system(.headline, design: .rounded).bold())
                                         .accessibilityHidden(true)
                                 }
-                                
+
                             }
                             .padding()
                             .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
                             .background(.white)
                             .cornerRadius(16)
                         }
-                        
+
                 //   Form{
                 //       Section{
                         ForEach (project.participantListName, id: \.self){ itemss in
@@ -89,7 +89,7 @@ struct DetailProjectView: View {
                                             .foregroundColor(.black)
                                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
                                             .accessibilityLabel("..... blabla") // need to further update dummy - vp
-                                        
+
                                         //Tugasnya
                 //                        Text("\(project3.tasks.count)")
                 //                        ForEach ($project3.tasks, id: \.self){ $task in
@@ -141,8 +141,12 @@ struct DetailProjectView: View {
                 mvm.fetchTask(project: project)
             }
             
-            .onReceive(vm.objectWillChange) {_ in
+            .onReceive(vm.objectWillChange ) {_ in
                 vm.fetchProject()
+                
+            }
+            .onReceive(mvm.objectWillChange){_ in
+                mvm.fetchTask(project: project)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
