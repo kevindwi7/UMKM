@@ -88,8 +88,8 @@ class HomeViewModel:ObservableObject{
         
         newParticipantID.insert(contentsOf: project.participantList, at: 0)
         newParticipantName.insert(contentsOf: project.participantListName, at: 0)
-        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
-        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
+//        newRegisterUser.insert(contentsOf: task.registerUser, at: 0)
+//        newRegisterUserID.insert(contentsOf: task.registerUserID, at: 0)
         
         newUserName = userName
         newUserID = userID
@@ -165,8 +165,8 @@ class HomeViewModel:ObservableObject{
                 record["user"] = newUserName as CKRecordValue
                 record["userID"] = newUserID as CKRecordValue
                 
-                record["registerUser"] = newRegisterUser as CKRecordValue
-                record["registerUserID"] = newRegisterUserID as CKRecordValue
+//                record["registerUser"] = newRegisterUser as CKRecordValue
+//                record["registerUserID"] = newRegisterUserID as CKRecordValue
                 
                 self.database.save(record) { record, error in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -381,7 +381,6 @@ class HomeViewModel:ObservableObject{
                 
                 record["registerUser"] = newRegisterUser as CKRecordValue
                 record["registerUserID"] = newRegisterUserID as CKRecordValue
-                record["userID"] = newUserID as CKRecordValue
                 
                 print("dispatch")
                 self.database.save(record) { record, error in

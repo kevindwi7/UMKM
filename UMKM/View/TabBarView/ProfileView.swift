@@ -411,6 +411,8 @@ struct ProfileView: View {
                     .accessibilityLabel("Keluar")
             }
             }
+        }.onAppear{
+            self.notification = UserDefaults.standard.bool(forKey: "notification")
         }
 
     }
