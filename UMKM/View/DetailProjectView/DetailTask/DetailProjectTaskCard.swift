@@ -42,13 +42,10 @@ struct DetailProjectTaskCard: View {
                                     print(task.taskName)
                                     print(task)
                                     tasks2 = task
-                                    //handle assign to me
-                                    //                                    vm.updateTaskParticipant(task: task, user: "\(firstName ?? "") \(lastName ?? "")", command: "join")
-                                    //                                    task = "Kevin Dwi"
                                     if(project.hostId == userID){
                                         self.showingSheet.toggle()
                                     }else{
-                                        vm.updateTaskRegisterUser(task: task, user:  "\(firstName ?? "")\(lastName ?? "")", userRegisterID: userID!, userID: "", command: "join")
+                                        vm.updateTaskRegisterUser(task: task, user: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!, userID: "", command: "join")
                                     }
                                     
                                 } label: {
@@ -63,7 +60,11 @@ struct DetailProjectTaskCard: View {
                                         }
                                      
                                     }else{
-                                        Text(tasks).font(.system(size: 14, weight: .regular, design: .default))
+                                        if(project.hostId == userID){
+                                            Text("Selesai Pilih").font(.system(size: 14, weight: .regular, design: .default)).accessibilityLabel("tombol ambil tugas")
+                                        }else{
+                                            Text("Sudah Terisi").font(.system(size: 14, weight: .regular, design: .default))
+                                        }
                                     }
                                     
                                 }
@@ -73,6 +74,7 @@ struct DetailProjectTaskCard: View {
 //                                .background( !task.registerUserID.contains(userID!) ? .blue : .gray)
                                 .cornerRadius(8)
 //                                .disabled( task.registerUserID.contains(userID!))
+                                .disabled(tasks.isEmpty ? false:true)
                                 
                                 
                                 

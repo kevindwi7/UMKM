@@ -93,13 +93,14 @@ struct LoginView: View {
                                     let publicDatabase = CKContainer.default().publicCloudDatabase
                                     publicDatabase.save(record) { (_, _) in
                                         UserDefaults.standard.set(record.recordID.recordName, forKey: "userID")
+                                        self.login = true
                                     }
                                     print(000)
                                     print("Berhasil Login")
                                     // Change login state
 //                                    vm.user = UserViewModel(user: UsersData(firstName: firstName , email: email , lastName: lastName , iCloudID: vm.userID , komunitas: "", divisi: "", pengalaman: "", isFirstTime: true))
 //                                    print(vm.user)
-                                    self.login = true
+                                    
                                 } else {
                                     // For returning user to signin,
                                     // fetch the saved records from Cloudkit
