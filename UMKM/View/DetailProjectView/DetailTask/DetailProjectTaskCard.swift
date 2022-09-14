@@ -45,7 +45,8 @@ struct DetailProjectTaskCard: View {
                                     if(project.hostId == userID){
                                         self.showingSheet.toggle()
                                     }else{
-                                        vm.updateTaskRegisterUser(task: task, user: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!, userID: "", command: "join")
+                                        tasks = "\(firstName) \(lastName)"
+//                                        vm.updateTaskRegisterUser(task: task, user: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!, userID: "", command: "join")
                                     }
                                     
                                 } label: {
@@ -84,7 +85,8 @@ struct DetailProjectTaskCard: View {
                     }
                     .sheet(isPresented: $showingSheet) {
 //                                    print($task)
-                        AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$tasks2, projects: $project, isActive: $isActive)
+//                        AnggotaSheetView(vm: HomeViewModel(container: CKContainer.default()), tasks: self.$tasks2, projects: $project, isActive: $isActive)
+                        AnggotaSheetDummyView()
                     }
                     .padding()
                     .navigationTitle("Detail Tugas")
