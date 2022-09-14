@@ -81,7 +81,7 @@ struct DetailProjectView: View {
                                         .scaledToFit()
                                         .frame(width: 40.8, height: 40.8)
                                         .foregroundColor(.black)
-                                        .accessibilityLabel("foto Tania") // need to further update dummy - vp
+                                        .accessibilityLabel("foto \(task.user)") // need to further update dummy - vp
                                     VStack(alignment:.leading){
                                         Text(task.user) // need to further update dummy - vp
                                             .font(.system(.body, design: .rounded)).bold()
@@ -89,21 +89,19 @@ struct DetailProjectView: View {
                                             .lineLimit(1)
                                             .foregroundColor(.black)
                                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
-                                            .accessibilityLabel("..... blabla")
+
+                                            .accessibilityLabel("\(task.user)")
                                         Text(task.taskName) // need to further update dummy - vp
-                                            .font(.system(.caption, design: .rounded))
-                                            .scaledFont(name: "", size: 12)
-                                            .minimumScaleFactor(0.01)
-                                            .lineLimit(1)
-                                            .foregroundColor(.black)
-                                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
-                                        Text("Atur Keuangan (Bendahara)") // need to further update dummy - vp
-                                            .font(.system(.caption, design: .rounded))
-                                            .scaledFont(name: "", size: 12)
-                                            .minimumScaleFactor(0.01)
-                                            .lineLimit(1)
-                                            .foregroundColor(.black)
-                                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
+
+                                            .accessibilityLabel("\(task.taskName)") // need to further update dummy - vp
+
+                                        //Tugasnya
+                //                        Text("\(project3.tasks.count)")
+                //                        ForEach ($project3.tasks, id: \.self){ $task in
+                //                            Text("Hellow") // need to further update dummy - vp
+                //                                .font(.system(.caption, design: .rounded))
+                //                        }
+                                       
                                     }
                                 }.padding()
                                     .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
