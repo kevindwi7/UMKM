@@ -16,6 +16,7 @@ struct TabBarView: View {
     var body: some View {
         TabView{
             HomeView(vm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), nvm: notificationViewModel())
+                
                 .tabItem{
                     Label("Proyek", systemImage: "person.3.fill")
                 }
@@ -28,7 +29,9 @@ struct TabBarView: View {
                     Label("Profile", systemImage: "person.fill")
                     
                 }
-        }.accentColor(.cyan)
+        }
+        .ignoresSafeArea()
+        .accentColor(.cyan)
      
        
 }

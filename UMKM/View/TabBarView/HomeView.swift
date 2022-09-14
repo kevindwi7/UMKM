@@ -30,49 +30,51 @@ struct HomeView: View {
         NavigationView{
             ZStack{
                 Color(UIColor.systemGray6)
-                ScrollView(.vertical){
-                    VStack(alignment: .leading){
-                        ForEach($vm.projects, id: \.id){ $project in
-            
-                            ProjectCardView(vm: self.vm, mvm: self.mvm, project: $project,task: $mvm.tasks)
+                if(vm.projects.isEmpty){
+                    EmptyHomeView()
+                }else{
+                    ScrollView(.vertical){
+                        VStack(alignment: .leading){
+                            ForEach($vm.projects, id: \.id){ $project in
+                                
+                                ProjectCardView(vm: self.vm, mvm: self.mvm, project: $project,task: $mvm.tasks)
+                            }
+                            .padding(.vertical, 6)
                         }
-                        .padding(.vertical, 6)
+                        .padding()
+                        
                     }
-                    .padding()
                     
-                }
-                .toolbar {
-                    Button {
-                        self.isActive = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                    }.sheet(isPresented: $isActive) {
-                        CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
-                    }.foregroundColor(.white)
-                        .accessibilityLabel("Tambah Proyek")
-                }
-                .onAppear {
-                    vm.fetchProject()
-                    vm.fetchAllUser()
                    
-                }
-                .onReceive(vm.objectWillChange) { _ in
-                    vm.fetchProject()
                     
-                    //vm.fetchTask()
                 }
-               
-                //                .background(NavigationLink(destination: CreateProjectView(), isActive: $isActive, label: {
-                //                    EmptyView()
-                //                })
-                //                )
+            }
+            .onAppear {
+                vm.fetchProject()
+                vm.fetchAllUser()
+                
+            }
+            .onReceive(vm.objectWillChange) { _ in
+                vm.fetchProject()
+                
+                //vm.fetchTask()
+            }
+            .toolbar {
+                Button {
+                    self.isActive = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                }.sheet(isPresented: $isActive) {
+                    CreateProjectView( vm: MainViewModel(container: CKContainer.default()), isActive: self.$isActive)
+                }.foregroundColor(.white)
+                    .accessibilityLabel("Tambah Proyek")
             }
             .navigationTitle("Proyek")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $isFirstTime ){
                 ForEach($vm.users, id: \.id){ $userss in
                     if (userss.id?.recordName ?? "" == usersID){
-//                        print(userss.id)
+                        //                        print(userss.id)
                         OnboardingView(vm: self.mvm, hm: self.vm, updateUser: $userss, isActive: $isFirstTime)
                             .onDisappear{
                                 nvm.requestNotificationPermission { finish in
@@ -82,28 +84,27 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                      
+                        
                     }
                 }
             }
             
         }
         
-        .ignoresSafeArea()
-        
-        .navigationViewStyle(.stack)
-            .onAppear {
-                let appearance = UINavigationBarAppearance()
-                appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-                appearance.backgroundColor = UIColor(Color.cyan
-                                                     //                            .opacity(0.2)
-                )
-                appearance.titleTextAttributes = [NSAttributedString.Key
-                    .foregroundColor : UIColor.white]
-                
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-                
-            }
+//        .ignoresSafeArea()
+//        .navigationViewStyle(.stack)
+        .onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+            appearance.backgroundColor = UIColor(Color.cyan
+                                                 //                            .opacity(0.2)
+            )
+            appearance.titleTextAttributes = [NSAttributedString.Key
+                .foregroundColor : UIColor.white]
+            
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            
+        }
     }
 }
 

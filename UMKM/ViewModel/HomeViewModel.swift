@@ -41,6 +41,7 @@ class HomeViewModel:ObservableObject{
         var returnedProjects: [Project] = []
         
         self.database.fetch(withQuery: query) { result in
+//            print("fetch from recotf\(result))")
             switch result {
             case .success(let result):
 
@@ -129,9 +130,11 @@ class HomeViewModel:ObservableObject{
         print(newRegisterUserID)
         print(newParticipantID)
         
-        
+        print("mau masuk fetch blsba")
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            print("berhasil fetch")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                print("masuk save lg")
                 if let error = error {
                     print(error)
                 }
@@ -146,7 +149,7 @@ class HomeViewModel:ObservableObject{
                             print(error)
                             
                         }
-
+                        print("berhasil update")
                         self.hasUpdated = true
                         self.isLoading =  false
                         self.objectWillChange.send()
@@ -372,7 +375,9 @@ class HomeViewModel:ObservableObject{
         
         print(newRegisterUser)
         print(newRegisterUserID)
+        print("mau daftar")
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
+            print("berhasil fetch daftar")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if let error = error {
                     print(error)
