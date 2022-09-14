@@ -52,7 +52,7 @@ class notificationViewModel:ObservableObject{
         
     }
     
-    func unsubscribeNotifications(){
+    func unsubscribeNotifications(completion:@escaping((String?) -> ())){
         CKContainer.default().publicCloudDatabase.delete(withSubscriptionID: "project_added_to_databse") { returnedID, returnedError in
             if let error = returnedError{
                 print(error)

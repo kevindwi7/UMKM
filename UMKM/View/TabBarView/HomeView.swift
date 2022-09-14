@@ -58,7 +58,7 @@ struct HomeView: View {
                 }
                 .onReceive(vm.objectWillChange) { _ in
                     vm.fetchProject()
-                    vm.fetchAllUser()
+                    
                     //vm.fetchTask()
                 }
                

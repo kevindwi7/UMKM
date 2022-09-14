@@ -275,12 +275,14 @@ struct ProfileView: View {
                             .accessibilityLabel("Komunitas Mata Hati")
                             .onChange(of: notification) { newValue in
                                 if(notification == false){
-                                    UserDefaults.standard.set(false, forKey: "notification")
-                                    nvm.unsubscribeNotifications()
+                                    nvm.unsubscribeNotifications(){finish in
+                                        UserDefaults.standard.set(false, forKey: "notification")
+                                    }
+//                                    print("Success to unsub")
                                 }else{
-                                    UserDefaults.standard.set(true, forKey: "notification")
                                     nvm.subscribeToNotifications{finish in
-                                        print("Success to unsubscribe")
+                                        UserDefaults.standard.set(true, forKey: "notification")
+                                        print("Success to subscribe")
                                     }
                                 }
                             }
@@ -424,6 +426,7 @@ struct ProfileView: View {
             }
             }
         }.onAppear{
+            print("asdsds")
             self.notification = UserDefaults.standard.bool(forKey: "notification")
         }
 
