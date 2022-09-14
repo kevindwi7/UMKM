@@ -26,24 +26,38 @@ struct DetailProjectCardView: View {
     var body: some View {
         VStack(alignment:.leading,spacing: 14){
             //            Text("Detail").font(.system(size: 18, weight: .bold, design: .default))
+            HStack{
                 VStack(alignment:.leading, spacing: 6){
-                    //                    Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
-                    //                        .accessibilityHidden(true)
-                    Text("Lokasi")
-                        .font(.system(.footnote, design: .rounded)).bold()
-                        .scaledFont(name: "", size: 14)
-                        .minimumScaleFactor(0.01)
-                        .lineLimit(1)
-                        .foregroundColor(.black)
-                    Text(project.location)
-                        .font(.system(.caption, design: .rounded))
-                        .scaledFont(name: "", size: 14)
-                        .minimumScaleFactor(0.01)
-                        .lineLimit(1)
-                        .foregroundColor(.black)
-                }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("Lokasi kegiatan di \(project.location)")
+                        //                    Image("location").resizable().scaledToFit().frame(width: 20, height: 20)
+                        //                        .accessibilityHidden(true)
+                        Text("Lokasi")
+                            .font(.system(.footnote, design: .rounded)).bold()
+                            .scaledFont(name: "", size: 14)
+                            .minimumScaleFactor(0.01)
+                            .lineLimit(1)
+                            .foregroundColor(.black)
+                        Text(project.location)
+                            .font(.system(.caption, design: .rounded))
+                            .scaledFont(name: "", size: 14)
+                            .minimumScaleFactor(0.01)
+                            .lineLimit(1)
+                            .foregroundColor(.black)
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("Lokasi kegiatan di \(project.location)")
+                Spacer()
+                Button(action: {
+                    guard let url = URL(string: "https://chat.whatsapp.com/EItv019gSZYFaSucXFSbmK") else { return }
+                    UIApplication.shared.open(url)
+                }){
+                Image("Whatsapp")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height:30)
+                    
+                }.accessibilityLabel("Bergabung Masuk ke Whatsapp Komunitas")
+            }
+            
             
                 VStack(alignment:.leading, spacing: 6){
                     //                    Image(systemName: "calendar").resizable().scaledToFit().frame(width: 20, height: 20)
