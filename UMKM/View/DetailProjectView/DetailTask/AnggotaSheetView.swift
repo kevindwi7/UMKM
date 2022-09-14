@@ -51,21 +51,20 @@ struct AnggotaSheetView: View {
                                             Text(items.self).font(.system(size: 14, weight: .medium, design: .rounded))
                                             Spacer()
                                             Button(action: {
-//                                                print(userID!)
-//                                                print("\(firstName ?? "") \(lastName ?? "")")
-//                                                vm.updateProjectMember(project: projects, task: tasks, participantID: userID!, participantName:  "\(firstName ?? "") \(lastName ?? "")", userID: userID!, userName: "\(firstName ?? "") \(lastName ?? "")", userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!){
-//                                                    self.isActive = true
-                                                }
+                                                //                                                print(userID!)
+                                                //                                                print("\(firstName ?? "") \(lastName ?? "")")
+                                                //                                                vm.updateProjectMember(project: projects, task: tasks, participantID: userID!, participantName:  "\(firstName ?? "") \(lastName ?? "")", userID: userID!, userName: "\(firstName ?? "") \(lastName ?? "")", userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!){
+                                                //                                                    self.isActive = true
                                                 //                                            print(tasks)
                                             }, label: {
                                                 Image(systemName: "person.fill.checkmark").opacity(0.5)
                                             })
                                             
                                             Button(action: {
-//                                                print("deecline")
-//                                                print(firstName!)
-//                                                vm.deleteTaskRegisterUser(task: tasks, userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!)
-//                                                print("\(firstName ?? "") \(lastName ?? "")")
+                                                //                                                print("deecline")
+                                                //                                                print(firstName!)
+                                                //                                                vm.deleteTaskRegisterUser(task: tasks, userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!)
+                                                //                                                print("\(firstName ?? "") \(lastName ?? "")")
                                             }, label: {
                                                 Image(systemName: "person.fill.xmark").opacity(0.5)
                                             })
@@ -161,14 +160,13 @@ struct AnggotaSheetView: View {
             
         }
     }
-    
-    
-    
 }
-
-
-//struct AnggotaSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AnggotaSheetView()
-//    }
-//}
+    
+    
+    
+    
+    //struct AnggotaSheetView_Previews: PreviewProvider {
+    //    static var previews: some View {
+    //        AnggotaSheetView()
+    //    }
+    //}
