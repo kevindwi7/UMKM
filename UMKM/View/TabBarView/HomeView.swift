@@ -58,7 +58,7 @@ struct HomeView: View {
                 }
                 .onReceive(vm.objectWillChange) { _ in
                     vm.fetchProject()
-                   
+                    
                     //vm.fetchTask()
                 }
                
@@ -78,6 +78,7 @@ struct HomeView: View {
                                 nvm.requestNotificationPermission { finish in
                                     nvm.subscribeToNotifications { finish in
                                         UserDefaults.standard.set(true, forKey: "notification")
+                                        print("pppp")
                                     }
                                 }
                             }
