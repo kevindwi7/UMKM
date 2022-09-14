@@ -17,7 +17,7 @@ struct TabBarView: View {
         TabView{
             HomeView(vm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()), nvm: notificationViewModel())
                 .tabItem{
-                    Label("Explore", systemImage: "person.3.fill")
+                    Label("Proyek", systemImage: "person.3.fill")
                 }
             TugaskuView(vm: HomeViewModel(container: CKContainer.default()), mvm: MainViewModel(container: CKContainer.default()))
                 .tabItem{
@@ -28,7 +28,7 @@ struct TabBarView: View {
                     Label("Profile", systemImage: "person.fill")
                     
                 }
-        }
+        }.accentColor(.cyan)
      
        
 }
