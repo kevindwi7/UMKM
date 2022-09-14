@@ -26,6 +26,7 @@ final class MainViewModel: ObservableObject{
     @Published var projects: [ProjectViewModel] = []
     @Published var tasks: [TaskViewModel] = []
     @Published var userTasks: [TaskViewModel] = []
+    
     //    @Published var usersProfile: [UserProfileViewModel] = []
     
     @Published var isSignedInToiCloud: Bool = false
@@ -223,14 +224,10 @@ final class MainViewModel: ObservableObject{
                             print(error)
                         }
                     }
-                
+                print("Task")
                 DispatchQueue.main.async {
                     self.tasks = returnedTasks.map(TaskViewModel.init)
-                    //                    defer {
-                    //                        self.objectWillChange.send()
-                    //                    }
                     self.objectWillChange.send()
-                    //                    print("\(self.rooms)")
                 }
                 
             case .failure(let error):

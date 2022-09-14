@@ -15,6 +15,7 @@
 		9C52AE9028C6E4020057AC72 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */; };
 		9C52AE9228C77AB10057AC72 /* AnggotaSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */; };
 		9C52AE9728C8328D0057AC72 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52AE9628C8328D0057AC72 /* OnboardingView.swift */; };
+		9C6F330A28D168B900F9F93E /* TaskCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F330928D168B900F9F93E /* TaskCountViewModel.swift */; };
 		9C8F6A9E28CCEE7C00068797 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */; };
 		9CA627FA28B5E0E9008344B1 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */; };
 		9CA627FC28B5E206008344B1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA627FB28B5E206008344B1 /* Constant.swift */; };
@@ -59,6 +60,7 @@
 		9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9C52AE9128C77AB10057AC72 /* AnggotaSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnggotaSheetView.swift; sourceTree = "<group>"; };
 		9C52AE9628C8328D0057AC72 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9C6F330928D168B900F9F93E /* TaskCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCountViewModel.swift; sourceTree = "<group>"; };
 		9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		9CA627F928B5E0E9008344B1 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		9CA627FB28B5E206008344B1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -242,8 +244,8 @@
 				C967B8A128BDB84A00B59CE2 /* TaskViewModel.swift */,
 				146F744628BDC73600740D8C /* HapticModel.swift */,
 				9C52AE8F28C6E4020057AC72 /* UserViewModel.swift */,
-				C9DDF5DB28CE431A007B3BF1 /* UserFirstTimeOnboardingViewModel.swift */,
 				9C8F6A9D28CCEE7C00068797 /* NotificationViewModel.swift */,
+				9C6F330928D168B900F9F93E /* TaskCountViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -347,6 +349,7 @@
 				9C52AE9728C8328D0057AC72 /* OnboardingView.swift in Sources */,
 				9C52AE8E28C6DCBD0057AC72 /* User.swift in Sources */,
 				9C281B9B28B7050800B437AC /* HomeViewModel.swift in Sources */,
+				9C6F330A28D168B900F9F93E /* TaskCountViewModel.swift in Sources */,
 				D847ECF028CAF83B00D3BBC9 /* EmptyHomeView.swift in Sources */,
 				9C52AE9228C77AB10057AC72 /* AnggotaSheetView.swift in Sources */,
 				D847ECF228CAF92C00D3BBC9 /* EmptyTugasView.swift in Sources */,
