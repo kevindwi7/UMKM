@@ -66,7 +66,7 @@ struct DetailProjectCard4Views: View {
                         .scaledToFit()
                         .frame(width: 40.8, height: 40.8)
                         .foregroundColor(.black)
-                        .accessibilityLabel("foto Tania") // need to further update dummy - vp
+                        .accessibilityLabel("foto \(itemss.self)") // need to further update dummy - vp
                     VStack(alignment:.leading){
                         Text(itemss.self) // need to further update dummy - vp
                             .font(.system(.body, design: .rounded)).bold()
@@ -74,7 +74,7 @@ struct DetailProjectCard4Views: View {
                             .lineLimit(1)
                             .foregroundColor(.black)
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
-                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                            .accessibilityLabel("ini \(itemss.self)") // need to further update dummy - vp
                         
                         //Tugasnya
 //                        Text("\(project3.tasks.count)")
@@ -88,14 +88,14 @@ struct DetailProjectCard4Views: View {
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
-                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                            .accessibilityLabel("Sapu halaman depan") // need to further update dummy - vp
                         Text("Atur Keuangan (Bendahara)") // need to further update dummy - vp
                             .font(.system(.caption, design: .rounded))
                             .scaledFont(name: "", size: 12)
                             .minimumScaleFactor(0.01)
                             .lineLimit(1)
                             .foregroundColor(.black)
-                            .accessibilityLabel("..... blabla") // need to further update dummy - vp
+                            .accessibilityLabel("Atur Keuangan (Bendahara)") // need to further update dummy - vp
                     }
                 }.padding()
                     .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)

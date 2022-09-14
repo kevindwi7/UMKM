@@ -131,7 +131,7 @@ struct ProjectCardView: View {
                 .background(.white)
                 .cornerRadius(15)
                 .minimumScaleFactor(0.01)
-                .accessibilityLabel("Proyek \(project.projectName), Lokasi di \(project.location), tanggal mulai \(project.startDate) sampai \(project.endDate), jam kegiatan \(project.startTime) sampai \(project.endTime), tugas yang terisi enam dari sepuluh tugas") // dummy data, need to further update - vp
+                .accessibilityLabel("Proyek \(project.projectName), Lokasi di \(project.location), tanggal mulai \(dateFormatter.string(from: project.startDate)) sampai \(dateFormatter.string(from: project.endDate)), jam kegiatan \(timeFormatter.string(from: project.startTime)) sampai \(timeFormatter.string(from: project.endTime)), tugas yang tersedia satu dari \(self.task.count), Divisi \(project.divisi)") // tugas yang tersedia satu dari masih  masih data dummy need to update
         }
         .background(
             NavigationLink(destination: DetailProjectView(vm: self.vm, mvm: self.mvm, project: $project), isActive: $isActive, label: {

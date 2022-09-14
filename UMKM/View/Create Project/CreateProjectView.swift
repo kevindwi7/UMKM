@@ -99,15 +99,12 @@ struct CreateProjectView: View {
                                         Text(flavor.rawValue.capitalized)
                                         
                                     }.foregroundColor(.black)
+//                                        .accessibilityHidden(true)
                                  
                                 }
                               
-                                
-                                //                            Image(systemName: "chevron.right").foregroundColor(.cyan)
-                                //                                                            .font(.system(.body, design: .rounded).bold())
-                                //                                                            .accessibilityHidden(true)
                             }.accessibilityElement(children: .combine)
-                                .accessibilityLabel("pilih divisi")
+                                .accessibilityLabel("pilih divisi, contoh pilih")
                             //
 
 
@@ -212,7 +209,7 @@ struct CreateProjectView: View {
                                 HStack{
                                     Text("Lanjut")
                                     Image(systemName: "chevron.right")
-                                }.accessibilityLabel("Tombol kembali ke halaman proyek")
+                                }.accessibilityLabel("Tombol Lanjut Bagi Tugas")
                             }
                             
                         }
