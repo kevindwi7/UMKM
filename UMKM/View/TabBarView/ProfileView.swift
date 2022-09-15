@@ -207,7 +207,7 @@ struct ProfileView: View {
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .accessibilityLabel("Komunitas")
-                            Text("\(komunitas ?? "")")
+                            Text("Mata Hati")
                                 .font(.system(.subheadline, design: .rounded)).bold()
                                 .minimumScaleFactor(0.01)
                                 .lineLimit(1)
@@ -232,13 +232,13 @@ struct ProfileView: View {
                 VStack(alignment:.leading,spacing: 15){
                     HStack{
                         VStack(alignment:.leading,spacing: 6){
-                            Text("Divisi").font(.system(.caption2, design: .rounded))
+                            Text("Humas").font(.system(.caption2, design: .rounded))
                             
                                 .minimumScaleFactor(0.01)
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .accessibilityLabel("Divisi")
-                            Text("\(divisi ?? "")") //need to update - backend for labeling - data dummy divisi
+                            Text("Humas") //need to update - backend for labeling - data dummy divisi
                                 .font(.system(.caption, design: .rounded).bold())
                                 .foregroundColor(.black.opacity(0.85))
                                 .minimumScaleFactor(0.01)

@@ -417,74 +417,102 @@ class HomeViewModel:ObservableObject{
     
     func fetchAllUser(){
 //        print(222)
-        self.isLoading = true
+//        self.isLoading = true
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: RecordType.user.rawValue, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         
         var returnedUsers: [UsersData] = []
         
-        self.database.fetch(withQuery: query) { result in
+        queryOperation.recordMatchedBlock = { id, result in
             switch result {
-            case .success(let result):
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            if let user = UsersData.fromRecord(record) {
-                                returnedUsers.append(user)
-                                print(123)
-                            }
-//                            print(returnedRooms)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    }
-                
-                DispatchQueue.main.async {
-                    self.users = returnedUsers.map(UserViewModel.init)
-                    self.isLoading = false
-//                    defer {
-//                        self.objectWillChange.send()
-//                    }
-                    self.objectWillChange.send()
-//                    print("\(self.rooms)")
-                }
+                case .success(let record):
+                if let user = UsersData.fromRecord(record) {
+                                             returnedUsers.append(user)
+                                             print(123)
+                                         }
 
-            case .failure(let error):
-                print(error)
+                    DispatchQueue.main.async {
+                        self.users = returnedUsers.map(UserViewModel.init)
+
+                        self.objectWillChange.send()
+
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
             }
         }
+        database.add(queryOperation)
+
+        
+//        self.database.fetch(withQuery: query) { result in
+//            switch result {
+//            case .success(let result):
+//                result.matchResults.compactMap { $0.1 }
+//                    .forEach {
+//                        switch $0 {
+//                        case .success(let record):
+//                            if let user = UsersData.fromRecord(record) {
+//                                returnedUsers.append(user)
+//                                print(123)
+//                            }
+////                            print(returnedRooms)
+//                        case .failure(let error):
+//                            print(error)
+//                        }
+//                    }
+//
+//                DispatchQueue.main.async {
+//                    self.users = returnedUsers.map(UserViewModel.init)
+//                    self.isLoading = false
+////                    defer {
+////                        self.objectWillChange.send()
+////                    }
+//                    self.objectWillChange.send()
+////                    print("\(self.rooms)")
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
-    func updateUserOnboarding(users: UserViewModel, komunitas: String,divisi: String, pengalaman: String, isFirstTime: Bool, completionHandler:  @escaping () -> Void){
-       
-        var newKomunitas =  String()
-        var newdivisi =  String()
-        var newPengalaman =  String()
+    func updateUserOnboarding(users: UserViewModel, isFirstTime: Bool, completionHandler:  @escaping () -> Void){
+        self.isLoading = true
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.user.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.qualityOfService = .userInitiated
+//        var newKomunitas =  String()
+//        var newdivisi =  String()
+//        var newPengalaman =  String()
         var newIsFirstTime =  Bool()
         
-        newKomunitas = komunitas
-        newdivisi = divisi
-        newPengalaman = pengalaman
+//        newKomunitas = komunitas
+//        newdivisi = divisi
+//        newPengalaman = pengalaman
         newIsFirstTime = false
         
         let recordId = users.id
-        let komunitas = users.komunitas
-        let divisi = users.divisi
-        let pengalaman = users.pengalaman
+//        let komunitas = users.komunitas
+//        let divisi = users.divisi
+//        let pengalaman = users.pengalaman
 
-        if(!(newKomunitas.contains(komunitas)) || !(newdivisi.contains(divisi)) || !(newPengalaman.contains(pengalaman))){
-            print(222)
-            self.isLoading = true
-                newKomunitas.append(komunitas)
-                newdivisi.append(divisi)
-                newIsFirstTime = false
-                newPengalaman.append(pengalaman)
-                print("masukk")
-            
-//            }
-        }
+//        if(!(newKomunitas.contains(komunitas)) || !(newdivisi.contains(divisi)) || !(newPengalaman.contains(pengalaman))){
+//            print(222)
+//            self.isLoading = true
+////                newKomunitas.append(komunitas)
+////                newdivisi.append(divisi)
+//                newIsFirstTime = false
+////                newPengalaman.append(pengalaman)
+//                print("masukk")
+//
+////            }
+//        }
         
         database.fetch(withRecordID: recordId!) { returnedRecord, error in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -493,13 +521,14 @@ class HomeViewModel:ObservableObject{
                 }
                 guard let record = returnedRecord else { return }
                 
-                record["komunitas"] = newKomunitas as CKRecordValue
-                record["divisi"] = newdivisi as CKRecordValue
-                record["pengalaman"] = newPengalaman as CKRecordValue
+//                record["komunitas"] = newKomunitas as CKRecordValue
+//                record["divisi"] = newdivisi as CKRecordValue
+//                record["pengalaman"] = newPengalaman as CKRecordValue
                 record["isFirstTime"] = newIsFirstTime as CKRecordValue
                 
                 
-                print("print: \(newKomunitas)")
+//                print("print: \(newKomunitas)")
+                
                 self.database.save(record) { record, error in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         if let error = error {
@@ -508,9 +537,9 @@ class HomeViewModel:ObservableObject{
                         }
                         guard let record = returnedRecord else { return }
                         let id = record.recordID
-                        guard let komunitas = record["komunitas"] as? String else { return }
-                        guard let divisi = record["divisi"] as? String else { return }
-                        guard let pengalaman = record["pengalaman"] as? String else { return }
+//                        guard let komunitas = record["komunitas"] as? String else { return }
+//                        guard let divisi = record["divisi"] as? String else { return }
+//                        guard let pengalaman = record["pengalaman"] as? String else { return }
 
                         print("testttt")
                         
@@ -529,6 +558,4 @@ class HomeViewModel:ObservableObject{
         }
         
     }
-    
-    
 }

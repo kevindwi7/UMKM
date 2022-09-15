@@ -92,9 +92,11 @@ struct OnboardingView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         Button {
-                            hm.updateUserOnboarding(users: updateUser, komunitas: komunitas, divisi: divisi, pengalaman: pengalaman, isFirstTime: false){
-                                UserDefaults.standard.set(komunitas, forKey: "komunitas")
-                                UserDefaults.standard.set(divisi, forKey: "divisi")
+//                            hm.updateUserOnboarding(users: updateUser, komunitas: komunitas, divisi: divisi, pengalaman: pengalaman, isFirstTime: false){
+//                                UserDefaults.standard.set(komunitas, forKey: "komunitas")
+//                                UserDefaults.standard.set(divisi, forKey: "divisi")
+//                                self.isActive = false
+                            hm.updateUserOnboarding(users: updateUser, isFirstTime: false){
                                 self.isActive = false
                             }
                         } label: {

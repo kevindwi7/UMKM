@@ -202,44 +202,44 @@ final class MainViewModel: ObservableObject{
         
     }
     
-    func fetchTask(project: ProjectViewModel){
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
-        let queryOperation = CKQueryOperation(query: query)
-        
-        var returnedTasks: [Task] = []
-        
-        self.database.fetch(withQuery: query) { result in
-            switch result {
-            case .success(let result):
-                
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            
-                            if let task = Task.fromRecord(record) {
-                                if task.projectId == project.projectID{
-                                    returnedTasks.append(task)
-                                }
-                                
-                            }
-                            //                            print(returnedRooms)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    }
-                print("Task")
-                DispatchQueue.main.async {
-                    self.tasks = returnedTasks.map(TaskViewModel.init)
-                    self.objectWillChange.send()
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+//    func fetchTask(project: ProjectViewModel){
+//        let predicate = NSPredicate(value: true)
+//        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
+//        let queryOperation = CKQueryOperation(query: query)
+//
+//        var returnedTasks: [Task] = []
+//
+//        self.database.fetch(withQuery: query) { result in
+//            switch result {
+//            case .success(let result):
+//
+//                result.matchResults.compactMap { $0.1 }
+//                    .forEach {
+//                        switch $0 {
+//                        case .success(let record):
+//
+//                            if let task = Task.fromRecord(record) {
+//                                if task.projectId == project.projectID{
+//                                    returnedTasks.append(task)
+//                                }
+//
+//                            }
+//                            //                            print(returnedRooms)
+//                        case .failure(let error):
+//                            print(error)
+//                        }
+//                    }
+//                print("Task")
+//                DispatchQueue.main.async {
+//                    self.tasks = returnedTasks.map(TaskViewModel.init)
+//                    self.objectWillChange.send()
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
     
     func fetchUserTasks(userID:String){
         
@@ -289,105 +289,103 @@ final class MainViewModel: ObservableObject{
         
         var returnedTasks: [Task] = []
         
-        self.database.fetch(withQuery: query) { result in
+        queryOperation.recordMatchedBlock = { id, result in
             switch result {
-            case .success(let result):
-                
-                result.matchResults.compactMap { $0.1 }
-                    .forEach {
-                        switch $0 {
-                        case .success(let record):
-                            
-                            if let task = Task.fromRecord(record) {
-                                if(task.projectId == project.projectID){
-                                    if !task.userID.isEmpty{
-                                        returnedTasks.append(task)
-                                        print("Taken")
-                                        print(task.projectName)
-                                        print(task.user)
-                                    }
-                                }
-                            }
-                            //                            print(returnedRooms)
-                        case .failure(let error):
-                            print(error)
+                case .success(let record):
+                if let task = Task.fromRecord(record) {
+                    if(task.projectId == project.projectID){
+                        if !task.userID.isEmpty{
+                            returnedTasks.append(task)
+                            print("Taken")
+                            print(task.projectName)
+                            print(task.user)
                         }
                     }
-                print("Task")
-                DispatchQueue.main.async {
-                    self.takenTasks = returnedTasks.map(TaskViewModel.init)
-                    self.objectWillChange.send()
                 }
-                
-            case .failure(let error):
-                print(error)
+
+                    DispatchQueue.main.async {
+                        self.tasks = returnedTasks.map(TaskViewModel.init)
+
+                        self.objectWillChange.send()
+
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
             }
         }
-    }
-    
-//    func fetchTask(project: ProjectViewModel){
-//        let predicate = NSPredicate(value: true)
-//        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
-//        let queryOperation = CKQueryOperation(query: query)
-//        queryOperation.qualityOfService = .userInitiated
-//
-//        var returnedTasks: [Task] = []
-//
-//        queryOperation.recordMatchedBlock = { id, result in
+        
+        database.add(queryOperation)
+//        self.database.fetch(withQuery: query) { result in
 //            switch result {
-//                case .success(let record):
-//                if let task = Task.fromRecord(record) {
-//                                                if task.projectId == project.projectID{
-//                                                    returnedTasks.append(task)
-//                                                }
+//            case .success(let result):
 //
-//                                            }
+//                result.matchResults.compactMap { $0.1 }
+//                    .forEach {
+//                        switch $0 {
+//                        case .success(let record):
 //
-//                    DispatchQueue.main.async {
-//                        self.tasks = returnedTasks.map(TaskViewModel.init)
-////                        self.tasks = self.tasks.sorted(by: {$0.startDate.compare($1.startDate) == .orderedAscending})
-//                        self.objectWillChange.send()
-//    //                    print("\(self.rooms)")
+//                            if let task = Task.fromRecord(record) {
+//                                if(task.projectId == project.projectID){
+//                                    if !task.userID.isEmpty{
+//                                        returnedTasks.append(task)
+//                                        print("Taken")
+//                                        print(task.projectName)
+//                                        print(task.user)
+//                                    }
+//                                }
+//                            }
+//                            //                            print(returnedRooms)
+//                        case .failure(let error):
+//                            print(error)
+//                        }
 //                    }
-//                    break
-//                case .failure(let error):
-//                    print(error)
-//                    break
+//                print("Task")
+//                DispatchQueue.main.async {
+//                    self.takenTasks = returnedTasks.map(TaskViewModel.init)
+//                    self.objectWillChange.send()
+//                }
+//
+//            case .failure(let error):
+//                print(error)
 //            }
 //        }
-//
-//        database.add(queryOperation)
-//
-////        self.database.fetch(withQuery: query) { result in
-////            switch result {
-////            case .success(let result):
-////
-////                result.matchResults.compactMap { $0.1 }
-////                    .forEach {
-////                        switch $0 {
-////                        case .success(let record):
-////
-////                            if let task = Task.fromRecord(record) {
-////                                if task.projectId == project.projectID{
-////                                    returnedTasks.append(task)
-////                                }
-////
-////                            }
-////                            //                            print(returnedRooms)
-////                        case .failure(let error):
-////                            print(error)
-////                        }
-////                    }
-//////                print("Task")
-////                DispatchQueue.main.async {
-////                    self.tasks = returnedTasks.map(TaskViewModel.init)
-////                    self.objectWillChange.send()
-////                }
-////
-////            case .failure(let error):
-////                print(error)
-////            }
-////        }
-//    }
+    }
+    
+    func fetchTask(project: ProjectViewModel){
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: RecordType.task.rawValue, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.qualityOfService = .userInitiated
+
+        var returnedTasks: [Task] = []
+        
+        queryOperation.recordMatchedBlock = { id, result in
+            switch result {
+                case .success(let record):
+                if let task = Task.fromRecord(record) {
+                                                if task.projectId == project.projectID{
+                                                    returnedTasks.append(task)
+                                                }
+
+                                            }
+
+                    DispatchQueue.main.async {
+                        self.tasks = returnedTasks.map(TaskViewModel.init)
+
+                        self.objectWillChange.send()
+
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+            }
+        }
+
+        database.add(queryOperation)
+
+    }
 }
 

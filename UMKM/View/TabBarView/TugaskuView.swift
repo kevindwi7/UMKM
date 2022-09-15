@@ -25,7 +25,10 @@ struct TugaskuView: View {
                 ScrollView{
                     VStack(alignment: .leading){
                         ForEach($mvm.userTasks, id: \.self){$task in
-                            TugaskuCardView(task: $task)
+                                TugaskuCardView(task: $task)
+//                                EmptyTugasView()
+                            
+                            
                         }
                     }
                 }

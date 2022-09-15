@@ -23,7 +23,7 @@ struct DetailProjectView: View {
     let userID = UserDefaults.standard.object(forKey: "userID") as? String
     
     var body: some View {
-        LoadingView(isShowing: $vm.isLoading) {
+//        LoadingView(isShowing: $vm.isLoading) {
             LoadingView(isShowing: $mvm.isLoading){
                 ZStack{
                     Color(UIColor.systemGray6)
@@ -128,7 +128,8 @@ struct DetailProjectView: View {
                     }
                 }
                 .navigationTitle(project.projectName).navigationBarTitleDisplayMode(.inline)
-            }.onAppear{
+            }
+            .onAppear{
 //                print(self.project)
                 mvm.tasks = []
                 mvm.fetchTask(project: project)
@@ -155,7 +156,7 @@ struct DetailProjectView: View {
                     }
                 }
         }
-        }
+//        }
         
         
     }
