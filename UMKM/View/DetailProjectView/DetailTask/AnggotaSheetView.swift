@@ -45,85 +45,85 @@ struct AnggotaSheetView: View {
                                 
                                 Text(tasks.taskName).font(.system(size: 14, weight: .regular, design: .default)).padding(.horizontal)
                                 
-                                ForEach(tasks.registerUser, id: \.self) { items in
-                                    VStack {
-                                        HStack {
-                                            Text(items.self).font(.system(size: 14, weight: .medium, design: .rounded))
-                                            Spacer()
-                                            Button(action: {
-                                                //                                                print(userID!)
-                                                //                                                print("\(firstName ?? "") \(lastName ?? "")")
-                                                //                                                vm.updateProjectMember(project: projects, task: tasks, participantID: userID!, participantName:  "\(firstName ?? "") \(lastName ?? "")", userID: userID!, userName: "\(firstName ?? "") \(lastName ?? "")", userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!){
-                                                //                                                    self.isActive = true
-                                                //                                            print(tasks)
-                                            }, label: {
-                                                Image(systemName: "person.fill.checkmark").opacity(0.5)
-                                            })
-                                            
-                                            Button(action: {
-                                                //                                                print("deecline")
-                                                //                                                print(firstName!)
-                                                //                                                vm.deleteTaskRegisterUser(task: tasks, userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!)
-                                                //                                                print("\(firstName ?? "") \(lastName ?? "")")
-                                            }, label: {
-                                                Image(systemName: "person.fill.xmark").opacity(0.5)
-                                            })
-                                            
-                                            
+                                //                                ForEach(tasks.registerUser, id: \.self) { items in
+                                //                                    VStack {
+                                //                                        HStack {
+                                //                                            Text(items.self).font(.system(size: 14, weight: .medium, design: .rounded))
+                                //                                            Spacer()
+                                //                                            Button(action: {
+                                //                                                //                                                print(userID!)
+                                //                                                //                                                print("\(firstName ?? "") \(lastName ?? "")")
+                                //                                                //                                                vm.updateProjectMember(project: projects, task: tasks, participantID: userID!, participantName:  "\(firstName ?? "") \(lastName ?? "")", userID: userID!, userName: "\(firstName ?? "") \(lastName ?? "")", userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!){
+                                //                                                //                                                    self.isActive = true
+                                //                                                //                                            print(tasks)
+                                //                                            }, label: {
+                                //                                                Image(systemName: "person.fill.checkmark").opacity(0.5)
+                                //                                            })
+                                //
+                                //                                            Button(action: {
+                                //                                                //                                                print("deecline")
+                                //                                                //                                                print(firstName!)
+                                //                                                //                                                vm.deleteTaskRegisterUser(task: tasks, userRegister: "\(firstName ?? "") \(lastName ?? "")", userRegisterID: userID!)
+                                //                                                //                                                print("\(firstName ?? "") \(lastName ?? "")")
+                                //                                            }, label: {
+                                //                                                Image(systemName: "person.fill.xmark").opacity(0.5)
+                                //                                            })
+                                //
+                                //
+                                //                                        }
+                                //                                    }
+                                //                                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                                //                                    .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
+                                //                                    .background(.white)
+                                //                                    .cornerRadius(15)
+                                //                                    //                                    .minimumScaleFactor(0.01)
+                                //                                    //                                    .padding(.top, 16)
+                                //                                }
+                                //                                .padding(.vertical,0)
+                                //                                .cornerRadius(8)
+                                //                                .padding()
+                            }
+                            ForEach($vm.users, id: \.id){ $userss in
+                                ForEach(tasks.registerUserID, id: \.self) { items in
+                                    if(userss.id!.recordName == items.self){
+                                        VStack {
+                                            HStack {
+                                                Text("\(userss.firstName) \(userss.lastName)").font(.system(size: 14, weight: .medium, design: .rounded))
+                                                Spacer()
+                                                Button(action: {
+                                                    print(userss.firstName)
+//                                                    vm.updateProjectMember(project: projects, task: tasks, participantID: userss.id!.recordName, participantName:  "\(userss.firstName) \(userss.lastName)", userID: userss.id!.recordName, userName: "\(userss.firstName) \(userss.lastName)", userRegister: "\(userss.firstName) \(userss.lastName)", userRegisterID: userss.id!.recordName){
+//                                                        self.isActive = true
+//                                                    }
+                                                    
+                                                }, label: {
+                                                    Image(systemName: "person.fill.checkmark").opacity(0.5)
+                                                })
+                                                
+                                                Button(action: {
+                                                    print(firstName!)
+                                                    vm.deleteTaskRegisterUser(task: tasks, userRegister:  "\(userss.firstName) \(userss.lastName)", userRegisterID: userss.id!.recordName)
+                                                    print("\(userss.firstName) \(userss.lastName)")
+                                                    
+                                                }, label: {
+                                                    Image(systemName: "person.fill.xmark").opacity(0.5)
+                                                })
+                                                
+                                                
+                                            }
                                         }
+                                        .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                                        .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
+                                        .background(.white)
+                                        .cornerRadius(15)
+                                        
                                     }
-                                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
-                                    .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
-                                    .background(.white)
-                                    .cornerRadius(15)
-                                    //                                    .minimumScaleFactor(0.01)
-                                    //                                    .padding(.top, 16)
+                                    
                                 }
                                 .padding(.vertical,0)
                                 .cornerRadius(8)
                                 .padding()
                             }
-                            //                                ForEach($vm.users, id: \.id){ $userss in
-                            //                                    ForEach(tasks.registerUserID, id: \.self) { items in
-                            //                                        if(userss.id!.recordName == items.self){
-                            //                                            VStack {
-                            //                                                HStack {
-                            //                                                    Text("\(userss.firstName) \(userss.lastName)").font(.system(size: 14, weight: .medium, design: .rounded))
-                            //                                                    Spacer()
-                            //                                                    Button(action: {
-                            //                                                        print("accept")
-                            //                                                        vm.updateProjectMember(project: projects, task: tasks, participantID: userss.id!.recordName, participantName:  "\(userss.firstName) \(userss.lastName)", userID: userss.id!.recordName, userName: "\(userss.firstName) \(userss.lastName)", userRegister: "\(userss.firstName) \(userss.lastName)", userRegisterID: userss.id!.recordName){
-                            //                                                            self.isActive = true
-                            //                                                        }
-                            //
-                            //                                                    }, label: {
-                            //                                                        Image(systemName: "person.fill.checkmark").opacity(0.5)
-                            //                                                    })
-                            //
-                            //                                                    Button(action: {
-                            //                                                        print(firstName!)
-                            //                                                        vm.deleteTaskRegisterUser(task: tasks, userRegister:  "\(userss.firstName) \(userss.lastName)", userRegisterID: userss.id!.recordName)
-                            //                                                        print("\(userss.firstName) \(userss.lastName)")
-                            //
-                            //                                                    }, label: {
-                            //                                                        Image(systemName: "person.fill.xmark").opacity(0.5)
-                            //                                                    })
-                            //
-                            //
-                            //                                                }
-                            //                                            }
-                            //                                            .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
-                            //                                            .frame(width: UIScreen.main.bounds.width/1.1, alignment:.leading)
-                            //                                            .background(.white)
-                            //                                            .cornerRadius(15)
-                            //
-                            //                                        }
-                            //
-                            //                                    }
-                            //                                    .padding(.vertical,0)
-                            //                                    .cornerRadius(8)
-                            //                                    .padding()
-                            //                                }
                             
                             
                             
@@ -161,12 +161,12 @@ struct AnggotaSheetView: View {
         }
     }
 }
-    
-    
-    
-    
-    //struct AnggotaSheetView_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        AnggotaSheetView()
-    //    }
-    //}
+
+
+
+
+//struct AnggotaSheetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AnggotaSheetView()
+//    }
+//}

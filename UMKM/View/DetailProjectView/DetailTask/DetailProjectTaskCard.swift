@@ -103,11 +103,10 @@ struct DetailProjectTaskCard: View {
                     
                     
                 }
-//                                .onAppear{
+                                .onAppear{
 //                                    vm.fetchTask()
-//                                }   .onReceive(vm.objectWillChange) { _ in
-//                                    vm.fetchTask()
-//                                }
+                                    vm.fetchAllUser()
+                                }   
             }
         }
         
